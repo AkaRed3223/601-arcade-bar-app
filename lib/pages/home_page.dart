@@ -30,7 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          HomeButton(title: 'Comandas'),
+          HomeButton(title: 'Comandasss'),
           HomeButton(title: 'Cardápio'),
         ],
       ),

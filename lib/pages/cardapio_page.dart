@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../entities/product.dart';
+import '../entities/produto.dart';
 import '../widgets/custom_app_bar_widget.dart';
 
 class Cardapio extends StatelessWidget {
@@ -8,11 +8,11 @@ class Cardapio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Product> products = [
-      Product(name: "X-Burger", imageUrl: 'assets/image1.png', price: 24.90),
-      Product(name: "X-Egg", imageUrl: 'assets/image2.png', price: 26.90),
-      Product(name: "X-Bacon", imageUrl: 'assets/image3.png', price: 28.90),
-      Product(name: "X-Pagan", imageUrl: 'assets/image4.png', price: 34.90),
+    List<Produto> products = [
+      Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.90),
+      Produto(nome: "X-Egg", url: 'assets/image2.png', preco: 26.90),
+      Produto(nome: "X-Bacon", url: 'assets/image3.png', preco: 28.90),
+      Produto(nome: "X-Pagan", url: 'assets/image4.png', preco: 34.90),
     ];
 
     return Scaffold(
@@ -22,9 +22,9 @@ class Cardapio extends StatelessWidget {
           itemCount: products.length,
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
-              leading: Image.asset(products[index].imageUrl),
+              leading: Image.asset(products[index].url),
               title: Text(
-                products[index].name,
+                products[index].nome,
                 style: const TextStyle(
                   color: Colors.white70,
                   fontWeight: FontWeight.bold,
@@ -32,7 +32,7 @@ class Cardapio extends StatelessWidget {
                 ),
               ),
               subtitle: Text(
-                  'R\$ ${products[index].price.toStringAsFixed(2)}',
+                  'R\$ ${products[index].preco.toStringAsFixed(2)}',
                   style: const TextStyle(
                     color: Colors.white60,
                     fontSize: 14,

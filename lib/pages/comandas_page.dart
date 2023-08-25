@@ -1,56 +1,56 @@
-import 'package:arcade/entities/guest_tab.dart';
+import 'package:arcade/entities/comanda.dart';
 import 'package:flutter/material.dart';
 
-import '../entities/product.dart';
+import '../entities/produto.dart';
 import '../widgets/custom_app_bar_widget.dart';
-import '../widgets/guest_tab_widget.dart';
+import '../widgets/comanda_widget.dart';
 
 class Comandas extends StatelessWidget {
   const Comandas({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List<GuestTab> tabs = [
-      GuestTab(id: 26, guestName: 'César', orderedProducts: [
-        Product(name: "X-Burger", imageUrl: 'assets/image1.png', price: 24.90),
-        Product(name: "Original", imageUrl: '', price: 12.90),
-        Product(name: "Coca", imageUrl: '', price: 8.90),
+    List<Comanda> tabs = [
+      Comanda(id: 26, nome: 'César', produtos: [
+        Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.90),
+        Produto(nome: "Original", url: '', preco: 12.90),
+        Produto(nome: "Coca", url: '', preco: 8.90),
       ]),
-      GuestTab(id: 27, guestName: 'Gabs', orderedProducts: [
-        Product(name: "X-Burger", imageUrl: 'assets/image1.png', price: 24.90),
-        Product(name: "Original", imageUrl: '', price: 11.90)
+      Comanda(id: 27, nome: 'Gabs', produtos: [
+        Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.90),
+        Produto(nome: "Original", url: '', preco: 11.90)
       ]),
-      GuestTab(id: 28, guestName: 'Elias', orderedProducts: [
-        Product(name: "X-Burger", imageUrl: 'assets/image1.png', price: 24.90),
-        Product(name: "Original", imageUrl: '', price: 10.90)
+      Comanda(id: 28, nome: 'Elias', produtos: [
+        Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.90),
+        Produto(nome: "Original", url: '', preco: 10.90)
       ]),
-      GuestTab(id: 29, guestName: 'Saulo', orderedProducts: [
-        Product(name: "X-Burger", imageUrl: 'assets/image1.png', price: 24.90),
-        Product(name: "Original", imageUrl: '', price: 10.90)
+      Comanda(id: 29, nome: 'Saulo', produtos: [
+        Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.90),
+        Produto(nome: "Original", url: '', preco: 10.90)
       ]),
-      GuestTab(id: 30, guestName: 'Lucas', orderedProducts: [
-        Product(name: "X-Burger", imageUrl: 'assets/image1.png', price: 24.90),
-        Product(name: "Original", imageUrl: '', price: 10.90)
+      Comanda(id: 30, nome: 'Lucas', produtos: [
+        Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.90),
+        Produto(nome: "Original", url: '', preco: 10.90)
       ]),
-      GuestTab(id: 31, guestName: 'Léo', orderedProducts: [
-        Product(name: "X-Burger", imageUrl: 'assets/image1.png', price: 24.90),
-        Product(name: "Original", imageUrl: '', price: 10.90)
+      Comanda(id: 31, nome: 'Léo', produtos: [
+        Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.90),
+        Produto(nome: "Original", url: '', preco: 10.90)
       ]),
-      GuestTab(id: 32, guestName: 'Pagan', orderedProducts: [
-        Product(name: "X-Burger", imageUrl: 'assets/image1.png', price: 24.90),
-        Product(name: "Original", imageUrl: '', price: 10.90)
+      Comanda(id: 32, nome: 'Pagan', produtos: [
+        Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.90),
+        Produto(nome: "Original", url: '', preco: 10.90)
       ]),
-      GuestTab(id: 33, guestName: 'Takatu', orderedProducts: [
-        Product(name: "X-Burger", imageUrl: 'assets/image1.png', price: 24.90),
-        Product(name: "Original", imageUrl: '', price: 10.90)
+      Comanda(id: 33, nome: 'Takatu', produtos: [
+        Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.90),
+        Produto(nome: "Original", url: '', preco: 10.90)
       ]),
-      GuestTab(id: 34, guestName: 'Ichinose', orderedProducts: [
-        Product(name: "X-Burger", imageUrl: 'assets/image1.png', price: 24.90),
-        Product(name: "Original", imageUrl: '', price: 10.90)
+      Comanda(id: 34, nome: 'Ichinose', produtos: [
+        Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.90),
+        Produto(nome: "Original", url: '', preco: 10.90)
       ]),
-      GuestTab(id: 35, guestName: 'Ueda', orderedProducts: [
-        Product(name: "X-Burger", imageUrl: 'assets/image1.png', price: 24.90),
-        Product(name: "Original", imageUrl: '', price: 10.90)
+      Comanda(id: 35, nome: 'Ueda', produtos: [
+        Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.90),
+        Produto(nome: "Original", url: '', preco: 10.90)
       ]),
 
     ];

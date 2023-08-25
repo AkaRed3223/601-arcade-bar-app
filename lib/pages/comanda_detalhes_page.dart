@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../widgets/custom_app_bar_widget.dart';
 
-class ComandaDetails extends StatelessWidget {
-  const ComandaDetails({Key? key}) : super(key: key);
+class ComandaDetalhes extends StatelessWidget {
+  const ComandaDetalhes({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../entities/guest_tab.dart';
+import '../entities/comanda.dart';
 
 class GuestTabWidget extends StatelessWidget {
-  final GuestTab guestTab;
+  final Comanda guestTab;
 
   const GuestTabWidget({super.key, required this.guestTab});
 
@@ -20,7 +20,7 @@ class GuestTabWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(guestTab.guestName,
+          Text(guestTab.nome,
               style: TextStyle(
                   fontSize: MediaQuery.of(context).size.width * 0.06,
                   color: Colors.white,

@@ -1,5 +1,5 @@
 import 'package:arcade/pages/cardapio_page.dart';
-import 'package:arcade/pages/comanda_details_page.dart';
+import 'package:arcade/pages/comanda_detalhes_page.dart';
 import 'package:arcade/pages/comandas_page.dart';
 import 'package:arcade/pages/home_page.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "/": (context) => const MyHomePage(title: '601 Arcade Bar App'),
         "comandas": (context) => const Comandas(),
-        "comandas/{id}": (context) => const ComandaDetails(),
+        "comandas/{id}": (context) => const ComandaDetalhes(),
         "cardapio": (context) => const Cardapio(),
       },
     );

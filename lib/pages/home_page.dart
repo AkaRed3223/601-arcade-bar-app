@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             ListTile(
               title: const Text(
-                "Comandas",
+                "Comandaz",
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,

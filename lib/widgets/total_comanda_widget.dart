@@ -18,20 +18,24 @@ class TotalComandaWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text('Total devido: ',
-              style: TextStyle(
-                  fontSize: MediaQuery.of(context).size.width * 0.05,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold)),
+          Text(
+            'Total devido',
+            style: TextStyle(
+                fontSize: MediaQuery.of(context).size.width * 0.05,
+                color: Colors.white,
+                fontWeight: FontWeight.bold),
+          ),
           const Divider(
             color: Colors.green,
             thickness: 5,
           ),
-          Text(comanda.totalFormatado,
+          Text(
+              comanda.totalFormatado,
               style: TextStyle(
                   fontSize: MediaQuery.of(context).size.width * 0.07,
                   color: Colors.white,
-                  fontWeight: FontWeight.bold)),
+                  fontWeight: FontWeight.bold)
+          ),
         ],
       ),
     );

@@ -8,7 +8,6 @@ class PedidoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     Container comandaWidget = Container(
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
@@ -16,13 +15,18 @@ class PedidoWidget extends StatelessWidget {
         borderRadius: BorderRadius.zero,
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(produto.nome,
+          Flexible(
+            child: Text(
+              produto.nome,
+              overflow: TextOverflow.fade,
               style: TextStyle(
                   fontSize: MediaQuery.of(context).size.width * 0.07,
                   color: Colors.white,
-                  fontWeight: FontWeight.bold)),
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
           Text(produto.precoFormatado,
               style: TextStyle(
                   fontSize: MediaQuery.of(context).size.width * 0.05,

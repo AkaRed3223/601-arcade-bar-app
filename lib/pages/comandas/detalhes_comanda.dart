@@ -11,11 +11,31 @@ class ComandaDetalhes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     Comanda comanda = Comanda(id: 26, nome: 'César', produtos: [
-      Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.91),
-      Produto(nome: "Original", url: '', preco: 12.92),
-      Produto(nome: "Coca", url: '', preco: 8.93),
+      Produto(nome: "X-Pagan", url: '', preco: 24.91),
+      Produto(nome: "Cerveja Original", url: '', preco: 12.92),
+      Produto(nome: "Coca-cola", url: '', preco: 8.93),
+      Produto(nome: "X-Pagan", url: '', preco: 24.91),
+      Produto(nome: "Cerveja Original", url: '', preco: 12.92),
+      Produto(nome: "Coca-cola", url: '', preco: 8.93),
+      Produto(nome: "X-Pagan", url: '', preco: 24.91),
+      Produto(nome: "Cerveja Original", url: '', preco: 12.92),
+      Produto(nome: "Coca-cola", url: '', preco: 8.93),
+      Produto(nome: "X-Pagan", url: '', preco: 24.91),
+      Produto(nome: "Cerveja Original", url: '', preco: 12.92),
+      Produto(nome: "Coca-cola", url: '', preco: 8.93),
+      Produto(nome: "X-Pagan", url: '', preco: 24.91),
+      Produto(nome: "Cerveja Original", url: '', preco: 12.92),
+      Produto(nome: "Coca-cola", url: '', preco: 8.93),
+      Produto(nome: "X-Pagan", url: '', preco: 24.91),
+      Produto(nome: "Cerveja Original", url: '', preco: 12.92),
+      Produto(nome: "Coca-cola", url: '', preco: 8.93),
+      Produto(nome: "X-Pagan", url: '', preco: 24.91),
+      Produto(nome: "Cerveja Original", url: '', preco: 12.92),
+      Produto(nome: "Coca-cola", url: '', preco: 8.93),
+      Produto(nome: "X-Pagan", url: '', preco: 24.91),
+      Produto(nome: "Cerveja Original", url: '', preco: 12.92),
+      Produto(nome: "Coca-cola", url: '', preco: 8.93),
     ]);
 
     return Scaffold(
@@ -23,7 +43,7 @@ class ComandaDetalhes extends StatelessWidget {
       appBar: const CustomAppBar(title: 'Detalhes da Comanda'),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-            Navigator.pushNamed(context, 'pedidos/novo_pedido');
+          Navigator.pushNamed(context, 'pedidos/novo_pedido');
         },
         backgroundColor: Colors.grey[800],
         child: const Icon(Icons.add),
@@ -49,7 +69,5 @@ class ComandaDetalhes extends StatelessWidget {
         ],
       ),
     );
-
-
   }
 }

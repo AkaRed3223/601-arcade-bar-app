@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../entities/produto.dart';
-import '../widgets/custom_app_bar_widget.dart';
+import '../../entities/produto_dto.dart';
+import '../../widgets/custom_app_bar_widget.dart';
 
 class Cardapio extends StatelessWidget {
   const Cardapio({super.key});

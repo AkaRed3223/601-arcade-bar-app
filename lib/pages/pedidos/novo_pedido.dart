@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/custom_app_bar_widget.dart';
+import '../../widgets/custom_app_bar_widget.dart';
 
 class NovoPedido extends StatelessWidget {
   const NovoPedido({super.key});

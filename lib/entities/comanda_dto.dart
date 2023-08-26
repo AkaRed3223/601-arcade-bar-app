@@ -1,4 +1,4 @@
-import 'package:arcade/entities/produto.dart';
+import 'package:arcade/entities/produto_dto.dart';
 
 class Comanda {
   final int id;

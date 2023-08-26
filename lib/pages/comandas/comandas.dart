@@ -1,9 +1,9 @@
-import 'package:arcade/entities/comanda.dart';
+import 'package:arcade/entities/comanda_dto.dart';
 import 'package:flutter/material.dart';
 
-import '../entities/produto.dart';
-import '../widgets/custom_app_bar_widget.dart';
-import '../widgets/comanda_widget.dart';
+import '../../entities/produto_dto.dart';
+import '../../widgets/custom_app_bar_widget.dart';
+import '../../widgets/comanda_widget.dart';
 
 class Comandas extends StatelessWidget {
   const Comandas({super.key});
@@ -66,7 +66,7 @@ class Comandas extends StatelessWidget {
           ),
           itemCount: tabs.length,
           itemBuilder: (BuildContext context, int index) {
-            return GuestTabWidget(guestTab: tabs[index]);
+            return ComandaWidget(guestTab: tabs[index]);
           }),
     );
   }

@@ -1,8 +1,8 @@
-import 'package:arcade/pages/cardapio_page.dart';
-import 'package:arcade/pages/comanda_detalhes_page.dart';
-import 'package:arcade/pages/comandas_page.dart';
+import 'package:arcade/pages/cardapio/cardapio.dart';
+import 'package:arcade/pages/comandas/detalhes_comanda.dart';
+import 'package:arcade/pages/comandas/comandas.dart';
 import 'package:arcade/pages/home_page.dart';
-import 'package:arcade/pages/novo_pedido_page.dart';
+import 'package:arcade/pages/pedidos/novo_pedido.dart';
 import 'package:flutter/material.dart';
 
 void main() {

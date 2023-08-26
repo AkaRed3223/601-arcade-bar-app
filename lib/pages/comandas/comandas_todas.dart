@@ -57,7 +57,7 @@ class Comandas extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      appBar: const CustomAppBar(title: 'Comandas'),
+      appBar: const CustomAppBar(title: 'Todas as Comandas'),
       body: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,

@@ -1,6 +1,9 @@
 import 'package:arcade/pages/cardapio/cardapio.dart';
+import 'package:arcade/pages/comandas/abrir_comanda.dart';
+import 'package:arcade/pages/comandas/comandas_home.dart';
 import 'package:arcade/pages/comandas/detalhes_comanda.dart';
-import 'package:arcade/pages/comandas/comandas.dart';
+import 'package:arcade/pages/comandas/comandas_todas.dart';
+import 'package:arcade/pages/comandas/fechar_comanda.dart';
 import 'package:arcade/pages/home_page.dart';
 import 'package:arcade/pages/pedidos/novo_pedido.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +21,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         "/": (context) => const MyHomePage(),
-        "comandas": (context) => const Comandas(),
+        "menu_comandas": (context) => const ComandasHome(),
+        "menu_comandas/comandas/ver": (context) => const Comandas(),
+        "menu_comandas/comandas/abrir": (context) => const ComandaAbrir(),
+        "menu_comandas/comandas/fechar": (context) => const ComandaFechar(),
         "comandas/{id}": (context) => const ComandaDetalhes(),
         "cardapio": (context) => const Cardapio(),
         "pedidos/novo_pedido": (context) => const NovoPedido()

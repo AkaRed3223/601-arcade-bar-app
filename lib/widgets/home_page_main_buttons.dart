@@ -15,11 +15,7 @@ class HomeButton extends StatelessWidget implements PreferredSizeWidget {
         backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
       ),
       onPressed: () {
-        if (title == 'Comandas') {
-          Navigator.pushNamed(context, 'comandas');
-        } else if (title == 'Cardápio') {
-          Navigator.pushNamed(context, 'cardapio');
-        }
+          Navigator.pushNamed(context, _findRouteByTitle(title));
       },
       child: Container(
         padding: const EdgeInsets.all(50.0),
@@ -27,13 +23,25 @@ class HomeButton extends StatelessWidget implements PreferredSizeWidget {
         child: Center(
           child: Text(
             title,
+            textAlign: TextAlign.center,
             style: TextStyle(
-                fontSize: MediaQuery.of(context).size.width * 0.09,
+                fontSize: MediaQuery.of(context).size.width * 0.08,
                 fontWeight: FontWeight.bold,
                 color: Colors.black87),
           ),
         ),
       ),
     );
+  }
+
+  _findRouteByTitle(String title) {
+    Map<String, String> routeMap = {
+      'Comandas': 'menu_comandas',
+      'Ver Comandas': 'menu_comandas/comandas/ver',
+      'Abrir Comanda': 'menu_comandas/comandas/abrir',
+      'Fechar Comanda': 'menu_comandas/comandas/fechar',
+      'Cardápio': 'cardapio',
+    };
+    return routeMap[title] ?? '/';
   }
 }

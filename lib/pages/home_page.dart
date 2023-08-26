@@ -22,7 +22,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      appBar: const CustomAppBar(title: '601 Arcade Bar'),
+      appBar: const CustomAppBar(title: '601 Arcade Bar - Home Page'),
       body: ListView(
         children: const <Widget>[
           Padding(

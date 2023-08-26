@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class HomeButton extends StatelessWidget implements PreferredSizeWidget {
@@ -12,7 +14,7 @@ class HomeButton extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+        backgroundColor: MaterialStateProperty.all<Color>(_getRandomColor()),
       ),
       onPressed: () {
           Navigator.pushNamed(context, _findRouteByTitle(title));
@@ -43,5 +45,15 @@ class HomeButton extends StatelessWidget implements PreferredSizeWidget {
       'Cardápio': 'cardapio',
     };
     return routeMap[title] ?? '/';
+  }
+
+  Color _getRandomColor() {
+    Random random = Random();
+    return Color.fromARGB(
+      255, // Alpha value (255 means fully opaque)
+      random.nextInt(256), // Red value (0-255)
+      random.nextInt(256), // Green value (0-255)
+      random.nextInt(256), // Blue value (0-255)
+    );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:arcade/entities/comanda_dto.dart';
 import 'package:flutter/material.dart';
 
+import '../../entities/categories_enum.dart';
 import '../../entities/produto_dto.dart';
 import '../../widgets/custom_app_bar_widget.dart';
 import '../../widgets/comanda_widget.dart';
@@ -10,49 +11,22 @@ class Comandas extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Comanda> tabs = [
+    List<Comanda> comandas = [
       Comanda(id: 26, nome: 'César', produtos: [
-        Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.90),
-        Produto(nome: "Original", url: '', preco: 12.90),
-        Produto(nome: "Coca", url: '', preco: 8.90),
+        Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.90, categoria: Categorias.lanches),
+        Produto(nome: "Original", url: '', preco: 12.90, categoria: Categorias.bebidas),
+        Produto(nome: "Coca", url: '', preco: 8.90, categoria: Categorias.bebidas),
       ]),
-      Comanda(id: 27, nome: 'Gabs', produtos: [
-        Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.90),
-        Produto(nome: "Original", url: '', preco: 11.90)
+      Comanda(id: 26, nome: 'Mi', produtos: [
+        Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.90, categoria: Categorias.lanches),
+        Produto(nome: "Original", url: '', preco: 12.90, categoria: Categorias.bebidas),
+        Produto(nome: "Coca", url: '', preco: 8.90, categoria: Categorias.bebidas),
       ]),
-      Comanda(id: 28, nome: 'Elias', produtos: [
-        Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.90),
-        Produto(nome: "Original", url: '', preco: 10.90)
+      Comanda(id: 26, nome: 'Elias', produtos: [
+        Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.90, categoria: Categorias.lanches),
+        Produto(nome: "Original", url: '', preco: 12.90, categoria: Categorias.bebidas),
+        Produto(nome: "Coca", url: '', preco: 8.90, categoria: Categorias.bebidas),
       ]),
-      Comanda(id: 29, nome: 'Saulo', produtos: [
-        Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.90),
-        Produto(nome: "Original", url: '', preco: 10.90)
-      ]),
-      Comanda(id: 30, nome: 'Lucas', produtos: [
-        Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.90),
-        Produto(nome: "Original", url: '', preco: 10.90)
-      ]),
-      Comanda(id: 31, nome: 'Léo', produtos: [
-        Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.90),
-        Produto(nome: "Original", url: '', preco: 10.90)
-      ]),
-      Comanda(id: 32, nome: 'Pagan', produtos: [
-        Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.90),
-        Produto(nome: "Original", url: '', preco: 10.90)
-      ]),
-      Comanda(id: 33, nome: 'Takatu', produtos: [
-        Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.90),
-        Produto(nome: "Original", url: '', preco: 10.90)
-      ]),
-      Comanda(id: 34, nome: 'Ichinose', produtos: [
-        Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.90),
-        Produto(nome: "Original", url: '', preco: 10.90)
-      ]),
-      Comanda(id: 35, nome: 'Ueda', produtos: [
-        Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.90),
-        Produto(nome: "Original", url: '', preco: 10.90)
-      ]),
-
     ];
 
     return Scaffold(
@@ -64,9 +38,9 @@ class Comandas extends StatelessWidget {
               mainAxisSpacing: 16.0,
               crossAxisSpacing: 16.0
           ),
-          itemCount: tabs.length,
+          itemCount: comandas.length,
           itemBuilder: (BuildContext context, int index) {
-            return ComandaWidget(guestTab: tabs[index]);
+            return ComandaWidget(guestTab: comandas[index]);
           }),
     );
   }

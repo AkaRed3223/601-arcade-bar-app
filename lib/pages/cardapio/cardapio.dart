@@ -8,7 +8,7 @@ class Cardapio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Produto> products = [
+    List<Produto> produtos = [
       Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.90),
       Produto(nome: "X-Egg", url: 'assets/image2.png', preco: 26.90),
       Produto(nome: "X-Bacon", url: 'assets/image3.png', preco: 28.90),
@@ -19,12 +19,12 @@ class Cardapio extends StatelessWidget {
       backgroundColor: Colors.grey[900],
       appBar: const CustomAppBar(title: 'Cardápio'),
       body: ListView.builder(
-          itemCount: products.length,
+          itemCount: produtos.length,
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
-              leading: Image.asset(products[index].url),
+              leading: Image.asset(produtos[index].url),
               title: Text(
-                products[index].nome,
+                produtos[index].nome,
                 style: TextStyle(
                   color: Colors.white70,
                   fontWeight: FontWeight.bold,
@@ -32,7 +32,7 @@ class Cardapio extends StatelessWidget {
                 ),
               ),
               subtitle: Text(
-                  'R\$ ${products[index].preco.toStringAsFixed(2)}',
+                  produtos[index].precoFormatado,
                   style: TextStyle(
                     color: Colors.white60,
                     fontSize: MediaQuery.of(context).size.width * 0.04,

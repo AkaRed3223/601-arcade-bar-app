@@ -23,7 +23,7 @@ class PedidoWidget extends StatelessWidget {
                   fontSize: MediaQuery.of(context).size.width * 0.07,
                   color: Colors.white,
                   fontWeight: FontWeight.bold)),
-          Text('R\$ ${produto.preco.toStringAsFixed(2)}',
+          Text(produto.precoFormatado,
               style: TextStyle(
                   fontSize: MediaQuery.of(context).size.width * 0.05,
                   color: Colors.white,

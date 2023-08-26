@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../entities/comanda.dart';
+import '../entities/comanda_dto.dart';
 
-class GuestTabWidget extends StatelessWidget {
+class ComandaWidget extends StatelessWidget {
   final Comanda guestTab;
 
-  const GuestTabWidget({super.key, required this.guestTab});
+  const ComandaWidget({super.key, required this.guestTab});
 
   @override
   Widget build(BuildContext context) {

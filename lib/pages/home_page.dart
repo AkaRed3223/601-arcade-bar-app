@@ -30,7 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          HomeButton(title: 'Comandas'),
+          HomeButton(title: 'Comandaz'),
           HomeButton(title: 'Cardápio'),
         ],
       ),
@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             ListTile(
               title: const Text(
-                "Comandas",
+                "Comandaz",
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,

@@ -2,6 +2,7 @@ import 'package:arcade/pages/cardapio_page.dart';
 import 'package:arcade/pages/comanda_detalhes_page.dart';
 import 'package:arcade/pages/comandas_page.dart';
 import 'package:arcade/pages/home_page.dart';
+import 'package:arcade/pages/novo_pedido_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
         "comandas": (context) => const Comandas(),
         "comandas/{id}": (context) => const ComandaDetalhes(),
         "cardapio": (context) => const Cardapio(),
+        "pedidos/novo_pedido": (context) => const NovoPedido()
       },
     );
   }

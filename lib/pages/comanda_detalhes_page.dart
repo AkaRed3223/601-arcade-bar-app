@@ -12,6 +12,13 @@ class ComandaDetalhes extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[900],
       appBar: const CustomAppBar(title: 'Detalhes da Comanda'),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+            Navigator.pushNamed(context, 'pedidos/novo_pedido');
+        },
+        backgroundColor: Colors.grey[800],
+        child: const Icon(Icons.add),
+      ),
       body: Center(
         child: Text(
           'Detalhes da Comanda: $id',

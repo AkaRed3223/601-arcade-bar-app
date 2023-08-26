@@ -8,7 +8,6 @@ class ComandaDetalhes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var id = ModalRoute.of(context)?.settings.arguments ?? 0;
-    double fontSize = MediaQuery.of(context).size.width * 0.05;
 
     return Scaffold(
       backgroundColor: Colors.grey[900],
@@ -19,7 +18,7 @@ class ComandaDetalhes extends StatelessWidget {
           style: TextStyle(
             color: Colors.white70,
             fontWeight: FontWeight.bold,
-            fontSize: fontSize,
+            fontSize: MediaQuery.of(context).size.width * 0.05,
           ),
         ),
       ),

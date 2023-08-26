@@ -25,17 +25,17 @@ class Cardapio extends StatelessWidget {
               leading: Image.asset(products[index].url),
               title: Text(
                 products[index].nome,
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.white70,
                   fontWeight: FontWeight.bold,
-                  fontSize: 18,
+                  fontSize: MediaQuery.of(context).size.width * 0.06,
                 ),
               ),
               subtitle: Text(
                   'R\$ ${products[index].preco.toStringAsFixed(2)}',
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white60,
-                    fontSize: 14,
+                    fontSize: MediaQuery.of(context).size.width * 0.04,
                   )
               ),
             );

@@ -10,7 +10,6 @@ class HomeButton extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return ElevatedButton(
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
@@ -29,10 +28,9 @@ class HomeButton extends StatelessWidget implements PreferredSizeWidget {
           child: Text(
             title,
             style: TextStyle(
-                fontSize: MediaQuery.of(context).size.width * 0.07,
+                fontSize: MediaQuery.of(context).size.width * 0.09,
                 fontWeight: FontWeight.bold,
-                color: Colors.black87
-            ),
+                color: Colors.black87),
           ),
         ),
       ),

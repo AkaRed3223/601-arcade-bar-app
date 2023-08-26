@@ -9,14 +9,12 @@ class GuestTabWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    var comanda = Container(
+    Container comandaWidget = Container(
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey),
         borderRadius: BorderRadius.circular(25.0),
       ),
-
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -24,20 +22,17 @@ class GuestTabWidget extends StatelessWidget {
               style: TextStyle(
                   fontSize: MediaQuery.of(context).size.width * 0.06,
                   color: Colors.white,
-                  fontWeight: FontWeight.bold)
-          ),
+                  fontWeight: FontWeight.bold)),
           Text("${guestTab.id}",
               style: TextStyle(
                   fontSize: MediaQuery.of(context).size.width * 0.18,
                   color: Colors.white,
-                  fontWeight: FontWeight.bold)
-          ),
+                  fontWeight: FontWeight.bold)),
           const SizedBox(height: 8),
           Text("Total: R\$ ${guestTab.total.toStringAsFixed(2)}",
               style: TextStyle(
                   fontSize: MediaQuery.of(context).size.width * 0.045,
-                  color: Colors.white)
-          ),
+                  color: Colors.white)),
         ],
       ),
     );
@@ -47,7 +42,7 @@ class GuestTabWidget extends StatelessWidget {
         Navigator.pushNamed(context, 'comandas/{id}',
             arguments: {'id': guestTab.id});
       },
-      child: comanda,
+      child: comandaWidget,
     );
   }
 }

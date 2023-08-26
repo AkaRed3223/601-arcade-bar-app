@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        "/": (context) => const MyHomePage(title: '601 Arcade Bar App'),
+        "/": (context) => const MyHomePage(),
         "comandas": (context) => const Comandas(),
         "comandas/{id}": (context) => const ComandaDetalhes(),
         "cardapio": (context) => const Cardapio(),

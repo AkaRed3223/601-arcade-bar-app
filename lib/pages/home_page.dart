@@ -5,9 +5,7 @@ import 'package:flutter/services.dart';
 import '../widgets/home_page_main_buttons.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -22,54 +20,21 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-
-    var scaffold = Scaffold(
+    return Scaffold(
       backgroundColor: Colors.grey[900],
       appBar: const CustomAppBar(title: '601 Arcade Bar'),
-      body: const Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          HomeButton(title: 'Comandaz'),
-          HomeButton(title: 'Cardápio'),
+      body: ListView(
+        children: const <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 10),
+            child: HomeButton(title: 'Comandas'),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 10),
+            child: HomeButton(title: 'Cardápio'),
+          ),
         ],
       ),
     );
-
-    return scaffold;
   }
 }
-
-/*drawer: Drawer(
-        backgroundColor: Colors.blueGrey[800],
-        child: ListView(
-          children: [
-            ListTile(
-              title: const Text(
-                "Comandaz",
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-              onTap: () {
-                Navigator.pushNamed(context, "comandas");
-              },
-            ),
-            ListTile(
-              title: const Text(
-                "Cardápio",
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-              onTap: () {
-                Navigator.pushNamed(context, "cardapio");
-              },
-            ),
-          ],
-        ),
-      ),*/

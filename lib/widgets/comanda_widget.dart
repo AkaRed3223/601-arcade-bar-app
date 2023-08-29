@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../entities/comanda_dto.dart';
+import '../entities/comanda.dart';
 
 class ComandaWidget extends StatelessWidget {
   final Comanda guestTab;

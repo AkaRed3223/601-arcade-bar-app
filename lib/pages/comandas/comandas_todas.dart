@@ -1,8 +1,7 @@
-import 'package:arcade/entities/comanda_dto.dart';
+import 'package:arcade/entities/comanda.dart';
 import 'package:flutter/material.dart';
 
-import '../../entities/categories_enum.dart';
-import '../../entities/produto_dto.dart';
+import '../../entities/product.dart';
 import '../../widgets/custom_app_bar_widget.dart';
 import '../../widgets/comanda_widget.dart';
 
@@ -13,19 +12,19 @@ class Comandas extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Comanda> comandas = [
       Comanda(id: 26, nome: 'César', produtos: [
-        Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.90, categoria: Categorias.lanches),
-        Produto(nome: "Original", url: '', preco: 12.90, categoria: Categorias.bebidas),
-        Produto(nome: "Coca", url: '', preco: 8.90, categoria: Categorias.bebidas),
+        Product(name: "X-Burger", url: 'assets/image1.png', price: 24.90, category: "Lanches"),
+        Product(name: "Original", url: '', price: 12.90, category: "Bebidas"),
+        Product(name: "Coca", url: '', price: 8.90, category: "Bebidas"),
       ]),
       Comanda(id: 26, nome: 'Mi', produtos: [
-        Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.90, categoria: Categorias.lanches),
-        Produto(nome: "Original", url: '', preco: 12.90, categoria: Categorias.bebidas),
-        Produto(nome: "Coca", url: '', preco: 8.90, categoria: Categorias.bebidas),
+        Product(name: "X-Burger", url: 'assets/image1.png', price: 24.90, category: "Lanches"),
+        Product(name: "Original", url: '', price: 12.90, category: "Bebidas"),
+        Product(name: "Coca", url: '', price: 8.90, category: "Bebidas"),
       ]),
       Comanda(id: 26, nome: 'Elias', produtos: [
-        Produto(nome: "X-Burger", url: 'assets/image1.png', preco: 24.90, categoria: Categorias.lanches),
-        Produto(nome: "Original", url: '', preco: 12.90, categoria: Categorias.bebidas),
-        Produto(nome: "Coca", url: '', preco: 8.90, categoria: Categorias.bebidas),
+        Product(name: "X-Burger", url: 'assets/image1.png', price: 24.90, category: "Lanches"),
+        Product(name: "Original", url: '', price: 12.90, category: "Bebidas"),
+        Product(name: "Coca", url: '', price: 8.90, category: "Bebidas"),
       ]),
     ];
 

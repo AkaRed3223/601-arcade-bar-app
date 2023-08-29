@@ -1,9 +1,8 @@
 import 'package:arcade/widgets/pedido_widget.dart';
 import 'package:flutter/material.dart';
 
-import '../../entities/categories_enum.dart';
-import '../../entities/comanda_dto.dart';
-import '../../entities/produto_dto.dart';
+import '../../entities/comanda.dart';
+import '../../entities/product.dart';
 import '../../widgets/custom_app_bar_widget.dart';
 import '../../widgets/total_comanda_widget.dart';
 
@@ -13,11 +12,11 @@ class ComandaDetalhes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Comanda comanda = Comanda(id: 26, nome: 'César', produtos: [
-      Produto(nome: "X-Pagan", url: '', preco: 24.91, categoria: Categorias.lanches),
-      Produto(nome: "Cerveja Original", url: '', preco: 12.92, categoria: Categorias.bebidas),
-      Produto(nome: "Coca-cola", url: '', preco: 8.93, categoria: Categorias.bebidas),
-      Produto(nome: "X-Pagan", url: '', preco: 24.91, categoria: Categorias.lanches),
-      Produto(nome: "Cerveja Original", url: '', preco: 12.92, categoria: Categorias.bebidas),
+      Product(name: "X-Pagan", url: '', price: 24.91, category: "Lanches"),
+      Product(name: "Cerveja Original", url: '', price: 12.92, category: "Bebidas"),
+      Product(name: "Coca-cola", url: '', price: 8.93, category: "Bebidas"),
+      Product(name: "X-Pagan", url: '', price: 24.91, category: "Lanches"),
+      Product(name: "Cerveja Original", url: '', price: 12.92, category: "Bebidas"),
     ]);
 
     return Scaffold(

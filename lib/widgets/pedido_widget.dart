@@ -1,10 +1,10 @@
-import 'package:arcade/entities/produto_dto.dart';
+import 'package:arcade/entities/product.dart';
 import 'package:flutter/material.dart';
 
 class PedidoWidget extends StatelessWidget {
   const PedidoWidget({super.key, required this.produto});
 
-  final Produto produto;
+  final Product produto;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class PedidoWidget extends StatelessWidget {
         children: [
           Flexible(
             child: Text(
-              produto.nome,
+              produto.name,
               overflow: TextOverflow.fade,
               style: TextStyle(
                   fontSize: MediaQuery.of(context).size.width * 0.07,

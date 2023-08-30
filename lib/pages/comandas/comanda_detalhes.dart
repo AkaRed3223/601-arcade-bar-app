@@ -5,12 +5,39 @@ import '../../entities/comanda.dart';
 import '../../widgets/custom_app_bar_widget.dart';
 import '../../widgets/total_comanda_widget.dart';
 
-class ComandaDetalhes extends StatelessWidget {
+class ComandaDetalhes extends StatefulWidget {
   const ComandaDetalhes({Key? key}) : super(key: key);
 
   @override
+  State<ComandaDetalhes> createState() => _ComandaDetalhesState();
+}
+
+class _ComandaDetalhesState extends State<ComandaDetalhes> {
+  late Future<List<Comanda>> futureComandas;
+  late List<Comanda> loadedComandas = [];
+
+  @override
+  void initState() {
+    super.initState();
+    futureComandas = ComandasService().fetchComandas();
+
+    _loadData();
+  }
+
+  Future<void> _loadData() async {
+    loadedComandas = await futureComandas;
+  }
+
+
+
+  @override
   Widget build(BuildContext context) {
-    Comanda comanda = Comanda(id: 26, name: 'César', products: [], externalId: 120);
+    Comanda comanda = Comanda(
+        id: 26,
+        name: 'César',
+        products: [],
+        externalId: 120,
+        total: 25.90);
 
     return Scaffold(
       backgroundColor: Colors.grey[900],

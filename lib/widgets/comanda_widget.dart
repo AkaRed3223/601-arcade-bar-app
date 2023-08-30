@@ -23,7 +23,7 @@ class ComandaWidget extends StatelessWidget {
                   fontSize: MediaQuery.of(context).size.width * 0.06,
                   color: Colors.white,
                   fontWeight: FontWeight.bold)),
-          Text("${guestTab.id}",
+          Text("${guestTab.externalId}",
               style: TextStyle(
                   fontSize: MediaQuery.of(context).size.width * 0.18,
                   color: Colors.white,

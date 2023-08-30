@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../widgets/custom_app_bar_widget.dart';
 
-class NovoPedido extends StatelessWidget {
-  const NovoPedido({super.key});
+class PedidoInserir extends StatelessWidget {
+  const PedidoInserir({super.key});
 
   @override
   Widget build(BuildContext context) {

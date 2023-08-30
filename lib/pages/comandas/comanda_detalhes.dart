@@ -2,7 +2,6 @@ import 'package:arcade/widgets/pedido_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../entities/comanda.dart';
-import '../../entities/product.dart';
 import '../../widgets/custom_app_bar_widget.dart';
 import '../../widgets/total_comanda_widget.dart';
 
@@ -11,13 +10,7 @@ class ComandaDetalhes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Comanda comanda = Comanda(id: 26, nome: 'César', produtos: [
-      Product(name: "X-Pagan", url: '', price: 24.91, category: "Lanches"),
-      Product(name: "Cerveja Original", url: '', price: 12.92, category: "Bebidas"),
-      Product(name: "Coca-cola", url: '', price: 8.93, category: "Bebidas"),
-      Product(name: "X-Pagan", url: '', price: 24.91, category: "Lanches"),
-      Product(name: "Cerveja Original", url: '', price: 12.92, category: "Bebidas"),
-    ]);
+    Comanda comanda = Comanda(id: 26, name: 'César', products: [], externalId: 120);
 
     return Scaffold(
       backgroundColor: Colors.grey[900],
@@ -33,9 +26,9 @@ class ComandaDetalhes extends StatelessWidget {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: comanda.produtos.length,
+              itemCount: comanda.products.length,
               itemBuilder: (context, index) {
-                return PedidoWidget(produto: comanda.produtos[index]);
+                return PedidoWidget(produto: comanda.products[index]);
               },
             ),
           ),

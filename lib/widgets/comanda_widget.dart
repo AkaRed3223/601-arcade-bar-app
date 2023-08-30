@@ -18,7 +18,7 @@ class ComandaWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(guestTab.nome,
+          Text(guestTab.name,
               style: TextStyle(
                   fontSize: MediaQuery.of(context).size.width * 0.06,
                   color: Colors.white,

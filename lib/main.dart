@@ -1,11 +1,11 @@
 import 'package:arcade/pages/cardapio/cardapio.dart';
-import 'package:arcade/pages/comandas/abrir_comanda.dart';
+import 'package:arcade/pages/comandas/comanda_abrir.dart';
 import 'package:arcade/pages/comandas/comandas_home.dart';
-import 'package:arcade/pages/comandas/detalhes_comanda.dart';
-import 'package:arcade/pages/comandas/comandas_todas.dart';
-import 'package:arcade/pages/comandas/fechar_comanda.dart';
+import 'package:arcade/pages/comandas/comanda_detalhes.dart';
+import 'package:arcade/pages/comandas/comandas.dart';
+import 'package:arcade/pages/comandas/comanda_fechar.dart';
 import 'package:arcade/pages/home_page.dart';
-import 'package:arcade/pages/pedidos/novo_pedido.dart';
+import 'package:arcade/pages/pedidos/pedido_inserir.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         "menu_comandas/comandas/fechar": (context) => const ComandaFechar(),
         "comandas/{id}": (context) => const ComandaDetalhes(),
         "cardapio": (context) => const Cardapio(),
-        "pedidos/novo_pedido": (context) => const NovoPedido()
+        "pedidos/novo_pedido": (context) => const PedidoInserir()
       },
     );
   }

@@ -1,17 +1,19 @@
-import 'package:arcade/entities/product.dart';
+import 'package:arcade/entities/produto.dart';
 import 'package:intl/intl.dart';
 
 class Comanda {
   final int id;
-  final String nome;
-  final List<Product> produtos;
+  final int externalId;
+  final String name;
+  final List<Produto> products;
   final double total;
 
   Comanda({
     required this.id,
-    required this.nome,
-    required this.produtos,
-  }) : total = produtos.fold(0.0, (total, produto) => total + produto.price);
+    required this.externalId,
+    required this.name,
+    required this.products,
+  }) : total = products.fold(0.0, (total, produto) => total + produto.price);
 
   String get totalFormatado => NumberFormat.currency(locale: 'pt_BR', symbol: 'R\$').format(total);
 }

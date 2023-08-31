@@ -23,6 +23,10 @@ class ComandasHome extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 10),
+            child: HomeButton(title: 'Excluir Comanda'),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 10),
             child: HomeButton(title: 'Fechar Comanda'),
           ),
         ],

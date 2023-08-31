@@ -42,6 +42,7 @@ class HomeButton extends StatelessWidget implements PreferredSizeWidget {
       'Ver Comandas': 'menu_comandas/comandas/ver',
       'Abrir Comanda': 'menu_comandas/comandas/abrir',
       'Fechar Comanda': 'menu_comandas/comandas/fechar',
+      'Excluir Comanda': 'menu_comandas/comandas/excluir',
       'Cardápio': 'cardapio',
     };
     return routeMap[title] ?? '/';

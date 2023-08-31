@@ -33,9 +33,9 @@ class Produto {
 }
 
 class ProductsService {
-  Future<List<Produto>> fetchProducts() async {
+  Future<List<Produto>> fetchProdutos() async {
     final response = await http.get(
-      Uri.parse('http://192.168.240.1:8080/products'),
+      Uri.parse('http://localhost:8080/products'),
       headers: {'Content-Type': 'application/json; charset=utf-8'},
     );
 

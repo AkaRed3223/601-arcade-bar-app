@@ -43,10 +43,11 @@ class _ComandasState extends State<Comandas> {
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisSpacing: 16.0,
-                    crossAxisSpacing: 16.0),
+                    crossAxisSpacing: 16.0
+                ),
                 itemCount: loadedComandas.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return ComandaWidget(guestTab: loadedComandas[index]);
+                  return ComandaWidget(comanda: loadedComandas[index]);
                 }),
           );
         }

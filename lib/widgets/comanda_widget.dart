@@ -1,11 +1,12 @@
+import 'package:arcade/pages/comandas/comanda_detalhes.dart';
 import 'package:flutter/material.dart';
 
 import '../entities/comanda.dart';
 
 class ComandaWidget extends StatelessWidget {
-  final Comanda guestTab;
+  final Comanda comanda;
 
-  const ComandaWidget({super.key, required this.guestTab});
+  const ComandaWidget({super.key, required this.comanda});
 
   @override
   Widget build(BuildContext context) {
@@ -18,29 +19,32 @@ class ComandaWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(guestTab.name,
+          Text(comanda.name,
               style: TextStyle(
                   fontSize: MediaQuery.of(context).size.width * 0.06,
                   color: Colors.white,
                   fontWeight: FontWeight.bold)),
-          Text("${guestTab.externalId}",
+          Text("${comanda.externalId}",
               style: TextStyle(
                   fontSize: MediaQuery.of(context).size.width * 0.18,
                   color: Colors.white,
                   fontWeight: FontWeight.bold)),
           const SizedBox(height: 8),
-          Text("Total: R\$ ${guestTab.total.toStringAsFixed(2)}",
+          Text("Total: ${comanda.totalFormatado}",
               style: TextStyle(
                   fontSize: MediaQuery.of(context).size.width * 0.045,
-                  color: Colors.white)),
-        ],
+                  color: Colors.white)),],
       ),
     );
 
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, 'comandas/{id}',
-            arguments: {'id': guestTab.id});
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ComandaDetalhes(comanda: comanda),
+          ),
+        );
       },
       child: comandaWidget,
     );

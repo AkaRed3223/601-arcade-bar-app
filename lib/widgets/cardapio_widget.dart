@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import '../entities/categoria.dart';
 
 class CardapioWidget extends StatelessWidget {
-  const CardapioWidget({super.key, required this.products, required this.categories});
-
   final List<Produto> products;
   final List<Categoria> categories;
+
+  const CardapioWidget({super.key, required this.products, required this.categories});
 
   Widget _buildCategoryTab({required List<Produto> products}) {
     return SingleChildScrollView(
@@ -38,7 +38,6 @@ class CardapioWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return DefaultTabController(
       length: categories.length,
 

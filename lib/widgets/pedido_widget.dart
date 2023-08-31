@@ -2,9 +2,9 @@ import 'package:arcade/entities/produto.dart';
 import 'package:flutter/material.dart';
 
 class PedidoWidget extends StatelessWidget {
-  const PedidoWidget({super.key, required this.produto});
-
   final Produto produto;
+
+  const PedidoWidget({super.key, required this.produto});
 
   @override
   Widget build(BuildContext context) {

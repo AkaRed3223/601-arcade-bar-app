@@ -26,9 +26,9 @@ class Categoria {
 }
 
 class CategoriasService {
-  Future<List<Categoria>> fetchCategories() async {
+  Future<List<Categoria>> fetchCategorias() async {
     final response = await http.get(
-      Uri.parse('http://192.168.240.1:8080/categories'),
+      Uri.parse('http://localhost:8080/categories'),
       headers: {'Content-Type': 'application/json; charset=utf-8'},
     );
 

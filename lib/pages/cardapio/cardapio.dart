@@ -20,8 +20,8 @@ class _CardapioState extends State<Cardapio> {
   @override
   void initState() {
     super.initState();
-    futureCategories = CategoriasService().fetchCategories();
-    futureProducts = ProductsService().fetchProducts();
+    futureCategories = CategoriasService().fetchCategorias();
+    futureProducts = ProductsService().fetchProdutos();
     _loadData();
   }
 

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import '../entities/comanda.dart';
 
 class TotalComandaWidget extends StatelessWidget {
-  const TotalComandaWidget({super.key, required this.comanda});
-
   final Comanda comanda;
+
+  const TotalComandaWidget({super.key, required this.comanda});
 
   @override
   Widget build(BuildContext context) {

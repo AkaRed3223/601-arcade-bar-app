@@ -39,7 +39,7 @@ class Comanda {
 class ComandasService {
   Future<List<Comanda>> fetchComandas() async {
     final response = await http.get(
-      Uri.parse('http://localhost:8080/tabs'),
+      Uri.parse('http://192.168.240.1:8080/tabs'),
       headers: {'Content-Type': 'application/json; charset=utf-8'},
     );
 

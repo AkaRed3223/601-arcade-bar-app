@@ -13,25 +13,31 @@ class ComandaAbrir extends StatefulWidget {
 }
 
 class _ComandaAbrirState extends State<ComandaAbrir> {
-
   final TextEditingController idController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
+
   bool showSuccess = false;
+  bool showError = false;
 
   Future<void> _abrirComanda() async {
-    final url = Uri.parse('http://localhost:8080/tabs');
-    final headers = {'Content-Type': 'application/json'}; // Set the content type to JSON
+    setState(() {
+      showSuccess = false;
+      showError = false;
+    });
+
+    final url = Uri.parse('http://192.168.240.1:8080/tabs');
+    final headers = { 'Content-Type': 'application/json' };
     final body = {'externalId': idController.text, 'name': nameController.text};
 
-    final response = await http.post(
-      url,
-      headers: headers,
-      body: jsonEncode(body), // Convert the body map to a JSON string
-    );
+    final response = await http.post(url,headers: headers,body: jsonEncode(body));
 
     if (response.statusCode == 201) {
       setState(() {
         showSuccess = true;
+      });
+    } else {
+      setState(() {
+        showError = true;
       });
     }
   }
@@ -42,44 +48,117 @@ class _ComandaAbrirState extends State<ComandaAbrir> {
       backgroundColor: Colors.grey[900],
       appBar: const CustomAppBar(title: 'Abrir Comanda'),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (showSuccess)
-              const Column(
-                children: [
-                  Icon(
-                    Icons.check_circle_outline,
-                    size: 100,
-                    color: Colors.green,
+        child: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).unfocus();
+          },
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 0),
+                  child: Column(
+                    children: [
+                      TextField(
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                        controller: idController,
+                        decoration: const InputDecoration(
+                          labelText: 'Número da Comanda',
+                          labelStyle: TextStyle(
+                            color: Colors.white,
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                      TextField(
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                        controller: nameController,
+                        decoration: const InputDecoration(
+                          labelText: 'Nome do Cliente',
+                          labelStyle: TextStyle(
+                            color: Colors.white,
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 50),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white70,
+                            foregroundColor: Colors.black,
+                            minimumSize: const Size(220, 90)),
+                        onPressed: () {
+                          _abrirComanda();
+                          FocusScope.of(context).unfocus();
+                        },
+                        child: const Text(
+                          'Abrir Comanda',
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 20),
-                  Text('Comanda criada!', style: TextStyle(fontSize: 20)),
-                ],
-              )
-            else
-              Column(
-                children: [
-                  TextField(
-                    controller: idController,
-                    decoration: const InputDecoration(labelText: 'ID'),
+                ),
+                if (showSuccess)
+                  const Column(
+                    children: [
+                      SizedBox(height: 20),
+                      Icon(
+                        Icons.check_circle_outline,
+                        size: 100,
+                        color: Colors.green,
+                      ),
+                      SizedBox(height: 20),
+                      Text(
+                          'Comanda criada!',
+                          style: TextStyle(
+                              fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          )
+                      ),
+                    ],
                   ),
-                  TextField(
-                    controller: nameController,
-                    decoration: const InputDecoration(labelText: 'Nome'),
+                if (showError)
+                  const Column(
+                    children: [
+                      SizedBox(height: 20),
+                      Icon(
+                        Icons.error_outline,
+                        size: 100,
+                        color: Colors.red,
+                      ),
+                      SizedBox(height: 20),
+                      Text(
+                          'Erro ao abrir comanda!',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          )
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: _abrirComanda,
-                    child: const Text('Abrir Comanda'),
-                  ),
-                ],
-              ),
-          ],
+              ],
+            ),
+          ),
         ),
       ),
     );
   }
-
-
 }

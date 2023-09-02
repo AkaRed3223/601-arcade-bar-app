@@ -1,8 +1,6 @@
 import 'package:arcade/pages/cardapio/cardapio.dart';
 import 'package:arcade/pages/comandas/comanda_abrir.dart';
-import 'package:arcade/pages/comandas/comanda_excluir.dart';
 import 'package:arcade/pages/comandas/comanda_fechar.dart';
-import 'package:arcade/pages/comandas/comanda_todas.dart';
 import 'package:arcade/pages/comandas/comandas_home.dart';
 import 'package:arcade/pages/home_page.dart';
 import 'package:arcade/pages/pedidos/pedido_inserir.dart';
@@ -22,10 +20,10 @@ class MyApp extends StatelessWidget {
       routes: {
         "/": (context) => const MyHomePage(),
         "menu_comandas": (context) => const ComandasHome(),
-        "menu_comandas/comandas/ver": (context) => const Comandas(),
+        //"menu_comandas/comandas/ver": (context) => const Comandas(),
         "menu_comandas/comandas/abrir": (context) => const ComandaAbrir(),
         "menu_comandas/comandas/fechar": (context) => const ComandaFechar(),
-        "menu_comandas/comandas/excluir": (context) => const ComandaExcluir(),
+        //"menu_comandas/comandas/excluir": (context) => const ComandaExcluir(),
         //"comandas/{id}": (context) => const ComandaDetalhes(),
         "cardapio": (context) => const Cardapio(),
         "pedidos/novo_pedido": (context) => const PedidoInserir()

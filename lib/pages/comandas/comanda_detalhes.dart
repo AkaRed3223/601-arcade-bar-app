@@ -39,6 +39,7 @@ class _ComandaDetalhesState extends State<ComandaDetalhes> {
             ),
           ),
           Expanded(
+            flex: 0,
             child: Container(
               color: Colors.black,
               padding: const EdgeInsets.all(16),

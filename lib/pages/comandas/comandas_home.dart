@@ -4,6 +4,7 @@ import 'package:arcade/pages/comandas/comanda_todas.dart';
 import 'package:arcade/widgets/custom_app_bar_widget.dart';
 import 'package:flutter/material.dart';
 
+import '../../entities/categoria.dart';
 import '../../entities/comanda.dart';
 import '../../widgets/home_page_main_buttons.dart';
 
@@ -17,27 +18,31 @@ class ComandasHome extends StatefulWidget {
 class _ComandasHomeState extends State<ComandasHome> {
   late Future<List<Comanda>> futureComandas;
   late Future<List<Produto>> futureProdutos;
+  late Future<List<Categoria>> futureCategorias;
 
   late List<Comanda> loadedComandas = [];
   late List<Produto> loadedProdutos = [];
+  late List<Categoria> loadedCategorias = [];
 
   @override
   void initState() {
     super.initState();
     futureComandas = ComandasService().fetchComandas();
     futureProdutos = ProdutosService().fetchProdutos();
+    futureCategorias = CategoriasService().fetchCategorias();
     _loadData();
   }
 
   Future<void> _loadData() async {
     loadedComandas = await futureComandas;
     loadedProdutos = await futureProdutos;
+    loadedCategorias = await futureCategorias;
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<void>(
-      future: Future.wait([futureComandas, futureProdutos]),
+      future: Future.wait([futureComandas, futureProdutos, futureCategorias]),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator();
@@ -57,7 +62,7 @@ class _ComandasHomeState extends State<ComandasHome> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                Comandas(comandas: loadedComandas, cardapio: loadedProdutos,)
+                                Comandas(comandas: loadedComandas, cardapio: loadedProdutos, categorias: loadedCategorias)
                         ),
                       );
                     },

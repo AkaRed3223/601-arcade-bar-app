@@ -3,6 +3,7 @@ import 'package:arcade/pages/pedidos/pedido_inserir.dart';
 import 'package:arcade/widgets/pedido_widget.dart';
 import 'package:flutter/material.dart';
 
+import '../../entities/categoria.dart';
 import '../../entities/comanda.dart';
 import '../../widgets/custom_app_bar_widget.dart';
 import '../../widgets/comanda_total_widget.dart';
@@ -10,8 +11,9 @@ import '../../widgets/comanda_total_widget.dart';
 class ComandaDetalhes extends StatelessWidget {
   final Comanda comanda;
   final List<Produto> cardapio;
+  final List<Categoria> categoria;
 
-  const ComandaDetalhes({super.key, required this.comanda, required this.cardapio});
+  const ComandaDetalhes({super.key, required this.comanda, required this.cardapio, required this.categoria});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class ComandaDetalhes extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) =>
-                    PedidoInserir(cardapio: cardapio, comanda: comanda)
+                    PedidoInserir(cardapio: cardapio, comanda: comanda, categorias: categoria,)
             ),
           );
         },

@@ -1,13 +1,108 @@
 import 'package:arcade/entities/produto.dart';
+import 'package:arcade/pages/cardapio/cardapio_excluir_produto.dart';
+import 'package:arcade/pages/cardapio/cardapio_inserir_categoria.dart';
+import 'package:arcade/pages/cardapio/cardapio_inserir_produto.dart';
+import 'package:arcade/widgets/floating_action_button.dart';
 import 'package:flutter/material.dart';
 
 import '../entities/categoria.dart';
+import '../pages/cardapio/cardapio_excluir_categoria.dart';
 
-class CardapioWidget extends StatelessWidget {
+class CardapioWidget extends StatefulWidget {
   final List<Produto> products;
   final List<Categoria> categories;
 
-  const CardapioWidget({super.key, required this.products, required this.categories});
+  const CardapioWidget(
+      {super.key, required this.products, required this.categories});
+
+  @override
+  State<CardapioWidget> createState() => _CardapioWidgetState();
+}
+
+class _CardapioWidgetState extends State<CardapioWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: widget.categories.length,
+      child: Scaffold(
+        backgroundColor: Colors.grey[900],
+        appBar: AppBar(
+          title: const Text('Cardápio'),
+          centerTitle: true,
+          backgroundColor: Colors.grey[800],
+          elevation: 2,
+          bottom: TabBar(
+            isScrollable: true,
+            tabs: widget.categories.map((category) {
+              return Tab(
+                text: category.name,
+              );
+            }).toList(),
+          ),
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              child: TabBarView(
+                children: widget.categories.map((category) {
+                  final categoryProducts = widget.products
+                      .where(
+                        (produto) => produto.category.id == category.id,
+                      )
+                      .toList();
+                  return _buildCategoryTab(products: categoryProducts);
+                }).toList(),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ReusableFAB(
+                          text: 'Categoria',
+                          builder: (context) =>
+                              const CardapioInserirCategoria(),
+                          iconData: Icons.add),
+                      const SizedBox(width: 5),
+                      ReusableFAB(
+                        text: 'Produto',
+                        builder: (context) => CardapioInserirProduto(
+                            categorias: widget.categories),
+                        iconData: Icons.add,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 5),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ReusableFAB(
+                        text: 'Categoria',
+                        builder: (context) => CardapioExcluirCategoria(
+                            categorias: widget.categories,
+                            produtos: widget.products),
+                        iconData: Icons.remove,
+                      ),
+                      const SizedBox(width: 5),
+                      ReusableFAB(
+                        text: 'Produto',
+                        builder: (context) =>
+                            CardapioExcluirProduto(produtos: widget.products),
+                        iconData: Icons.remove,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   Widget _buildCategoryTab({required List<Produto> products}) {
     return SingleChildScrollView(
@@ -35,43 +130,4 @@ class CardapioWidget extends StatelessWidget {
       ),
     );
   }
-
-  @override
-  Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: categories.length,
-
-      child: Scaffold(
-        backgroundColor: Colors.grey[900],
-
-        appBar: AppBar(
-          title: const Text('Cardápio'),
-          centerTitle: true,
-          backgroundColor: Colors.grey[800],
-          elevation: 2,
-
-          bottom: TabBar(
-            isScrollable: true,
-            tabs: categories.map((category) {
-              return Tab(
-                text: category.name,
-              );
-            }).toList(),
-          ),
-        ),
-
-        body: TabBarView(
-          children: categories.map((category) {
-            List<Produto> produtosPorCategoria = products
-                .where((produto) => produto.category.id == category.id)
-                .toList();
-
-            return _buildCategoryTab(products: produtosPorCategoria);
-          }).toList(),
-        ),
-      ),
-    );
-  }
 }
-
-

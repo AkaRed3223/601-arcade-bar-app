@@ -9,11 +9,12 @@ import 'package:http/http.dart' as http;
 class PedidoInserir extends StatefulWidget {
   final Comanda comanda;
   final List<Produto> cardapio;
+  final List<Categoria> categorias;
 
   const PedidoInserir({
     Key? key,
     required this.comanda,
-    required this.cardapio,
+    required this.cardapio, required this.categorias,
   }) : super(key: key);
 
   @override
@@ -24,52 +25,7 @@ class _PedidoInserirState extends State<PedidoInserir> {
   Produto? selectedProduct;
   bool showSuccess = false;
   bool showError = false;
-  //final ScrollController _scrollController = ScrollController();
-
-  List<Categoria> mockCategorias = [
-    Categoria(id: 1, name: "Lanches", position: 0),
-    Categoria(id: 2, name: "Bebidas", position: 1),
-    Categoria(id: 3, name: "Porções", position: 2),
-  ];
-
-  /*List<Produto> mockCardapio = [
-    Produto(
-        id: 1,
-        name: "X-Burger",
-        price: 24.90,
-        category: Categoria(id: 0, name: "Lanches", position: 0)
-    ),
-    Produto(
-        id: 2,
-        name: "X-Bacon",
-        price: 26.90,
-        category: Categoria(id: 0, name: "Lanches", position: 0)
-    ),
-    Produto(
-        id: 3,
-        name: "X-Pagan",
-        price: 34.90,
-        category: Categoria(id: 0, name: "Lanches", position: 0)
-    ),
-    Produto(
-        id: 4,
-        name: "Original",
-        price: 12.90,
-        category: Categoria(id: 1, name: "Bebidas", position: 1)
-    ),
-    Produto(
-        id: 5,
-        name: "Coca-cola",
-        price: 6.90,
-        category: Categoria(id: 1, name: "Bebidas", position: 1)
-    ),
-    Produto(
-        id: 6,
-        name: "Batata frita",
-        price: 14.90,
-        category: Categoria(id: 2, name: "Porções", position: 2)
-    ),
-  ];*/
+  final ScrollController _scrollController = ScrollController();
 
   Future<void> _atualizarComanda(int comandaExternalId, int productId) async {
     setState(() {
@@ -80,7 +36,6 @@ class _PedidoInserirState extends State<PedidoInserir> {
     final url = Uri.parse('http://192.168.240.1:8080/tabs/$comandaExternalId');
     final headers = {'Content-Type': 'application/json'};
     final queryParams = {'productId': productId.toString()};
-    //final body = {'externalId': idController.text, 'name': nameController.text};
 
     final response = await http.put(url.replace(queryParameters: queryParams),
         headers: headers);
@@ -102,9 +57,10 @@ class _PedidoInserirState extends State<PedidoInserir> {
       backgroundColor: Colors.grey[900],
       appBar: const CustomAppBar(title: 'Novo Pedido'),
       body: SingleChildScrollView(
+        controller: _scrollController,
         child: Column(
           children: [
-            for (Categoria categoria in mockCategorias)
+            for (Categoria categoria in widget.categorias)
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -123,9 +79,7 @@ class _PedidoInserirState extends State<PedidoInserir> {
                       ),
                     ),
                   ),
-                  const Divider(
-                    color: Colors.green,
-                  ),
+                  const Divider(color: Colors.white, thickness: 0),
                   Column(
                     children: [
                       for (Produto produto in widget.cardapio)
@@ -144,13 +98,20 @@ class _PedidoInserirState extends State<PedidoInserir> {
                               setState(() {
                                 selectedProduct = produto;
                               });
+                              /*_scrollController.animateTo(
+                                _scrollController.position.maxScrollExtent,
+                                duration: Duration(milliseconds: 500),
+                                // Adjust the duration as needed
+                                curve: Curves.easeInOut, // Adjust the curve as needed
+                              );*/
                             },
                           ),
                     ],
                   ),
                 ],
               ),
-            if (showSuccess)
+            const SizedBox(height: 80),
+            /*if (showSuccess)
               const Column(
                 children: [
                   SizedBox(height: 20),
@@ -160,14 +121,12 @@ class _PedidoInserirState extends State<PedidoInserir> {
                     color: Colors.green,
                   ),
                   SizedBox(height: 20),
-                  Text(
-                      'Produto adicionado!',
+                  Text('Produto adicionado!',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
-                      )
-                  ),
+                      )),
                 ],
               ),
             if (showError)
@@ -180,31 +139,39 @@ class _PedidoInserirState extends State<PedidoInserir> {
                     color: Colors.red,
                   ),
                   SizedBox(height: 20),
-                  Text(
-                      'Erro ao adicionar produto!',
+                  Text('Erro ao adicionar produto!',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
-                      )
-                  ),
+                      )),
                 ],
-              ),
-            const SizedBox(height: 20),
-            selectedProduct != null
-                ? Text(
-                    'Produto selecionado:\n${selectedProduct!.name}',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.greenAccent,
-                    ),
-                  )
-                : const SizedBox(),
+              ),*/
           ],
         ),
       ),
+      bottomSheet: selectedProduct != null
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Container(
+                    color: Colors.greenAccent,
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      'Produto selecionado:\n${selectedProduct!.name}',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
+          : null,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           final selectedProduct = this.selectedProduct;
@@ -212,7 +179,9 @@ class _PedidoInserirState extends State<PedidoInserir> {
             widget.comanda.products.add(selectedProduct);
             _atualizarComanda(widget.comanda.externalId, selectedProduct.id);
           }
-          //ccc Retornar para a página anterior renderizando com o novo produto
+          /*setState(() {
+            this.selectedProduct = null;
+          });*/
         },
         backgroundColor: Colors.grey[800],
         child: const Icon(Icons.done),

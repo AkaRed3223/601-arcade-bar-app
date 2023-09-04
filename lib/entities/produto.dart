@@ -28,7 +28,9 @@ class Produto {
   }
 
   static List<Produto> listFromJson(List<dynamic> jsonList) {
-    return jsonList.map((item) => Produto.fromJson(item)).toList();
+    List<Produto> produtos = jsonList.map((item) => Produto.fromJson(item)).toList();
+    produtos.sort((a, b) => a.name.compareTo(b.name));
+    return produtos;
   }
 }
 

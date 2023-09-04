@@ -3,7 +3,6 @@ import 'package:arcade/pages/comandas/comanda_abrir.dart';
 import 'package:arcade/pages/comandas/comanda_fechar.dart';
 import 'package:arcade/pages/comandas/comandas_home.dart';
 import 'package:arcade/pages/home_page.dart';
-import 'package:arcade/pages/pedidos/pedido_inserir.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -26,7 +25,7 @@ class MyApp extends StatelessWidget {
         //"menu_comandas/comandas/excluir": (context) => const ComandaExcluir(),
         //"comandas/{id}": (context) => const ComandaDetalhes(),
         "cardapio": (context) => const Cardapio(),
-        "pedidos/novo_pedido": (context) => const PedidoInserir()
+        //"pedidos/novo_pedido": (context) => const PedidoInserir()
       },
     );
   }

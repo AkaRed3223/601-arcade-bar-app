@@ -32,7 +32,7 @@ class Produto {
   }
 }
 
-class ProductsService {
+class ProdutosService {
   Future<List<Produto>> fetchProdutos() async {
     final response = await http.get(
       Uri.parse('http://192.168.240.1:8080/products'),

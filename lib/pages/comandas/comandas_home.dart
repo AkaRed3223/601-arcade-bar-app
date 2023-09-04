@@ -1,3 +1,4 @@
+import 'package:arcade/entities/produto.dart';
 import 'package:arcade/pages/comandas/comanda_excluir.dart';
 import 'package:arcade/pages/comandas/comanda_todas.dart';
 import 'package:arcade/widgets/custom_app_bar_widget.dart';
@@ -15,23 +16,28 @@ class ComandasHome extends StatefulWidget {
 
 class _ComandasHomeState extends State<ComandasHome> {
   late Future<List<Comanda>> futureComandas;
+  late Future<List<Produto>> futureProdutos;
+
   late List<Comanda> loadedComandas = [];
+  late List<Produto> loadedProdutos = [];
 
   @override
   void initState() {
     super.initState();
     futureComandas = ComandasService().fetchComandas();
+    futureProdutos = ProdutosService().fetchProdutos();
     _loadData();
   }
 
   Future<void> _loadData() async {
     loadedComandas = await futureComandas;
+    loadedProdutos = await futureProdutos;
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<void>(
-      future: Future.wait([futureComandas]),
+      future: Future.wait([futureComandas, futureProdutos]),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator();
@@ -51,7 +57,7 @@ class _ComandasHomeState extends State<ComandasHome> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                Comandas(comandas: loadedComandas)
+                                Comandas(comandas: loadedComandas, cardapio: loadedProdutos,)
                         ),
                       );
                     },

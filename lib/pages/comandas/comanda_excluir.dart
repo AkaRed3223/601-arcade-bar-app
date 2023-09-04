@@ -49,124 +49,126 @@ class _ComandaExcluirState extends State<ComandaExcluir> {
     return Scaffold(
       backgroundColor: Colors.grey[900],
       appBar: const CustomAppBar(title: 'Excluir Comanda'),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  DropdownButtonFormField<int>(
-                    itemHeight: 60,
-                    dropdownColor: Colors.grey[800],
-                    style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                    value: selectedComandaId,
-                    onChanged: (value) {
-                      setState(() {
-                        selectedComandaId = value;
-                        showSuccess = false;
-                      });
-                    },
-                    items: widget.comandas
-                        .where((comanda) => comanda.products.isEmpty)
-                        .map((comanda) {
-                      return DropdownMenuItem<int>(
-                        value: comanda.id,
-                        child: Text('${comanda.name} (${comanda.externalId})'),
-                      );
-                    }).toList(),
-                    decoration: const InputDecoration(
-                      labelStyle: TextStyle(color: Colors.white),
-                      labelText: 'Selecionar Comanda',
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  if (selectedComandaId != null)
-                    ComandaDetailsCard(
-                      comanda: widget.comandas.firstWhere(
-                          (comanda) => comanda.id == selectedComandaId!),
-                      onDelete: _excluirComanda,
-                      showSuccess: showSuccess,
-                    ),
-                  Container(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.warning,
-                          color: Colors.redAccent,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    DropdownButtonFormField<int>(
+                      itemHeight: 60,
+                      dropdownColor: Colors.grey[800],
+                      style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                      value: selectedComandaId,
+                      onChanged: (value) {
+                        setState(() {
+                          selectedComandaId = value;
+                          showSuccess = false;
+                        });
+                      },
+                      items: widget.comandas
+                          .where((comanda) => comanda.products.isEmpty)
+                          .map((comanda) {
+                        return DropdownMenuItem<int>(
+                          value: comanda.id,
+                          child: Text('${comanda.name} (${comanda.externalId})'),
+                        );
+                      }).toList(),
+                      decoration: const InputDecoration(
+                        labelStyle: TextStyle(color: Colors.white),
+                        labelText: 'Selecionar Comanda',
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
                         ),
-                        Text(
-                            'Atenção! Esta lista contém apenas as comandas vazias!',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: MediaQuery.of(context).size.width * 0.06,
-                                color: Colors.redAccent,
-                                fontWeight: FontWeight.bold)),
-                        const Icon(
-                          Icons.warning,
-                          color: Colors.redAccent,
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
                         ),
-                        if (showSuccess)
-                          const Column(
-                            children: [
-                              SizedBox(height: 20),
-                              Icon(
-                                Icons.check_circle_outline,
-                                size: 100,
-                                color: Colors.green,
-                              ),
-                              SizedBox(height: 20),
-                              Text(
-                                  'Comanda excluída com sucesso!',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  )
-                              ),
-                            ],
-                          ),
-                        if (showError)
-                          const Column(
-                            children: [
-                              SizedBox(height: 20),
-                              Icon(
-                                Icons.error_outline,
-                                size: 100,
-                                color: Colors.red,
-                              ),
-                              SizedBox(height: 20),
-                              Text(
-                                  'Erro ao excluir comanda!',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  )
-                              ),
-                            ],
-                          ),
-                      ],
+                      ),
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 20),
+                    if (selectedComandaId != null)
+                      ComandaDetailsCard(
+                        comanda: widget.comandas.firstWhere(
+                            (comanda) => comanda.id == selectedComandaId!),
+                        onDelete: _excluirComanda,
+                        showSuccess: showSuccess,
+                      ),
+                    Container(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.warning,
+                            color: Colors.redAccent,
+                          ),
+                          Text(
+                              'Atenção! Esta lista contém apenas as comandas vazias!',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: MediaQuery.of(context).size.width * 0.06,
+                                  color: Colors.redAccent,
+                                  fontWeight: FontWeight.bold)),
+                          const Icon(
+                            Icons.warning,
+                            color: Colors.redAccent,
+                          ),
+                          if (showSuccess)
+                            const Column(
+                              children: [
+                                SizedBox(height: 20),
+                                Icon(
+                                  Icons.check_circle_outline,
+                                  size: 100,
+                                  color: Colors.green,
+                                ),
+                                SizedBox(height: 20),
+                                Text(
+                                    'Comanda excluída com sucesso!',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    )
+                                ),
+                              ],
+                            ),
+                          if (showError)
+                            const Column(
+                              children: [
+                                SizedBox(height: 20),
+                                Icon(
+                                  Icons.error_outline,
+                                  size: 100,
+                                  color: Colors.red,
+                                ),
+                                SizedBox(height: 20),
+                                Text(
+                                    'Erro ao excluir comanda!',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    )
+                                ),
+                              ],
+                            ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -1,3 +1,5 @@
+import 'package:arcade/entities/produto.dart';
+import 'package:arcade/pages/pedidos/pedido_inserir.dart';
 import 'package:arcade/widgets/pedido_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -5,16 +7,12 @@ import '../../entities/comanda.dart';
 import '../../widgets/custom_app_bar_widget.dart';
 import '../../widgets/comanda_total_widget.dart';
 
-class ComandaDetalhes extends StatefulWidget {
+class ComandaDetalhes extends StatelessWidget {
   final Comanda comanda;
+  final List<Produto> cardapio;
 
-  const ComandaDetalhes({super.key, required this.comanda});
+  const ComandaDetalhes({super.key, required this.comanda, required this.cardapio});
 
-  @override
-  State<ComandaDetalhes> createState() => _ComandaDetalhesState();
-}
-
-class _ComandaDetalhesState extends State<ComandaDetalhes> {
   @override
   Widget build(BuildContext context) {
 
@@ -23,7 +21,13 @@ class _ComandaDetalhesState extends State<ComandaDetalhes> {
       appBar: const CustomAppBar(title: 'Detalhes da Comanda'),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, 'pedidos/novo_pedido');
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    PedidoInserir(cardapio: cardapio, comanda: comanda)
+            ),
+          );
         },
         backgroundColor: Colors.grey[800],
         child: const Icon(Icons.add),
@@ -32,9 +36,9 @@ class _ComandaDetalhesState extends State<ComandaDetalhes> {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: widget.comanda.products.length,
+              itemCount: comanda.products.length,
               itemBuilder: (context, index) {
-                return PedidoWidget(produto: widget.comanda.products[index]);
+                return PedidoWidget(produto: comanda.products[index]);
               },
             ),
           ),
@@ -43,7 +47,7 @@ class _ComandaDetalhesState extends State<ComandaDetalhes> {
             child: Container(
               color: Colors.black,
               padding: const EdgeInsets.all(16),
-              child: TotalComandaWidget(comanda: widget.comanda),
+              child: TotalComandaWidget(comanda: comanda),
             ),
           ),
         ],

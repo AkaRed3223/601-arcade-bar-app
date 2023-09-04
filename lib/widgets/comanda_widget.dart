@@ -1,3 +1,4 @@
+import 'package:arcade/entities/produto.dart';
 import 'package:arcade/pages/comandas/comanda_detalhes.dart';
 import 'package:flutter/material.dart';
 
@@ -5,8 +6,9 @@ import '../entities/comanda.dart';
 
 class ComandaWidget extends StatelessWidget {
   final Comanda comanda;
+  final List<Produto> cardapio;
 
-  const ComandaWidget({super.key, required this.comanda});
+  const ComandaWidget({super.key, required this.comanda, required this.cardapio});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,7 @@ class ComandaWidget extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ComandaDetalhes(comanda: comanda),
+            builder: (context) => ComandaDetalhes(comanda: comanda, cardapio: cardapio,),
           ),
         );
       },

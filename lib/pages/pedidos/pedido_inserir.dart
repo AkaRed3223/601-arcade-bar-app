@@ -22,6 +22,8 @@ class PedidoInserir extends StatefulWidget {
 
 class _PedidoInserirState extends State<PedidoInserir> {
   Produto? selectedProduct;
+  bool showSuccess = false;
+  bool showError = false;
   //final ScrollController _scrollController = ScrollController();
 
   List<Categoria> mockCategorias = [
@@ -70,10 +72,10 @@ class _PedidoInserirState extends State<PedidoInserir> {
   ];*/
 
   Future<void> _atualizarComanda(int comandaExternalId, int productId) async {
-    /*setState(() {
+    setState(() {
       showSuccess = false;
       showError = false;
-    });*/
+    });
 
     final url = Uri.parse('http://192.168.240.1:8080/tabs/$comandaExternalId');
     final headers = {'Content-Type': 'application/json'};
@@ -84,16 +86,13 @@ class _PedidoInserirState extends State<PedidoInserir> {
         headers: headers);
 
     if (response.statusCode == 200) {
-      print("sucesso");
-
-      /*setState(() {
+      setState(() {
         showSuccess = true;
-      });*/
+      });
     } else {
-      print("falha");
-      /*setState(() {
+      setState(() {
         showError = true;
-      });*/
+      });
     }
   }
 
@@ -151,6 +150,46 @@ class _PedidoInserirState extends State<PedidoInserir> {
                   ),
                 ],
               ),
+            if (showSuccess)
+              const Column(
+                children: [
+                  SizedBox(height: 20),
+                  Icon(
+                    Icons.check_circle_outline,
+                    size: 100,
+                    color: Colors.green,
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                      'Produto adicionado!',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      )
+                  ),
+                ],
+              ),
+            if (showError)
+              const Column(
+                children: [
+                  SizedBox(height: 20),
+                  Icon(
+                    Icons.error_outline,
+                    size: 100,
+                    color: Colors.red,
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                      'Erro ao adicionar produto!',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      )
+                  ),
+                ],
+              ),
             const SizedBox(height: 20),
             selectedProduct != null
                 ? Text(
@@ -173,7 +212,7 @@ class _PedidoInserirState extends State<PedidoInserir> {
             widget.comanda.products.add(selectedProduct);
             _atualizarComanda(widget.comanda.externalId, selectedProduct.id);
           }
-          //Retornar para a página anterior renderizando com o novo produto
+          //ccc Retornar para a página anterior renderizando com o novo produto
         },
         backgroundColor: Colors.grey[800],
         child: const Icon(Icons.done),

@@ -21,7 +21,7 @@ class _ComandaFecharState extends State<ComandaFechar> {
   bool showError = false;
 
   Future<void> _fecharComanda() async {
-    selectedComandaId = widget.comanda.externalId;
+    selectedComandaId = widget.comanda.id;
 
     setState(() {
       showSuccess = false;

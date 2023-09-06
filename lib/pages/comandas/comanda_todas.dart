@@ -11,7 +11,11 @@ class Comandas extends StatelessWidget {
   final List<Produto> cardapio;
   final List<Categoria> categorias;
 
-  const Comandas({super.key, required this.comandas, required this.cardapio, required this.categorias});
+  const Comandas(
+      {super.key,
+      required this.comandas,
+      required this.cardapio,
+      required this.categorias});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +28,10 @@ class Comandas extends StatelessWidget {
               crossAxisCount: 2, mainAxisSpacing: 16.0, crossAxisSpacing: 16.0),
           itemCount: comandas.length,
           itemBuilder: (BuildContext context, int index) {
-            return ComandaWidget(comanda: comandas[index], cardapio: cardapio, categorias: categorias);
+            return ComandaWidget(
+                comanda: comandas[index],
+                cardapio: cardapio,
+                categorias: categorias);
           }),
     );
   }
@@ -32,9 +39,9 @@ class Comandas extends StatelessWidget {
   void _sortComandasByIsOpen(List<Comanda> comandas) {
     comandas.sort((a, b) {
       if (a.isOpen && !b.isOpen) {
-        return -1; // a comes before b
+        return -1;
       } else if (!a.isOpen && b.isOpen) {
-        return 1; // b comes before a
+        return 1;
       } else {
         return a.externalId.compareTo(b.externalId);
       }

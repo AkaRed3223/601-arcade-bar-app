@@ -22,40 +22,40 @@ class ComandaWidget extends StatelessWidget {
     Color borderColor = comanda.isOpen ? Colors.white : Colors.black;
     Color fontColor = comanda.isOpen ? Colors.white : Colors.black;
 
-    Container comandaWidget = Container(
-      padding: const EdgeInsets.all(16.0),
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: borderColor,
-        ),
-        borderRadius: BorderRadius.circular(25.0),
-        color: backgroundColor,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(comanda.name,
-              style: TextStyle(
-                  fontSize: MediaQuery.of(context).size.width * 0.06,
-                  color: fontColor,
-                  fontWeight: FontWeight.bold)),
-          Text("${comanda.externalId}",
-              style: TextStyle(
-                  fontSize: MediaQuery.of(context).size.width * 0.18,
-                  color: fontColor,
-                  fontWeight: FontWeight.bold)),
-          Text(
-              comanda.isOpen
-                  ? "Total: ${comanda.totalFormatado}"
-                  : "Pago: ${comanda.totalFormatado}",
-              style: TextStyle(
-                  fontSize: MediaQuery.of(context).size.width * 0.045,
-                  color: fontColor)),
-        ],
-      ),
-    );
-
     return GestureDetector(
+      child: Container(
+        padding: const EdgeInsets.all(16.0),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: borderColor,
+          ),
+          borderRadius: BorderRadius.circular(25.0),
+          color: backgroundColor,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(comanda.name,
+                style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width * 0.06,
+                    color: fontColor,
+                    fontWeight: FontWeight.bold)),
+            Text("${comanda.externalId}",
+                style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width * 0.18,
+                    color: fontColor,
+                    fontWeight: FontWeight.bold)),
+            Text(
+                comanda.isOpen
+                    ? "Total: ${comanda.totalFormatado}"
+                    : "Pago: ${comanda.totalFormatado}",
+                style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.width * 0.045,
+                  color: fontColor,
+                )),
+          ],
+        ),
+      ),
       onTap: () {
         Navigator.push(
           context,
@@ -68,7 +68,6 @@ class ComandaWidget extends StatelessWidget {
           ),
         );
       },
-      child: comandaWidget,
     );
   }
 }

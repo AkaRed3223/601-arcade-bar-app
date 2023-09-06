@@ -19,20 +19,20 @@ class _PedidoRemoverState extends State<PedidoRemover> {
   bool showSuccess = false;
   bool showError = false;
 
-  Future<void> _excluirProduto() async {
+  Future<void> _atualizarComanda() async {
     setState(() {
       showSuccess = false;
       showError = false;
     });
 
     if (selectedProdutoId != null) {
-      final url = Uri.parse('http://192.168.240.1:8080/tabs/');
+      final url = Uri.parse('http://192.168.240.1:8080/tabs/${widget.comanda.id}/remove');
       final headers = {'Content-Type': 'application/json'};
-      final queryParams = {'productId': selectedProdutoId};
+      final queryParams = {'productId': selectedProdutoId.toString()};
 
       final response = await http.put(url.replace(queryParameters: queryParams), headers: headers);
 
-      if (response.statusCode == 204) {
+      if (response.statusCode == 200) {
         setState(() {
           showSuccess = true;
         });
@@ -96,7 +96,7 @@ class _PedidoRemoverState extends State<PedidoRemover> {
                       ProdutoDetailsCard(
                         produto: widget.comanda.products.firstWhere(
                             (produto) => produto.id == selectedProdutoId!),
-                        onDelete: _excluirProduto,
+                        onDelete: _atualizarComanda,
                         showSuccess: showSuccess,
                       ),
                     Container(

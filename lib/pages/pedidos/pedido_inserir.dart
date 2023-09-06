@@ -28,14 +28,14 @@ class _PedidoInserirState extends State<PedidoInserir> {
   bool showError = false;
   final ScrollController _scrollController = ScrollController();
 
-  Future<void> _atualizarComanda(int comandaExternalId, int productId) async {
+  Future<void> _atualizarComanda(int comandaId, int productId) async {
     setState(() {
       showSuccess = false;
       showError = false;
     });
 
     final url =
-        Uri.parse('http://192.168.240.1:8080/tabs/$comandaExternalId/insert');
+        Uri.parse('http://192.168.240.1:8080/tabs/$comandaId/insert');
     final headers = {'Content-Type': 'application/json'};
     final queryParams = {'productId': productId.toString()};
 
@@ -179,7 +179,7 @@ class _PedidoInserirState extends State<PedidoInserir> {
           final selectedProduct = this.selectedProduct;
           if (selectedProduct != null) {
             widget.comanda.products.add(selectedProduct);
-            _atualizarComanda(widget.comanda.externalId, selectedProduct.id);
+            _atualizarComanda(widget.comanda.id, selectedProduct.id);
           }
           /*setState(() {
             this.selectedProduct = null;

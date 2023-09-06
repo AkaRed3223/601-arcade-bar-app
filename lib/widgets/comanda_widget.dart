@@ -10,15 +10,26 @@ class ComandaWidget extends StatelessWidget {
   final List<Produto> cardapio;
   final List<Categoria> categorias;
 
-  const ComandaWidget({super.key, required this.comanda, required this.cardapio, required this.categorias});
+  const ComandaWidget(
+      {super.key,
+      required this.comanda,
+      required this.cardapio,
+      required this.categorias});
 
   @override
   Widget build(BuildContext context) {
+    Color backgroundColor = comanda.isOpen ? Colors.transparent : Colors.green;
+    Color borderColor = comanda.isOpen ? Colors.white : Colors.black;
+    Color fontColor = comanda.isOpen ? Colors.white : Colors.black;
+
     Container comandaWidget = Container(
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey),
+        border: Border.all(
+          color: borderColor,
+        ),
         borderRadius: BorderRadius.circular(25.0),
+        color: backgroundColor,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -26,18 +37,21 @@ class ComandaWidget extends StatelessWidget {
           Text(comanda.name,
               style: TextStyle(
                   fontSize: MediaQuery.of(context).size.width * 0.06,
-                  color: Colors.white,
+                  color: fontColor,
                   fontWeight: FontWeight.bold)),
           Text("${comanda.externalId}",
               style: TextStyle(
                   fontSize: MediaQuery.of(context).size.width * 0.18,
-                  color: Colors.white,
+                  color: fontColor,
                   fontWeight: FontWeight.bold)),
-          const SizedBox(height: 8),
-          Text("Total: ${comanda.totalFormatado}",
+          Text(
+              comanda.isOpen
+                  ? "Total: ${comanda.totalFormatado}"
+                  : "Pago: ${comanda.totalFormatado}",
               style: TextStyle(
                   fontSize: MediaQuery.of(context).size.width * 0.045,
-                  color: Colors.white)),],
+                  color: fontColor)),
+        ],
       ),
     );
 
@@ -46,7 +60,11 @@ class ComandaWidget extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ComandaDetalhes(comanda: comanda, cardapio: cardapio, categoria: categorias,),
+            builder: (context) => ComandaDetalhes(
+              comanda: comanda,
+              cardapio: cardapio,
+              categoria: categorias,
+            ),
           ),
         );
       },

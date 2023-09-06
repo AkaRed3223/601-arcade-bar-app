@@ -30,7 +30,7 @@ class TotalComandaWidget extends StatelessWidget {
             thickness: 5,
           ),
           Text(
-              comanda.totalFormatado,
+            comanda.isOpen ? comanda.totalFormatado : 'R\$ 0,00',
               style: TextStyle(
                   fontSize: MediaQuery.of(context).size.width * 0.07,
                   color: Colors.white,

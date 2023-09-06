@@ -116,10 +116,6 @@ class _ComandasHomeState extends State<ComandasHome> {
                     ),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  child: HomeButton(title: 'Fechar Comanda'),
-                ),
               ],
             ),
           );

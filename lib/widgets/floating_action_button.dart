@@ -16,17 +16,20 @@ class ReusableFAB extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton.extended(
-      heroTag: tag,
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: builder),
-        );
-      },
-      backgroundColor: Colors.grey[800],
-      icon: Icon(iconData),
-      label: Text(text),
+    return Expanded(
+      flex: 1,
+      child: FloatingActionButton.extended(
+        heroTag: tag,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: builder),
+          );
+        },
+        backgroundColor: Colors.grey[800],
+        icon: Icon(iconData),
+        label: Text(text),
+      ),
     );
   }
 }

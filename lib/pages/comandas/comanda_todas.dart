@@ -15,8 +15,7 @@ class Comandas extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    comandas.sort((a, b) => a.externalId.compareTo(b.externalId));
-
+    _sortComandasByIsOpen(comandas);
     return Scaffold(
       backgroundColor: Colors.grey[900],
       appBar: const CustomAppBar(title: 'Todas as Comandas'),
@@ -28,5 +27,17 @@ class Comandas extends StatelessWidget {
             return ComandaWidget(comanda: comandas[index], cardapio: cardapio, categorias: categorias);
           }),
     );
+  }
+
+  void _sortComandasByIsOpen(List<Comanda> comandas) {
+    comandas.sort((a, b) {
+      if (a.isOpen && !b.isOpen) {
+        return -1; // a comes before b
+      } else if (!a.isOpen && b.isOpen) {
+        return 1; // b comes before a
+      } else {
+        return a.externalId.compareTo(b.externalId);
+      }
+    });
   }
 }

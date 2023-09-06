@@ -10,6 +10,7 @@ class Comanda {
   final String name;
   final List<Produto> products;
   final double total;
+  final bool isOpen;
 
   Comanda({
     required this.id,
@@ -17,6 +18,7 @@ class Comanda {
     required this.name,
     required this.products,
     required this.total,
+    required this.isOpen
   });
 
   String get totalFormatado => NumberFormat.currency(locale: 'pt_BR', symbol: 'R\$').format(total);
@@ -28,6 +30,7 @@ class Comanda {
       name: json['name'], 
       products: Produto.listFromJson(json['products']), 
       total: json['total'],
+      isOpen: json['isOpen']
     );
   }
 
@@ -46,8 +49,8 @@ class ComandasService {
     if (response.statusCode == 200) {
       final responseBody = utf8.decode(response.bodyBytes);
       final jsonData = json.decode(responseBody);
-      final List<Comanda> productList = Comanda.listFromJson(jsonData);
-      return productList;
+      final List<Comanda> comandaList = Comanda.listFromJson(jsonData);
+      return comandaList;
     } else {
       throw Exception('API call failed with status code: ${response.statusCode}');
     }

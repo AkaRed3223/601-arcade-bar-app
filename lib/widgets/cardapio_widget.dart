@@ -46,9 +46,7 @@ class _CardapioWidgetState extends State<CardapioWidget> {
               child: TabBarView(
                 children: widget.categories.map((category) {
                   final categoryProducts = widget.products
-                      .where(
-                        (produto) => produto.category.id == category.id,
-                      )
+                      .where((produto) => produto.category.id == category.id)
                       .toList();
                   return _buildCategoryTab(products: categoryProducts);
                 }).toList(),
@@ -62,15 +60,18 @@ class _CardapioWidgetState extends State<CardapioWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       ReusableFAB(
+                          tag: 'add categoria',
                           text: 'Categoria',
                           builder: (context) =>
                               const CardapioInserirCategoria(),
                           iconData: Icons.add),
                       const SizedBox(width: 5),
                       ReusableFAB(
+                        tag: 'add produto',
                         text: 'Produto',
                         builder: (context) => CardapioInserirProduto(
-                            categorias: widget.categories),
+                            categorias: widget.categories,
+                            produtos: widget.products),
                         iconData: Icons.add,
                       ),
                     ],
@@ -80,6 +81,7 @@ class _CardapioWidgetState extends State<CardapioWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       ReusableFAB(
+                        tag: 'remove categoria',
                         text: 'Categoria',
                         builder: (context) => CardapioExcluirCategoria(
                             categorias: widget.categories,
@@ -88,6 +90,7 @@ class _CardapioWidgetState extends State<CardapioWidget> {
                       ),
                       const SizedBox(width: 5),
                       ReusableFAB(
+                        tag: 'remove produto',
                         text: 'Produto',
                         builder: (context) =>
                             CardapioExcluirProduto(produtos: widget.products),

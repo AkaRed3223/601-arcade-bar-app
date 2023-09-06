@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../../entities/categoria.dart';
+import '../../entities/produto.dart';
 import '../../widgets/custom_app_bar_widget.dart';
 
 class CardapioInserirProduto extends StatefulWidget {
-  const CardapioInserirProduto({super.key, required this.categorias});
+  const CardapioInserirProduto({super.key, required this.categorias, required this.produtos});
 
   final List<Categoria> categorias;
+  final List<Produto> produtos;
 
   @override
   State<CardapioInserirProduto> createState() => _CardapioInserirProdutoState();

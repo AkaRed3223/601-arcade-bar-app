@@ -14,7 +14,8 @@ class PedidoInserir extends StatefulWidget {
   const PedidoInserir({
     Key? key,
     required this.comanda,
-    required this.cardapio, required this.categorias,
+    required this.cardapio,
+    required this.categorias,
   }) : super(key: key);
 
   @override
@@ -33,7 +34,8 @@ class _PedidoInserirState extends State<PedidoInserir> {
       showError = false;
     });
 
-    final url = Uri.parse('http://192.168.240.1:8080/tabs/$comandaExternalId');
+    final url =
+        Uri.parse('http://192.168.240.1:8080/tabs/$comandaExternalId/insert');
     final headers = {'Content-Type': 'application/json'};
     final queryParams = {'productId': productId.toString()};
 

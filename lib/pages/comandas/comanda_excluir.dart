@@ -74,7 +74,7 @@ class _ComandaExcluirState extends State<ComandaExcluir> {
                         });
                       },
                       items: widget.comandas
-                          .where((comanda) => comanda.products.isEmpty)
+                          .where((comanda) => comanda.products.isEmpty && comanda.isOpen)
                           .map((comanda) {
                         return DropdownMenuItem<int>(
                           value: comanda.id,

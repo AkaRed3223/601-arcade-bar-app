@@ -66,10 +66,10 @@ class _ComandaFecharState extends State<ComandaFechar> {
                 ),
                 child: Align(
                   alignment: Alignment.center,
-                  child: Text('Nome do cliente:\n ${widget.comanda.name}',
+                  child: Text(widget.comanda.name,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.width * 0.06,
+                          fontSize: MediaQuery.of(context).size.width * 0.1,
                           color: Colors.white,
                           fontWeight: FontWeight.bold)),
                 ),
@@ -77,12 +77,12 @@ class _ComandaFecharState extends State<ComandaFechar> {
               const SizedBox(height: 10),
               Text("${widget.comanda.externalId}",
                   style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width * 0.18,
+                      fontSize: MediaQuery.of(context).size.width * 0.24,
                       color: Colors.white,
                       fontWeight: FontWeight.bold)),
               Text("Total: ${widget.comanda.totalFormatado}",
                   style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width * 0.06,
+                      fontSize: MediaQuery.of(context).size.width * 0.07,
                       color: Colors.greenAccent,
                     fontWeight: FontWeight.bold
                   )),
@@ -90,7 +90,7 @@ class _ComandaFecharState extends State<ComandaFechar> {
               for (Produto produto in widget.comanda.products)
                 Text("${produto.name} - ${produto.precoFormatado}",
                     style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.width * 0.045,
+                        fontSize: MediaQuery.of(context).size.width * 0.05,
                         color: Colors.white)),
               const SizedBox(height: 70,),
             ],
@@ -98,12 +98,7 @@ class _ComandaFecharState extends State<ComandaFechar> {
         ),
       ),
       bottomSheet: GestureDetector(
-        /*onHorizontalDragEnd: (details) {
-          if (details.primaryVelocity! > 0) {
-            _fecharComanda();
-          }
-        },*/
-        onTap: () {
+        onDoubleTap: () {
           _fecharComanda();
         },
         child: Row(
@@ -113,11 +108,11 @@ class _ComandaFecharState extends State<ComandaFechar> {
               child: Container(
                 color: Colors.greenAccent,
                 padding: const EdgeInsets.all(16.0),
-                child: const Text(
+                child: Text(
                   'FECHAR COMANDA',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: MediaQuery.of(context).size.width * 0.06,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),

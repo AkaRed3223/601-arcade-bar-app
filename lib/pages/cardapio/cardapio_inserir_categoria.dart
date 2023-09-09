@@ -24,7 +24,7 @@ class _CardapioInserirCategoriaState extends State<CardapioInserirCategoria> {
       showError = false;
     });
 
-    final url = Uri.parse('http://192.168.240.1:8080/categories');
+    final url = Uri.parse('https://arcade-bar-backend.rj.r.appspot.com/categories');
     final headers = { 'Content-Type': 'application/json' };
     final body = {'name': nameController.text};
 

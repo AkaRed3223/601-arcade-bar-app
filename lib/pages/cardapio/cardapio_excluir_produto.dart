@@ -25,7 +25,7 @@ class _CardapioExcluirProdutoState extends State<CardapioExcluirProduto> {
 
     if (selectedProdutoId != null) {
       final url =
-          Uri.parse('http://192.168.240.1:8080/products/$selectedProdutoId');
+          Uri.parse('https://arcade-bar-backend.rj.r.appspot.com/products/$selectedProdutoId');
 
       final response = await http.delete(url);
 

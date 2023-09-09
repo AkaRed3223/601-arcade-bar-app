@@ -3,6 +3,7 @@ import 'package:arcade/pages/comandas/comanda_excluir.dart';
 import 'package:arcade/pages/comandas/comanda_todas.dart';
 import 'package:arcade/widgets/custom_app_bar_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../entities/categoria.dart';
 import '../../entities/comanda.dart';
@@ -58,6 +59,7 @@ class _ComandasHomeState extends State<ComandasHome> {
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: ElevatedButton(
                     onPressed: () {
+                      HapticFeedback.heavyImpact();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -91,6 +93,7 @@ class _ComandasHomeState extends State<ComandasHome> {
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: ElevatedButton(
                     onPressed: () {
+                      HapticFeedback.heavyImpact();
                       Navigator.push(
                         context,
                         MaterialPageRoute(

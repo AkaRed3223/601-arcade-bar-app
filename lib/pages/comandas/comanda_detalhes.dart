@@ -4,6 +4,7 @@ import 'package:arcade/pages/pedidos/pedido_inserir.dart';
 import 'package:arcade/pages/pedidos/pedido_remover.dart';
 import 'package:arcade/widgets/pedido_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../entities/categoria.dart';
 import '../../entities/comanda.dart';
@@ -62,6 +63,7 @@ class ComandaDetalhes extends StatelessWidget {
                   child: FloatingActionButton.extended(
                     heroTag: 'fechar comanda',
                     onPressed: () {
+                      HapticFeedback.heavyImpact();
                       Navigator.push(
                         context,
                         MaterialPageRoute(

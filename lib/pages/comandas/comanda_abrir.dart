@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 import '../../widgets/custom_app_bar_widget.dart';
@@ -50,6 +51,7 @@ class _ComandaAbrirState extends State<ComandaAbrir> {
       body: Center(
         child: GestureDetector(
           onTap: () {
+            HapticFeedback.heavyImpact();
             FocusScope.of(context).unfocus();
           },
           child: SingleChildScrollView(
@@ -103,6 +105,7 @@ class _ComandaAbrirState extends State<ComandaAbrir> {
                             foregroundColor: Colors.black,
                             minimumSize: const Size(220, 90)),
                         onPressed: () {
+                          HapticFeedback.heavyImpact();
                           _abrirComanda();
                           FocusScope.of(context).unfocus();
                         },

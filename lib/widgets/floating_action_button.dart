@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class ReusableFAB extends StatelessWidget {
   final String text;
@@ -21,6 +22,7 @@ class ReusableFAB extends StatelessWidget {
       child: FloatingActionButton.extended(
         heroTag: tag,
         onPressed: () {
+          HapticFeedback.heavyImpact();
           Navigator.push(
             context,
             MaterialPageRoute(builder: builder),

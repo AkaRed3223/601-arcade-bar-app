@@ -1,6 +1,7 @@
 import 'package:arcade/entities/produto.dart';
 import 'package:arcade/pages/comandas/comanda_detalhes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../entities/categoria.dart';
 import '../entities/comanda.dart';
@@ -57,6 +58,7 @@ class ComandaWidget extends StatelessWidget {
         ),
       ),
       onTap: () {
+        HapticFeedback.heavyImpact();
         Navigator.push(
           context,
           MaterialPageRoute(

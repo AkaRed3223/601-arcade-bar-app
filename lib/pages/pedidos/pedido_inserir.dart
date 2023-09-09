@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../entities/categoria.dart';
 import '../../entities/comanda.dart';
@@ -97,6 +98,7 @@ class _PedidoInserirState extends State<PedidoInserir> {
                               ),
                             ),
                             onTap: () {
+                              HapticFeedback.heavyImpact();
                               setState(() {
                                 selectedProduct = produto;
                               });
@@ -176,6 +178,7 @@ class _PedidoInserirState extends State<PedidoInserir> {
           : null,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          HapticFeedback.heavyImpact();
           final selectedProduct = this.selectedProduct;
           if (selectedProduct != null) {
             widget.comanda.products.add(selectedProduct);

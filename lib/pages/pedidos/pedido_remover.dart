@@ -1,6 +1,7 @@
 import 'package:arcade/entities/produto.dart';
 import 'package:arcade/widgets/custom_app_bar_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 import '../../entities/comanda.dart';
@@ -26,11 +27,13 @@ class _PedidoRemoverState extends State<PedidoRemover> {
     });
 
     if (selectedProdutoId != null) {
-      final url = Uri.parse('https://arcade-bar-backend.rj.r.appspot.com/tabs/${widget.comanda.id}/remove');
+      final url = Uri.parse(
+          'https://arcade-bar-backend.rj.r.appspot.com/tabs/${widget.comanda.id}/remove');
       final headers = {'Content-Type': 'application/json'};
       final queryParams = {'productId': selectedProdutoId.toString()};
 
-      final response = await http.put(url.replace(queryParameters: queryParams), headers: headers);
+      final response = await http.put(url.replace(queryParameters: queryParams),
+          headers: headers);
 
       if (response.statusCode == 200) {
         setState(() {
@@ -114,12 +117,13 @@ class _PedidoRemoverState extends State<PedidoRemover> {
                                   color: Colors.green,
                                 ),
                                 SizedBox(height: 20),
-                                Text('Produto excluído com sucesso!',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
+                                Text(
+                                  'Produto excluído com sucesso!',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ],
                             ),
@@ -133,12 +137,13 @@ class _PedidoRemoverState extends State<PedidoRemover> {
                                   color: Colors.red,
                                 ),
                                 SizedBox(height: 20),
-                                Text('Erro ao excluir Produto!',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
+                                Text(
+                                  'Erro ao excluir Produto!',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ],
                             ),
@@ -200,7 +205,10 @@ class ProdutoDetailsCard extends StatelessWidget {
                   backgroundColor: Colors.white70,
                   foregroundColor: Colors.black,
                   minimumSize: const Size(220, 90)),
-              onPressed: onDelete,
+              onPressed: () {
+                HapticFeedback.heavyImpact();
+                onDelete;
+              },
               child: const Text(
                 'Excluir Pedido',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),

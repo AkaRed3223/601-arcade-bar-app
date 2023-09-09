@@ -1,6 +1,7 @@
 import 'package:arcade/entities/produto.dart';
 import 'package:arcade/widgets/custom_app_bar_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 import '../../entities/categoria.dart';
@@ -223,7 +224,10 @@ class CategoriaDetailsCard extends StatelessWidget {
                   backgroundColor: Colors.white70,
                   foregroundColor: Colors.black,
                   minimumSize: const Size(220, 90)),
-              onPressed: onDelete,
+              onPressed: () {
+                HapticFeedback.heavyImpact();
+                onDelete;
+              },
               child: const Text(
                 'Excluir Categoria',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),

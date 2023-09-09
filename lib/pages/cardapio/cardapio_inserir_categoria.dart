@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 import '../../widgets/custom_app_bar_widget.dart';
@@ -49,6 +50,7 @@ class _CardapioInserirCategoriaState extends State<CardapioInserirCategoria> {
       body: Center(
         child: GestureDetector(
           onTap: () {
+            HapticFeedback.heavyImpact();
             FocusScope.of(context).unfocus();
           },
           child: SingleChildScrollView(
@@ -84,6 +86,7 @@ class _CardapioInserirCategoriaState extends State<CardapioInserirCategoria> {
                             foregroundColor: Colors.black,
                             minimumSize: const Size(220, 90)),
                         onPressed: () {
+                          HapticFeedback.heavyImpact();
                           _inserirCategoria();
                           FocusScope.of(context).unfocus();
                         },

@@ -38,7 +38,7 @@ class ProdutosService {
   Future<List<Produto>> fetchProdutos() async {
     final response = await http.get(
       Uri.parse('https://arcade-bar-backend.rj.r.appspot.com/products'),
-      headers: {'Content-Type': 'application/json; charset=utf-8', 'Access-Control-Allow-Origin': '*' },
+      headers: {'Content-Type': 'application/json; charset=utf-8' },
     );
 
     if (response.statusCode == 200) {

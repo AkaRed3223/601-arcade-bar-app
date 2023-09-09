@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class HomeButton extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -17,7 +18,8 @@ class HomeButton extends StatelessWidget implements PreferredSizeWidget {
         backgroundColor: MaterialStateProperty.all<Color>(_getRandomColor()),
       ),
       onPressed: () {
-          Navigator.pushNamed(context, _findRouteByTitle(title));
+        HapticFeedback.heavyImpact();
+        Navigator.pushNamed(context, _findRouteByTitle(title));
       },
       child: Container(
         padding: const EdgeInsets.all(50.0),

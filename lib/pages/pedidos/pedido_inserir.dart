@@ -106,12 +106,6 @@ class _PedidoInserirState extends State<PedidoInserir> {
                               setState(() {
                                 selectedProduct = produto;
                               });
-                              /*_scrollController.animateTo(
-                                _scrollController.position.maxScrollExtent,
-                                duration: Duration(milliseconds: 500),
-                                // Adjust the duration as needed
-                                curve: Curves.easeInOut, // Adjust the curve as needed
-                              );*/
                             },
                           ),
                     ],
@@ -119,42 +113,6 @@ class _PedidoInserirState extends State<PedidoInserir> {
                 ],
               ),
             const SizedBox(height: 80),
-            /*if (showSuccess)
-              const Column(
-                children: [
-                  SizedBox(height: 20),
-                  Icon(
-                    Icons.check_circle_outline,
-                    size: 100,
-                    color: Colors.green,
-                  ),
-                  SizedBox(height: 20),
-                  Text('Produto adicionado!',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      )),
-                ],
-              ),
-            if (showError)
-              const Column(
-                children: [
-                  SizedBox(height: 20),
-                  Icon(
-                    Icons.error_outline,
-                    size: 100,
-                    color: Colors.red,
-                  ),
-                  SizedBox(height: 20),
-                  Text('Erro ao adicionar produto!',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      )),
-                ],
-              ),*/
           ],
         ),
       ),
@@ -181,16 +139,47 @@ class _PedidoInserirState extends State<PedidoInserir> {
             )
           : null,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
+        onPressed: () async {
           HapticFeedback.heavyImpact();
           final selectedProduct = this.selectedProduct;
           if (selectedProduct != null) {
             widget.comanda.products.add(selectedProduct);
-            _atualizarComanda(widget.comanda.id, selectedProduct.id);
+            await _atualizarComanda(widget.comanda.id, selectedProduct.id);
           }
-          /*setState(() {
-            this.selectedProduct = null;
-          });*/
+          if (showSuccess) {
+            setState(() {
+              this.selectedProduct = null;
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                backgroundColor: Colors.green,
+                content: Center(
+                    child: Text(
+                  'PEDIDO RECEBIDO!',
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
+                )),
+                duration: Duration(seconds: 1),
+              ));
+            });
+          }
+          if (showError) {
+            setState(() {
+              this.selectedProduct = null;
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                backgroundColor: Colors.red,
+                content: Center(
+                    child: Text(
+                      'PROBLEMA AO INSERIR PEDIDO!',
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    )),
+                duration: Duration(seconds: 1),
+              ));
+            });
+          }
         },
         backgroundColor: Colors.grey[800],
         child: const Icon(Icons.done),

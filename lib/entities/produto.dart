@@ -36,8 +36,13 @@ class Produto {
 
 class ProdutosService {
   Future<List<Produto>> fetchProdutos() async {
+
+    //const String baseUrl = 'http://172.20.128.1:8080';
+    //const String baseUrl = 'http://localhost:8080';
+    const String baseUrl = 'https://arcade-bar-backend-398600.ue.r.appspot.com';
+
     final response = await http.get(
-      Uri.parse('https://arcade-bar-backend-398600.ue.r.appspot.com/products'),
+      Uri.parse('$baseUrl/products'),
       headers: {'Content-Type': 'application/json; charset=utf-8' },
     );
 

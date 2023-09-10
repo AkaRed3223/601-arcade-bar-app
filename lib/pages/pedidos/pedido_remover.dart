@@ -26,9 +26,13 @@ class _PedidoRemoverState extends State<PedidoRemover> {
       showError = false;
     });
 
+    // const String baseUrl = 'http://172.20.128.1:8080';
+    //const String baseUrl = 'http://localhost:8080';
+    const String baseUrl = 'https://arcade-bar-backend-398600.ue.r.appspot.com';
+
     if (selectedProdutoId != null) {
       final url = Uri.parse(
-          'https://arcade-bar-backend-398600.ue.r.appspot.com/tabs/${widget.comanda.id}/remove');
+          '$baseUrl/tabs/${widget.comanda.id}/remove');
       final headers = {'Content-Type': 'application/json'};
       final queryParams = {'productId': selectedProdutoId.toString()};
 

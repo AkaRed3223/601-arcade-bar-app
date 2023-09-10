@@ -26,9 +26,13 @@ class _ComandaExcluirState extends State<ComandaExcluir> {
       showError = false;
     });
 
+    // const String baseUrl = 'http://172.20.128.1:8080';
+    //const String baseUrl = 'http://localhost:8080';
+    const String baseUrl = 'https://arcade-bar-backend-398600.ue.r.appspot.com';
+
     if (selectedComandaId != null) {
       final url =
-          Uri.parse('https://arcade-bar-backend-398600.ue.r.appspot.com/tabs/$selectedComandaId');
+          Uri.parse('$baseUrl/tabs/$selectedComandaId');
 
       final response = await http.delete(url);
 

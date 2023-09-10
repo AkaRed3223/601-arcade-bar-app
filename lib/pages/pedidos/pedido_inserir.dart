@@ -27,6 +27,7 @@ class _PedidoInserirState extends State<PedidoInserir> {
   Produto? selectedProduct;
   bool showSuccess = false;
   bool showError = false;
+
   final ScrollController _scrollController = ScrollController();
 
   Future<void> _atualizarComanda(int comandaId, int productId) async {
@@ -35,8 +36,11 @@ class _PedidoInserirState extends State<PedidoInserir> {
       showError = false;
     });
 
-    final url =
-        Uri.parse('https://arcade-bar-backend-398600.ue.r.appspot.com/tabs/$comandaId/insert');
+    // const String baseUrl = 'http://172.20.128.1:8080';
+    //const String baseUrl = 'http://localhost:8080';
+    const String baseUrl = 'https://arcade-bar-backend-398600.ue.r.appspot.com';
+
+    final url = Uri.parse('$baseUrl/tabs/$comandaId/insert');
     final headers = {'Content-Type': 'application/json'};
     final queryParams = {'productId': productId.toString()};
 

@@ -41,8 +41,13 @@ class Comanda {
 
 class ComandasService {
   Future<List<Comanda>> fetchComandas() async {
+
+    //const String baseUrl = 'http://172.20.128.1:8080';
+    //const String baseUrl = 'http://localhost:8080';
+    const String baseUrl = 'https://arcade-bar-backend-398600.ue.r.appspot.com';
+
     final response = await http.get(
-      Uri.parse('https://arcade-bar-backend-398600.ue.r.appspot.com/tabs'),
+      Uri.parse('$baseUrl/tabs'),
       headers: {'Content-Type': 'application/json; charset=utf-8'},
     );
 

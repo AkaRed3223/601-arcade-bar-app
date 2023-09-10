@@ -28,13 +28,17 @@ class _ComandaFecharState extends State<ComandaFechar> {
       showError = false;
     });
 
-    final url = Uri.parse('https://arcade-bar-backend-398600.ue.r.appspot.com/tabs/$selectedComandaId/checkout');
+    // const String baseUrl = 'http://172.20.128.1:8080';
+    //const String baseUrl = 'http://localhost:8080';
+    const String baseUrl = 'https://arcade-bar-backend-398600.ue.r.appspot.com';
+
+    final url = Uri.parse('$baseUrl/tabs/$selectedComandaId/checkout');
     final headers = { 'Content-Type': 'application/json' };
     //final body = {'externalId': idController.text, 'name': nameController.text};
 
     final response = await http.put(url,headers: headers);
 
-    if (response.statusCode == 201) {
+    if (response.statusCode == 200) {
       setState(() {
         showSuccess = true;
       });
@@ -93,14 +97,47 @@ class _ComandaFecharState extends State<ComandaFechar> {
                         fontSize: MediaQuery.of(context).size.width * 0.05,
                         color: Colors.white)),
               const SizedBox(height: 70,),
+              if (showSuccess)
+              const Column(
+                children: [
+                  SizedBox(height: 20),
+                  Icon(
+                    Icons.check_circle_outline,
+                    size: 100,
+                    color: Colors.green,
+                  ),
+                  SizedBox(height: 20),
+                  Text('Comanda encerrada!',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      )),
+                ],
+              ),
+            if (showError)
+              const Column(
+                children: [
+                  SizedBox(height: 20),
+                  Icon(
+                    Icons.error_outline,
+                    size: 100,
+                    color: Colors.red,
+                  ),
+                  SizedBox(height: 20),
+                  Text('Erro ao encerrar comanda!',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      )),
+                ],
+              ),
             ],
           ),
         ),
       ),
       bottomSheet: GestureDetector(
-        onDoubleTap: () {
-          _fecharComanda();
-        },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -121,7 +158,44 @@ class _ComandaFecharState extends State<ComandaFechar> {
             ),
           ],
         ),
+        onLongPress: () {
+          _showConfirmationDialog();
+        },
       ),
+    );
+  }
+
+  Future<void> _showConfirmationDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // Prevent dialog from being dismissed by tapping outside
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Confirmação'),
+          content: const SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Fechar comanda?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Não'),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+            ),
+            TextButton(
+              child: const Text('Sim'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                _fecharComanda();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

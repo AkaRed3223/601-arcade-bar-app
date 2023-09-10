@@ -16,7 +16,6 @@ class ComandaFechar extends StatefulWidget {
 }
 
 class _ComandaFecharState extends State<ComandaFechar> {
-
   int? selectedComandaId;
   bool showSuccess = false;
   bool showError = false;
@@ -29,15 +28,15 @@ class _ComandaFecharState extends State<ComandaFechar> {
       showError = false;
     });
 
-    // const String baseUrl = 'http://172.20.128.1:8080';
     // const String baseUrl = 'http://localhost:8080';
+    // const String baseUrl = 'http://172.20.128.1:8080';
     const String baseUrl = 'https://arcade-bar-backend-398600.ue.r.appspot.com';
 
     final url = Uri.parse('$baseUrl/tabs/$selectedComandaId/checkout');
-    final headers = { 'Content-Type': 'application/json' };
+    final headers = {'Content-Type': 'application/json'};
     //final body = {'externalId': idController.text, 'name': nameController.text};
 
-    final response = await http.put(url,headers: headers);
+    final response = await http.put(url, headers: headers);
 
     if (response.statusCode == 200) {
       setState(() {
@@ -89,51 +88,54 @@ class _ComandaFecharState extends State<ComandaFechar> {
                   style: TextStyle(
                       fontSize: MediaQuery.of(context).size.width * 0.07,
                       color: Colors.greenAccent,
-                    fontWeight: FontWeight.bold
-                  )),
-              const SizedBox(height: 12,),
+                      fontWeight: FontWeight.bold)),
+              const SizedBox(
+                height: 12,
+              ),
               for (Produto produto in widget.comanda.products)
                 Text("${produto.name} - ${produto.precoFormatado}",
                     style: TextStyle(
                         fontSize: MediaQuery.of(context).size.width * 0.05,
                         color: Colors.white)),
-              const SizedBox(height: 70,),
+              const SizedBox(
+                height: 70,
+              ),
               if (showSuccess)
-              const Column(
-                children: [
-                  SizedBox(height: 20),
-                  Icon(
-                    Icons.check_circle_outline,
-                    size: 100,
-                    color: Colors.green,
-                  ),
-                  SizedBox(height: 20),
-                  Text('Comanda encerrada!',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      )),
-                ],
-              ),
-            if (showError)
-              const Column(
-                children: [
-                  SizedBox(height: 20),
-                  Icon(
-                    Icons.error_outline,
-                    size: 100,
-                    color: Colors.red,
-                  ),
-                  SizedBox(height: 20),
-                  Text('Erro ao encerrar comanda!',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      )),
-                ],
-              ),
+                const Column(
+                  children: [
+                    SizedBox(height: 20),
+                    Icon(
+                      Icons.check_circle_outline,
+                      size: 100,
+                      color: Colors.green,
+                    ),
+                    SizedBox(height: 20),
+                    Text('Comanda encerrada!',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        )),
+                  ],
+                ),
+              if (showError)
+                const Column(
+                  children: [
+                    SizedBox(height: 20),
+                    Icon(
+                      Icons.error_outline,
+                      size: 100,
+                      color: Colors.red,
+                    ),
+                    SizedBox(height: 20),
+                    Text('Erro ao encerrar comanda!',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        )),
+                  ],
+                ),
             ],
           ),
         ),
@@ -172,7 +174,7 @@ class _ComandaFecharState extends State<ComandaFechar> {
   Future<void> _showConfirmationDialog() async {
     return showDialog<void>(
       context: context,
-      barrierDismissible: false, // Prevent dialog from being dismissed by tapping outside
+      barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Confirmação'),

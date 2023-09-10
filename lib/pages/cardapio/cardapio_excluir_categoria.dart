@@ -31,8 +31,8 @@ class _CardapioExcluirCategoriaState extends State<CardapioExcluirCategoria> {
 
     if (selectedCategoriaId != null) {
 
-      //const String baseUrl = 'http://172.20.128.1:8080';
-      //const String baseUrl = 'http://localhost:8080';
+      // const String baseUrl = 'http://172.20.128.1:8080';
+      // const String baseUrl = 'http://localhost:8080';
       const String baseUrl = 'https://arcade-bar-backend-398600.ue.r.appspot.com';
 
       final url = Uri.parse(
@@ -231,7 +231,7 @@ class CategoriaDetailsCard extends StatelessWidget {
                   minimumSize: const Size(220, 90)),
               onPressed: () {
                 HapticFeedback.heavyImpact();
-                onDelete;
+                onDelete();
               },
               child: const Text(
                 'Excluir Categoria',

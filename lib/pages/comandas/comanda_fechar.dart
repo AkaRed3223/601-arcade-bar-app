@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../entities/comanda.dart';
 import '../../entities/produto.dart';
@@ -29,7 +30,7 @@ class _ComandaFecharState extends State<ComandaFechar> {
     });
 
     // const String baseUrl = 'http://172.20.128.1:8080';
-    //const String baseUrl = 'http://localhost:8080';
+    // const String baseUrl = 'http://localhost:8080';
     const String baseUrl = 'https://arcade-bar-backend-398600.ue.r.appspot.com';
 
     final url = Uri.parse('$baseUrl/tabs/$selectedComandaId/checkout');
@@ -158,6 +159,9 @@ class _ComandaFecharState extends State<ComandaFechar> {
             ),
           ],
         ),
+        onLongPressStart: (context) {
+          HapticFeedback.selectionClick();
+        },
         onLongPress: () {
           _showConfirmationDialog();
         },
@@ -183,12 +187,14 @@ class _ComandaFecharState extends State<ComandaFechar> {
             TextButton(
               child: const Text('Não'),
               onPressed: () {
+                HapticFeedback.heavyImpact();
                 Navigator.of(context).pop(); // Close the dialog
               },
             ),
             TextButton(
               child: const Text('Sim'),
               onPressed: () {
+                HapticFeedback.heavyImpact();
                 Navigator.of(context).pop();
                 _fecharComanda();
               },

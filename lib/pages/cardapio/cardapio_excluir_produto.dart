@@ -24,8 +24,8 @@ class _CardapioExcluirProdutoState extends State<CardapioExcluirProduto> {
       showError = false;
     });
 
-    //const String baseUrl = 'http://172.20.128.1:8080';
-    //const String baseUrl = 'http://localhost:8080';
+    // const String baseUrl = 'http://172.20.128.1:8080';
+    // const String baseUrl = 'http://localhost:8080';
     const String baseUrl = 'https://arcade-bar-backend-398600.ue.r.appspot.com';
 
     if (selectedProdutoId != null) {
@@ -96,8 +96,7 @@ class _CardapioExcluirProdutoState extends State<CardapioExcluirProduto> {
                     const SizedBox(height: 20),
                     if (selectedProdutoId != null)
                       ProdutoDetailsCard(
-                        produto: widget.produtos.firstWhere(
-                            (comanda) => comanda.id == selectedProdutoId!),
+                        produto: widget.produtos.firstWhere((comanda) => comanda.id == selectedProdutoId!),
                         onDelete: _excluirProduto,
                         showSuccess: showSuccess,
                       ),
@@ -106,21 +105,6 @@ class _CardapioExcluirProdutoState extends State<CardapioExcluirProduto> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          /*const Icon(
-                            Icons.warning,
-                            color: Colors.redAccent,
-                          ),
-                          Text(
-                              'Atenção! Esta lista contém apenas as categorias vazias!',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: MediaQuery.of(context).size.width * 0.06,
-                                  color: Colors.redAccent,
-                                  fontWeight: FontWeight.bold)),
-                          const Icon(
-                            Icons.warning,
-                            color: Colors.redAccent,
-                          ),*/
                           if (showSuccess)
                             const Column(
                               children: [
@@ -154,7 +138,8 @@ class _CardapioExcluirProdutoState extends State<CardapioExcluirProduto> {
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white,
-                                    )),
+                                    )
+                                ),
                               ],
                             ),
                         ],
@@ -217,7 +202,7 @@ class ProdutoDetailsCard extends StatelessWidget {
                   minimumSize: const Size(220, 90)),
               onPressed: () {
                 HapticFeedback.heavyImpact();
-                onDelete;
+                onDelete();
               },
               child: const Text(
                 'Excluir Produto',

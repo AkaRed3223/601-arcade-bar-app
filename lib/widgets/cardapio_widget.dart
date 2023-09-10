@@ -4,6 +4,7 @@ import 'package:arcade/pages/cardapio/cardapio_inserir_categoria.dart';
 import 'package:arcade/pages/cardapio/cardapio_inserir_produto.dart';
 import 'package:arcade/widgets/floating_action_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../entities/categoria.dart';
 import '../pages/cardapio/cardapio_excluir_categoria.dart';
@@ -27,6 +28,13 @@ class _CardapioWidgetState extends State<CardapioWidget> {
       child: Scaffold(
         backgroundColor: Colors.grey[900],
         appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              HapticFeedback.mediumImpact(); // Add haptic feedback here
+              Navigator.of(context).pop(); // This will navigate back
+            },
+          ),
           title: const Text('Cardápio'),
           centerTitle: true,
           backgroundColor: Colors.grey[800],

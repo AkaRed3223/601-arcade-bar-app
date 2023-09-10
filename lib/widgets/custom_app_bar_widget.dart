@@ -19,8 +19,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {
-          HapticFeedback.mediumImpact(); // Add haptic feedback here
-          Navigator.of(context).pop(); // This will navigate back
+          HapticFeedback.mediumImpact();
+          Navigator.of(context).pop();
         },
       ),
     );

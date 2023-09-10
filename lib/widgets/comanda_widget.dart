@@ -36,11 +36,13 @@ class ComandaWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(comanda.name,
-                style: TextStyle(
-                    fontSize: MediaQuery.of(context).size.width * 0.06,
-                    color: fontColor,
-                    fontWeight: FontWeight.bold)),
+            FittedBox(
+              child: Text(comanda.name,
+                  style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.06,
+                      color: fontColor,
+                      fontWeight: FontWeight.bold)),
+            ),
             Text("${comanda.externalId}",
                 style: TextStyle(
                     fontSize: MediaQuery.of(context).size.width * 0.18,

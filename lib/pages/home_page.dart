@@ -1,4 +1,3 @@
-import 'package:arcade/widgets/custom_app_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -22,7 +21,12 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      appBar: const CustomAppBar(title: '601 Arcade Bar - Home Page'),
+      appBar: AppBar(
+        title: const Text('601 Arcade Bar - Home Page'),
+        centerTitle: true,
+        backgroundColor: Colors.grey[800],
+        elevation: 2,
+      ),
       body: ListView(
         children: const <Widget>[
           Padding(

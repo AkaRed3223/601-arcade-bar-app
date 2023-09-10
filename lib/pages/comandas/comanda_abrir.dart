@@ -26,7 +26,7 @@ class _ComandaAbrirState extends State<ComandaAbrir> {
       showError = false;
     });
 
-    final url = Uri.parse('https://arcade-bar-backend.rj.r.appspot.com/tabs');
+    final url = Uri.parse('https://arcade-bar-backend-398600.ue.r.appspot.com/tabs');
     final headers = { 'Content-Type': 'application/json' };
     final body = {'externalId': idController.text, 'name': nameController.text};
 

@@ -32,7 +32,7 @@ class _CardapioInserirProdutoState extends State<CardapioInserirProduto> {
       showError = false;
     });
 
-    final url = Uri.parse('https://arcade-bar-backend.rj.r.appspot.com/products');
+    final url = Uri.parse('https://arcade-bar-backend-398600.ue.r.appspot.com/products');
     final headers = {'Content-Type': 'application/json'};
     final body = {
       'name': nameController.text,

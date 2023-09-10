@@ -28,7 +28,7 @@ class _PedidoRemoverState extends State<PedidoRemover> {
 
     if (selectedProdutoId != null) {
       final url = Uri.parse(
-          'https://arcade-bar-backend.rj.r.appspot.com/tabs/${widget.comanda.id}/remove');
+          'https://arcade-bar-backend-398600.ue.r.appspot.com/tabs/${widget.comanda.id}/remove');
       final headers = {'Content-Type': 'application/json'};
       final queryParams = {'productId': selectedProdutoId.toString()};
 

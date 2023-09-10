@@ -28,7 +28,7 @@ class _ComandaFecharState extends State<ComandaFechar> {
       showError = false;
     });
 
-    final url = Uri.parse('https://arcade-bar-backend.rj.r.appspot.com/tabs/$selectedComandaId/checkout');
+    final url = Uri.parse('https://arcade-bar-backend-398600.ue.r.appspot.com/tabs/$selectedComandaId/checkout');
     final headers = { 'Content-Type': 'application/json' };
     //final body = {'externalId': idController.text, 'name': nameController.text};
 

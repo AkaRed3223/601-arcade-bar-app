@@ -31,7 +31,7 @@ class _CardapioExcluirCategoriaState extends State<CardapioExcluirCategoria> {
 
     if (selectedCategoriaId != null) {
       final url = Uri.parse(
-          'https://arcade-bar-backend.rj.r.appspot.com/categories/$selectedCategoriaId');
+          'https://arcade-bar-backend-398600.ue.r.appspot.com/categories/$selectedCategoriaId');
 
       final response = await http.delete(url);
 

@@ -36,7 +36,7 @@ class _PedidoInserirState extends State<PedidoInserir> {
     });
 
     final url =
-        Uri.parse('https://arcade-bar-backend.rj.r.appspot.com/tabs/$comandaId/insert');
+        Uri.parse('https://arcade-bar-backend-398600.ue.r.appspot.com/tabs/$comandaId/insert');
     final headers = {'Content-Type': 'application/json'};
     final queryParams = {'productId': productId.toString()};
 

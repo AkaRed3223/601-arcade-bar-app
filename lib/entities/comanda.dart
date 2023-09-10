@@ -42,7 +42,7 @@ class Comanda {
 class ComandasService {
   Future<List<Comanda>> fetchComandas() async {
     final response = await http.get(
-      Uri.parse('https://arcade-bar-backend.rj.r.appspot.com/tabs'),
+      Uri.parse('https://arcade-bar-backend-398600.ue.r.appspot.com/tabs'),
       headers: {'Content-Type': 'application/json; charset=utf-8'},
     );
 

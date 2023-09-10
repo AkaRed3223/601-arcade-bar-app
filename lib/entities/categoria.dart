@@ -28,7 +28,7 @@ class Categoria {
 class CategoriasService {
   Future<List<Categoria>> fetchCategorias() async {
     final response = await http.get(
-      Uri.parse('https://arcade-bar-backend.rj.r.appspot.com/categories'),
+      Uri.parse('https://arcade-bar-backend-398600.ue.r.appspot.com/categories'),
       headers: {'Content-Type': 'application/json; charset=utf-8'},
     );
 

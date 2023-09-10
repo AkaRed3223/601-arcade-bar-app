@@ -28,7 +28,7 @@ class _ComandaExcluirState extends State<ComandaExcluir> {
 
     if (selectedComandaId != null) {
       final url =
-          Uri.parse('https://arcade-bar-backend.rj.r.appspot.com/tabs/$selectedComandaId');
+          Uri.parse('https://arcade-bar-backend-398600.ue.r.appspot.com/tabs/$selectedComandaId');
 
       final response = await http.delete(url);
 

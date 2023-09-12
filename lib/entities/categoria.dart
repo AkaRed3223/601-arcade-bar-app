@@ -30,7 +30,7 @@ class CategoriasService {
 
     // const String baseUrl = 'http://localhost:8080';
     // const String baseUrl = 'http://172.20.128.1:8080';
-    const String baseUrl = 'https://arcade-bar-backend-398600.ue.r.appspot.com';
+    const String baseUrl = 'http://3.137.160.128:8080';
 
     final response = await http.get(
       Uri.parse('$baseUrl/categories'),

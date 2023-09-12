@@ -120,7 +120,7 @@ class _CardapioWidgetState extends State<CardapioWidget> {
       child: Column(
         children: products.map((product) {
           return ListTile(
-            leading: Image.asset(product.url),
+            leading: Icon(Icons.warning, color: Colors.grey[850]),
             title: Text(
               product.name,
               style: const TextStyle(

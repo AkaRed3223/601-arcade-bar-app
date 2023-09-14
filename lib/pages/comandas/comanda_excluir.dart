@@ -27,8 +27,8 @@ class _ComandaExcluirState extends State<ComandaExcluir> {
     });
 
     // const String baseUrl = 'http://localhost:8080';
-    // const String baseUrl = 'http://172.20.128.1:8080';
-    const String baseUrl = 'http://3.137.160.128:8080';
+    const String baseUrl = 'http://172.31.64.1:8080';
+    // const String baseUrl = 'http://3.137.160.128:8080';
 
     if (selectedComandaId != null) {
       final url =

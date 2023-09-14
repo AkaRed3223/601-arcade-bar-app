@@ -2,10 +2,17 @@ import 'package:arcade/pages/cardapio/cardapio.dart';
 import 'package:arcade/pages/comandas/comanda_abrir.dart';
 import 'package:arcade/pages/comandas/comandas_home.dart';
 import 'package:arcade/pages/home_page.dart';
+import 'package:arcade/providers/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => AppProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

@@ -3,8 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
+import '../../entities/comanda.dart';
+import '../../providers/provider.dart';
 import '../../widgets/custom_app_bar_widget.dart';
+import 'comanda_todas.dart';
 
 class ComandaAbrir extends StatefulWidget {
   const ComandaAbrir({super.key});
@@ -27,8 +31,8 @@ class _ComandaAbrirState extends State<ComandaAbrir> {
     });
 
     // const String baseUrl = 'http://localhost:8080';
-    // const String baseUrl = 'http://172.20.128.1:8080';
-    const String baseUrl = 'http://3.137.160.128:8080';
+    const String baseUrl = 'http://172.31.64.1:8080';
+    // const String baseUrl = 'http://3.137.160.128:8080';
 
     final url = Uri.parse('$baseUrl/tabs');
     final headers = { 'Content-Type': 'application/json' };
@@ -40,6 +44,28 @@ class _ComandaAbrirState extends State<ComandaAbrir> {
       setState(() {
         showSuccess = true;
       });
+
+      final responseBody = utf8.decode(response.bodyBytes);
+      final jsonData = json.decode(responseBody);
+      final newComanda = Comanda.fromJson(jsonData);
+
+      // Access the provider and add the new comanda
+      final comandasProvider = Provider.of<AppProvider>(context, listen: false);
+      comandasProvider.addComanda(newComanda);
+
+      await Future.delayed(const Duration(seconds: 2));
+
+      // Navigate back to the Comandas screen
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Comandas(
+            comandas: comandasProvider.comandas, // Pass the updated comandas list
+            cardapio: comandasProvider.produtos,
+            categorias: comandasProvider.categorias,
+          ),
+        ),
+      );
     } else {
       setState(() {
         showError = true;

@@ -1,4 +1,3 @@
-import 'package:arcade/entities/produto.dart';
 import 'package:arcade/pages/comandas/comanda_fechar.dart';
 import 'package:arcade/pages/pedidos/pedido_inserir.dart';
 import 'package:arcade/pages/pedidos/pedido_remover.dart';
@@ -6,28 +5,38 @@ import 'package:arcade/widgets/pedido_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../entities/categoria.dart';
 import '../../entities/comanda.dart';
 import '../../widgets/comanda_total_widget.dart';
-import '../../widgets/custom_app_bar_widget.dart';
 import '../../widgets/floating_action_button.dart';
+import 'comanda_todas.dart';
 
 class ComandaDetalhes extends StatelessWidget {
   final Comanda comanda;
-  final List<Produto> cardapio;
-  final List<Categoria> categoria;
 
-  const ComandaDetalhes(
-      {super.key,
-      required this.comanda,
-      required this.cardapio,
-      required this.categoria});
+  const ComandaDetalhes({super.key, required this.comanda});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      appBar: const CustomAppBar(title: 'Detalhes da Comanda'),
+      appBar: AppBar(
+        title: const Text('Detalhes da Comanda'),
+        centerTitle: true,
+        backgroundColor: Colors.grey[800],
+        elevation: 2,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            HapticFeedback.mediumImpact();
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Comandas(),
+              ),
+            );
+          },
+        ),
+      ),
       body: Column(
         children: [
           Expanded(
@@ -67,8 +76,8 @@ class ComandaDetalhes extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ComandaFechar(comanda: comanda)
-                        ),
+                            builder: (context) =>
+                                ComandaFechar(comanda: comanda)),
                       );
                     },
                     backgroundColor: Colors.green,
@@ -80,10 +89,7 @@ class ComandaDetalhes extends StatelessWidget {
                 ReusableFAB(
                     tag: 'add pedido',
                     text: 'Pedido',
-                    builder: (context) => PedidoInserir(
-                        cardapio: cardapio,
-                        comanda: comanda,
-                        categorias: categoria),
+                    builder: (context) => PedidoInserir(comanda: comanda),
                     iconData: Icons.add),
               ],
             ),

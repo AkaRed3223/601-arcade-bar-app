@@ -1,24 +1,26 @@
 import 'package:arcade/entities/comanda.dart';
-import 'package:arcade/entities/produto.dart';
+import 'package:arcade/providers/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../../entities/categoria.dart';
 import '../../widgets/comanda_widget.dart';
 import '../../widgets/custom_app_bar_widget.dart';
 
-class Comandas extends StatelessWidget {
-  final List<Comanda> comandas;
-  final List<Produto> cardapio;
-  final List<Categoria> categorias;
+class Comandas extends StatefulWidget {
 
-  const Comandas(
-      {super.key,
-      required this.comandas,
-      required this.cardapio,
-      required this.categorias});
+  const Comandas({super.key});
 
   @override
+  State<Comandas> createState() => _ComandasState();
+}
+
+class _ComandasState extends State<Comandas> {
+  @override
   Widget build(BuildContext context) {
+
+    final provider = Provider.of<AppProvider>(context, listen: false);
+    final comandas = provider.comandas;
+
     _sortComandasByIsOpen(comandas);
     return Scaffold(
       backgroundColor: Colors.grey[900],
@@ -29,9 +31,7 @@ class Comandas extends StatelessWidget {
           itemCount: comandas.length,
           itemBuilder: (BuildContext context, int index) {
             return ComandaWidget(
-                comanda: comandas[index],
-                cardapio: cardapio,
-                categorias: categorias);
+                comanda: comandas[index]);
           }),
     );
   }

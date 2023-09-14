@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 import '../../entities/categoria.dart';
 import '../../entities/comanda.dart';
 import '../../entities/produto.dart';
+import '../../providers/provider.dart';
 import '../../widgets/custom_app_bar_widget.dart';
-import 'package:http/http.dart' as http;
 
 class PedidoInserir extends StatefulWidget {
   final Comanda comanda;
-  final List<Produto> cardapio;
-  final List<Categoria> categorias;
 
   const PedidoInserir({
     Key? key,
     required this.comanda,
-    required this.cardapio,
-    required this.categorias,
   }) : super(key: key);
 
   @override
@@ -37,8 +35,8 @@ class _PedidoInserirState extends State<PedidoInserir> {
     });
 
     // const String baseUrl = 'http://localhost:8080';
-    const String baseUrl = 'http://172.31.64.1:8080';
-    // const String baseUrl = 'http://3.137.160.128:8080';
+    // const String baseUrl = 'http://172.31.64.1:8080';
+    const String baseUrl = 'http://3.137.160.128:8080';
 
     final url = Uri.parse('$baseUrl/tabs/$comandaId/insert');
     final headers = {'Content-Type': 'application/json'};
@@ -60,6 +58,11 @@ class _PedidoInserirState extends State<PedidoInserir> {
 
   @override
   Widget build(BuildContext context) {
+
+    final provider = Provider.of<AppProvider>(context, listen: false);
+    final produtos = provider.produtos;
+    final categorias = provider.categorias;
+
     return Scaffold(
       backgroundColor: Colors.grey[900],
       appBar: const CustomAppBar(title: 'Novo Pedido'),
@@ -67,7 +70,7 @@ class _PedidoInserirState extends State<PedidoInserir> {
         controller: _scrollController,
         child: Column(
           children: [
-            for (Categoria categoria in widget.categorias)
+            for (Categoria categoria in categorias)
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -89,7 +92,7 @@ class _PedidoInserirState extends State<PedidoInserir> {
                   const Divider(color: Colors.white, thickness: 0),
                   Column(
                     children: [
-                      for (Produto produto in widget.cardapio)
+                      for (Produto produto in produtos)
                         if (produto.category.id == categoria.id)
                           ListTile(
                             title: Text(

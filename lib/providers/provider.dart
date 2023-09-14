@@ -25,8 +25,23 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void addCategoria(Categoria categoria) {
+    _categorias.add(categoria);
+    notifyListeners();
+  }
+
+  void removeCategoria(int id) {
+    _categorias.removeWhere((categoria) => categoria.id == id);
+    notifyListeners();
+  }
+
   void addComanda(Comanda comanda) {
     _comandas.add(comanda);
+    notifyListeners();
+  }
+
+  void removeComanda(int externalId) {
+    _comandas.removeWhere((comanda) => comanda.id == externalId);
     notifyListeners();
   }
 
@@ -35,8 +50,8 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addCategoria(Categoria categoria) {
-    _categorias.add(categoria);
+  void removeProduto(int id) {
+    _produtos.removeWhere((produto) => produto.id == id);
     notifyListeners();
   }
 }

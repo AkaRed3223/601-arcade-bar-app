@@ -1,21 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../widgets/home_page_main_buttons.dart';
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  void initState() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top]);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +14,7 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
         backgroundColor: Colors.grey[800],
         elevation: 2,
+        automaticallyImplyLeading: false,
       ),
       body: ListView(
         children: const <Widget>[

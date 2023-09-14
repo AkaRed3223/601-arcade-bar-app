@@ -1,21 +1,21 @@
 import 'package:arcade/entities/produto.dart';
-import 'package:arcade/widgets/custom_app_bar_widget.dart';
+import 'package:arcade/pages/cardapio/cardapio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 import '../../entities/categoria.dart';
+import '../../providers/provider.dart';
 
 class CardapioExcluirCategoria extends StatefulWidget {
   final List<Categoria> categorias;
   final List<Produto> produtos;
 
-  const CardapioExcluirCategoria(
-      {super.key, required this.categorias, required this.produtos});
+  const CardapioExcluirCategoria({super.key, required this.categorias, required this.produtos});
 
   @override
-  State<CardapioExcluirCategoria> createState() =>
-      _CardapioExcluirCategoriaState();
+  State<CardapioExcluirCategoria> createState() => _CardapioExcluirCategoriaState();
 }
 
 class _CardapioExcluirCategoriaState extends State<CardapioExcluirCategoria> {
@@ -30,13 +30,11 @@ class _CardapioExcluirCategoriaState extends State<CardapioExcluirCategoria> {
     });
 
     if (selectedCategoriaId != null) {
-
       // const String baseUrl = 'http://localhost:8080';
-      const String baseUrl = 'http://172.31.64.1:8080';
-      // const String baseUrl = 'http://3.137.160.128:8080';
+      // const String baseUrl = 'http://172.31.64.1:8080';
+      const String baseUrl = 'http://3.137.160.128:8080';
 
-      final url = Uri.parse(
-          '$baseUrl/categories/$selectedCategoriaId');
+      final url = Uri.parse('$baseUrl/categories/$selectedCategoriaId');
 
       final response = await http.delete(url);
 
@@ -44,6 +42,14 @@ class _CardapioExcluirCategoriaState extends State<CardapioExcluirCategoria> {
         setState(() {
           showSuccess = true;
         });
+
+        final provider = Provider.of<AppProvider>(context, listen: false);
+        provider.removeCategoria(selectedCategoriaId!);
+
+        setState(() {
+          selectedCategoriaId = null;
+        });
+
       } else {
         setState(() {
           showError = true;
@@ -56,7 +62,24 @@ class _CardapioExcluirCategoriaState extends State<CardapioExcluirCategoria> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      appBar: const CustomAppBar(title: 'Excluir Categoria'),
+      appBar: AppBar(
+        title: const Text('Excluir Categoria'),
+        centerTitle: true,
+        backgroundColor: Colors.grey[800],
+        elevation: 2,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            HapticFeedback.mediumImpact();
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Cardapio(),
+              ),
+            );
+          },
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

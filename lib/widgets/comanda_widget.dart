@@ -1,21 +1,13 @@
-import 'package:arcade/entities/produto.dart';
 import 'package:arcade/pages/comandas/comanda_detalhes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../entities/categoria.dart';
 import '../entities/comanda.dart';
 
 class ComandaWidget extends StatelessWidget {
   final Comanda comanda;
-  final List<Produto> cardapio;
-  final List<Categoria> categorias;
 
-  const ComandaWidget(
-      {super.key,
-      required this.comanda,
-      required this.cardapio,
-      required this.categorias});
+  const ComandaWidget({super.key, required this.comanda});
 
   @override
   Widget build(BuildContext context) {
@@ -59,14 +51,10 @@ class ComandaWidget extends StatelessWidget {
       ),
       onTap: () {
         HapticFeedback.heavyImpact();
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => ComandaDetalhes(
-              comanda: comanda,
-              cardapio: cardapio,
-              categoria: categorias,
-            ),
+            builder: (context) => ComandaDetalhes(comanda: comanda),
           ),
         );
       },

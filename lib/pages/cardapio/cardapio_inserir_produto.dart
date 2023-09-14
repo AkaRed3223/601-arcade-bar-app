@@ -3,10 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 import '../../entities/categoria.dart';
 import '../../entities/produto.dart';
-import '../../widgets/custom_app_bar_widget.dart';
+import '../../providers/provider.dart';
+import 'cardapio.dart';
 
 class CardapioInserirProduto extends StatefulWidget {
   const CardapioInserirProduto({super.key, required this.categorias, required this.produtos});
@@ -33,8 +35,8 @@ class _CardapioInserirProdutoState extends State<CardapioInserirProduto> {
     });
 
     // const String baseUrl = 'http://localhost:8080';
-    const String baseUrl = 'http://172.31.64.1:8080';
-    // const String baseUrl = 'http://3.137.160.128:8080';
+    // const String baseUrl = 'http://172.31.64.1:8080';
+    const String baseUrl = 'http://3.137.160.128:8080';
 
     final url = Uri.parse('$baseUrl/products');
     final headers = {'Content-Type': 'application/json'};
@@ -51,6 +53,14 @@ class _CardapioInserirProdutoState extends State<CardapioInserirProduto> {
       setState(() {
         showSuccess = true;
       });
+
+      final responseBody = utf8.decode(response.bodyBytes);
+      final jsonData = json.decode(responseBody);
+      final newProduto = Produto.fromJson(jsonData);
+
+      final provider = Provider.of<AppProvider>(context, listen: false);
+      provider.addProduto(newProduto);
+
     } else {
       setState(() {
         showError = true;
@@ -62,7 +72,24 @@ class _CardapioInserirProdutoState extends State<CardapioInserirProduto> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      appBar: const CustomAppBar(title: 'Inserir Produto'),
+      appBar: AppBar(
+        title: const Text('Inserir Produto'),
+        centerTitle: true,
+        backgroundColor: Colors.grey[800],
+        elevation: 2,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            HapticFeedback.mediumImpact();
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Cardapio(),
+              ),
+            );
+          },
+        ),
+      ),
       body: Center(
         child: GestureDetector(
           onTap: () {

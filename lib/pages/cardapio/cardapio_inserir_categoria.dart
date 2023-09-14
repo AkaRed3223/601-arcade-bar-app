@@ -3,8 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
-import '../../widgets/custom_app_bar_widget.dart';
+import '../../entities/categoria.dart';
+import '../../providers/provider.dart';
+import 'cardapio.dart';
 
 class CardapioInserirCategoria extends StatefulWidget {
   const CardapioInserirCategoria({super.key});
@@ -26,8 +29,8 @@ class _CardapioInserirCategoriaState extends State<CardapioInserirCategoria> {
     });
 
     // const String baseUrl = 'http://localhost:8080';
-    const String baseUrl = 'http://172.31.64.1:8080';
-    // const String baseUrl = 'http://3.137.160.128:8080';
+    // const String baseUrl = 'http://172.31.64.1:8080';
+    const String baseUrl = 'http://3.137.160.128:8080';
 
     final url = Uri.parse('$baseUrl/categories');
     final headers = { 'Content-Type': 'application/json' };
@@ -39,6 +42,23 @@ class _CardapioInserirCategoriaState extends State<CardapioInserirCategoria> {
       setState(() {
         showSuccess = true;
       });
+
+      final responseBody = utf8.decode(response.bodyBytes);
+      final jsonData = json.decode(responseBody);
+      final newCategoria = Categoria.fromJson(jsonData);
+
+      final provider = Provider.of<AppProvider>(context, listen: false);
+      provider.addCategoria(newCategoria);
+
+      //await Future.delayed(const Duration(seconds: 1));
+
+      /*Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Cardapio(),
+        ),
+      );*/
+
     } else {
       setState(() {
         showError = true;
@@ -50,7 +70,24 @@ class _CardapioInserirCategoriaState extends State<CardapioInserirCategoria> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      appBar: const CustomAppBar(title: 'Inserir Categoria'),
+      appBar: AppBar(
+        title: const Text('Inserir Categoria'),
+        centerTitle: true,
+        backgroundColor: Colors.grey[800],
+        elevation: 2,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            HapticFeedback.mediumImpact();
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Cardapio(),
+              ),
+            );
+          },
+        ),
+      ),
       body: Center(
         child: GestureDetector(
           onTap: () {

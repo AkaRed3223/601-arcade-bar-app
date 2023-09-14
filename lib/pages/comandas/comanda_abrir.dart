@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 import '../../entities/comanda.dart';
 import '../../providers/provider.dart';
 import '../../widgets/custom_app_bar_widget.dart';
-import 'comanda_todas.dart';
 
 class ComandaAbrir extends StatefulWidget {
   const ComandaAbrir({super.key});
@@ -23,6 +22,7 @@ class _ComandaAbrirState extends State<ComandaAbrir> {
 
   bool showSuccess = false;
   bool showError = false;
+  late Comanda currentComanda;
 
   Future<void> _abrirComanda() async {
     setState(() {
@@ -31,14 +31,15 @@ class _ComandaAbrirState extends State<ComandaAbrir> {
     });
 
     // const String baseUrl = 'http://localhost:8080';
-    const String baseUrl = 'http://172.31.64.1:8080';
-    // const String baseUrl = 'http://3.137.160.128:8080';
+    // const String baseUrl = 'http://172.31.64.1:8080';
+    const String baseUrl = 'http://3.137.160.128:8080';
 
     final url = Uri.parse('$baseUrl/tabs');
-    final headers = { 'Content-Type': 'application/json' };
+    final headers = {'Content-Type': 'application/json'};
     final body = {'externalId': idController.text, 'name': nameController.text};
 
-    final response = await http.post(url,headers: headers,body: jsonEncode(body));
+    final response =
+        await http.post(url, headers: headers, body: jsonEncode(body));
 
     if (response.statusCode == 201) {
       setState(() {
@@ -49,23 +50,22 @@ class _ComandaAbrirState extends State<ComandaAbrir> {
       final jsonData = json.decode(responseBody);
       final newComanda = Comanda.fromJson(jsonData);
 
-      // Access the provider and add the new comanda
-      final comandasProvider = Provider.of<AppProvider>(context, listen: false);
-      comandasProvider.addComanda(newComanda);
+      final provider = Provider.of<AppProvider>(context, listen: false);
+      provider.addComanda(newComanda);
 
-      await Future.delayed(const Duration(seconds: 2));
+      setState(() {
+        currentComanda = newComanda;
+      });
+
+      /*await Future.delayed(const Duration(seconds: 2));
 
       // Navigate back to the Comandas screen
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => Comandas(
-            comandas: comandasProvider.comandas, // Pass the updated comandas list
-            cardapio: comandasProvider.produtos,
-            categorias: comandasProvider.categorias,
-          ),
+          builder: (context) => const Comandas(),
         ),
-      );
+      );*/
     } else {
       setState(() {
         showError = true;
@@ -89,7 +89,8 @@ class _ComandaAbrirState extends State<ComandaAbrir> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 0),
+                  padding:
+                      const EdgeInsets.fromLTRB(0, 0, 0, 20),
                   child: Column(
                     children: [
                       TextField(
@@ -128,20 +129,24 @@ class _ComandaAbrirState extends State<ComandaAbrir> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 50),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white70,
-                            foregroundColor: Colors.black,
-                            minimumSize: const Size(220, 90)),
-                        onPressed: () {
-                          HapticFeedback.heavyImpact();
-                          _abrirComanda();
-                          FocusScope.of(context).unfocus();
-                        },
-                        child: const Text(
-                          'Abrir Comanda',
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      //const SizedBox(height: 50),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white70,
+                              foregroundColor: Colors.black,
+                              minimumSize: const Size(220, 90)),
+                          onPressed: () {
+                            HapticFeedback.heavyImpact();
+                            _abrirComanda();
+                            FocusScope.of(context).unfocus();
+                          },
+                          child: const Text(
+                            'Abrir Comanda',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20),
+                          ),
                         ),
                       ),
                     ],
@@ -150,21 +155,20 @@ class _ComandaAbrirState extends State<ComandaAbrir> {
                 if (showSuccess)
                   const Column(
                     children: [
-                      SizedBox(height: 20),
+                      //SizedBox(height: 20),
                       Icon(
                         Icons.check_circle_outline,
                         size: 100,
                         color: Colors.green,
                       ),
-                      SizedBox(height: 20),
-                      Text(
-                          'Comanda criada!',
+                      //SizedBox(height: 20),
+                      Text('Comanda criada!',
                           style: TextStyle(
-                              fontSize: 20,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
-                          )
-                      ),
+                          )),
+
                     ],
                   ),
                 if (showError)
@@ -177,14 +181,12 @@ class _ComandaAbrirState extends State<ComandaAbrir> {
                         color: Colors.red,
                       ),
                       SizedBox(height: 20),
-                      Text(
-                          'Erro ao abrir comanda!',
+                      Text('Erro ao abrir comanda!',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
-                          )
-                      ),
+                          )),
                     ],
                   ),
               ],

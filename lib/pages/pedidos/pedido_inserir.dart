@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:arcade/pages/comandas/comanda_detalhes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,12 +10,11 @@ import '../../entities/categoria.dart';
 import '../../entities/comanda.dart';
 import '../../entities/produto.dart';
 import '../../providers/provider.dart';
-import '../../widgets/custom_app_bar_widget.dart';
 
 class PedidoInserir extends StatefulWidget {
-  final Comanda comanda;
+  late final Comanda comanda;
 
-  const PedidoInserir({
+  PedidoInserir({
     Key? key,
     required this.comanda,
   }) : super(key: key);
@@ -50,6 +51,14 @@ class _PedidoInserirState extends State<PedidoInserir> {
       setState(() {
         showSuccess = true;
       });
+
+      final responseBody = utf8.decode(response.bodyBytes);
+      final jsonData = json.decode(responseBody);
+      final newComanda = Comanda.fromJson(jsonData);
+
+      final provider = Provider.of<AppProvider>(context, listen: false);
+      provider.setCurrentComanda(newComanda);
+
     } else {
       setState(() {
         showError = true;
@@ -66,7 +75,41 @@ class _PedidoInserirState extends State<PedidoInserir> {
 
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      appBar: CustomAppBar(title: 'Novo Pedido', backDestination: ComandaDetalhes(comanda: widget.comanda),),
+      appBar: /*CustomAppBar(
+        title: 'Novo Pedido',
+        backDestination: ComandaDetalhes(comanda: widget.comanda),
+      ),*/
+      /*AppBar(
+        title: const Text('Inserir Pedido'),
+        centerTitle: true,
+        backgroundColor: Colors.grey[800],
+        elevation: 2,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            HapticFeedback.mediumImpact();
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ComandaDetalhes(comanda: provider.getCurrentComanda()),
+              ),
+            );
+          },
+        ),
+      ),*/
+      AppBar(
+        title: Text('Inserir Pedido'),
+        centerTitle: true,
+        backgroundColor: Colors.grey[800],
+        elevation: 2,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            HapticFeedback.mediumImpact();
+            Navigator.of(context).pop(ComandaDetalhes(comanda: widget.comanda));
+          },
+        ),
+      ),
       body: SingleChildScrollView(
         controller: _scrollController,
         child: Column(

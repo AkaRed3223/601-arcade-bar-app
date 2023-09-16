@@ -1,10 +1,13 @@
+import 'dart:convert';
+
 import 'package:arcade/pages/comandas/comanda_detalhes.dart';
-import 'package:arcade/widgets/custom_app_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 import '../../entities/comanda.dart';
+import '../../providers/provider.dart';
 
 class PedidoRemover extends StatefulWidget {
   final Comanda comanda;
@@ -41,7 +44,16 @@ class _PedidoRemoverState extends State<PedidoRemover> {
       if (response.statusCode == 200) {
         setState(() {
           showSuccess = true;
+          selectedProdutoId = null;
         });
+
+        final responseBody = utf8.decode(response.bodyBytes);
+        final jsonData = json.decode(responseBody);
+        final newComanda = Comanda.fromJson(jsonData);
+
+        final provider = Provider.of<AppProvider>(context, listen: false);
+        provider.setCurrentComanda(newComanda);
+
       } else {
         setState(() {
           showError = true;
@@ -52,11 +64,29 @@ class _PedidoRemoverState extends State<PedidoRemover> {
 
   @override
   Widget build(BuildContext context) {
+
+    final provider = Provider.of<AppProvider>(context, listen: false);
+    final currentComanda = provider.getCurrentComanda();
+
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      appBar: CustomAppBar(
-        title: 'Excluir Pedido',
-        backDestination: ComandaDetalhes(comanda: widget.comanda),
+      appBar: AppBar(
+        title: const Text('Remover Pedido'),
+        centerTitle: true,
+        backgroundColor: Colors.grey[800],
+        elevation: 2,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            HapticFeedback.mediumImpact();
+            /*Navigator.pop(context,
+              MaterialPageRoute(
+                builder: (context) => ComandaDetalhes(comanda: provider.getCurrentComanda()),
+              ),
+            );*/
+            Navigator.of(context).pop(ComandaDetalhes(comanda: provider.getCurrentComanda()));
+          },
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -69,7 +99,7 @@ class _PedidoRemoverState extends State<PedidoRemover> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     DropdownButtonFormField<int>(
-                      items: widget.comanda.products.map((produto) {
+                      items: currentComanda.products.map((produto) {
                         return DropdownMenuItem<int>(
                           value: produto.id,
                           child: Text(
@@ -111,7 +141,7 @@ class _PedidoRemoverState extends State<PedidoRemover> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                'Produto: ${widget.comanda.products.firstWhere((produto) => produto.id == selectedProdutoId!).name}',
+                                'Produto: ${currentComanda.products.firstWhere((produto) => produto.id == selectedProdutoId!).name}',
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -120,7 +150,7 @@ class _PedidoRemoverState extends State<PedidoRemover> {
                               ),
                               const SizedBox(height: 10),
                               Text(
-                                'Preço: ${widget.comanda.products.firstWhere((produto) => produto.id == selectedProdutoId!).precoFormatado}',
+                                'Preço: ${currentComanda.products.firstWhere((produto) => produto.id == selectedProdutoId!).precoFormatado}',
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,

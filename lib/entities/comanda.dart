@@ -8,7 +8,7 @@ class Comanda {
   final int id;
   final int externalId;
   final String name;
-  final List<Produto> products;
+  late final List<Produto> products;
   final double total;
   final bool isOpen;
 

@@ -13,6 +13,8 @@ class AppProvider extends ChangeNotifier {
   List<Produto> get produtos => _produtos;
   List<Categoria> get categorias => _categorias;
 
+  late Comanda currentComanda;
+
   AppProvider() {
     _loadData();
   }
@@ -22,6 +24,21 @@ class AppProvider extends ChangeNotifier {
     _produtos = await ProdutosService().fetchProdutos();
     _categorias = await CategoriasService().fetchCategorias();
 
+    notifyListeners();
+  }
+
+  Future<void> loadCategorias() async {
+    _categorias = await CategoriasService().fetchCategorias();
+    notifyListeners();
+  }
+
+  Future<void> loadProdutos() async {
+    _produtos = await ProdutosService().fetchProdutos();
+    notifyListeners();
+  }
+
+  Future<void> loadComandas() async {
+    _comandas = await ComandasService().fetchComandas();
     notifyListeners();
   }
 
@@ -40,8 +57,8 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeComanda(int externalId) {
-    _comandas.removeWhere((comanda) => comanda.id == externalId);
+  void removeComanda(int id) {
+    _comandas.removeWhere((comanda) => comanda.id == id);
     notifyListeners();
   }
 
@@ -53,5 +70,13 @@ class AppProvider extends ChangeNotifier {
   void removeProduto(int id) {
     _produtos.removeWhere((produto) => produto.id == id);
     notifyListeners();
+  }
+
+  void setCurrentComanda(Comanda comanda) {
+    currentComanda = comanda;
+  }
+
+  Comanda getCurrentComanda() {
+    return currentComanda;
   }
 }

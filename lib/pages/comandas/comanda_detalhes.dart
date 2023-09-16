@@ -4,11 +4,11 @@ import 'package:arcade/pages/pedidos/pedido_remover.dart';
 import 'package:arcade/widgets/pedido_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 import '../../entities/comanda.dart';
+import '../../providers/provider.dart';
 import '../../widgets/comanda_total_widget.dart';
-import '../../widgets/reusable_floating_action_buttons.dart';
-import 'comanda_todas.dart';
 
 class ComandaDetalhes extends StatefulWidget {
   final Comanda comanda;
@@ -24,6 +24,10 @@ class _ComandaDetalhesState extends State<ComandaDetalhes> {
 
   @override
   Widget build(BuildContext context) {
+
+    final provider = Provider.of<AppProvider>(context, listen: false);
+    final currentComanda = provider.getCurrentComanda();
+
     return Scaffold(
       backgroundColor: Colors.grey[900],
       appBar: AppBar(
@@ -35,12 +39,7 @@ class _ComandaDetalhesState extends State<ComandaDetalhes> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
             HapticFeedback.mediumImpact();
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const Comandas(),
-              ),
-            );
+            Navigator.of(context).pop(provider.comandas);
           },
         ),
       ),
@@ -48,9 +47,9 @@ class _ComandaDetalhesState extends State<ComandaDetalhes> {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: widget.comanda.products.length,
+              itemCount: currentComanda.products.length,
               itemBuilder: (context, index) {
-                return PedidoWidget(produto: widget.comanda.products[index]);
+                return PedidoWidget(produto: currentComanda.products[index]);
               },
             ),
           ),
@@ -59,20 +58,15 @@ class _ComandaDetalhesState extends State<ComandaDetalhes> {
             child: Container(
               color: Colors.black,
               padding: const EdgeInsets.all(16),
-              child: TotalComandaWidget(comanda: widget.comanda),
+              child: TotalComandaWidget(comanda: currentComanda),
             ),
           ),
           const SizedBox(width: 5),
           Visibility(
-            visible: widget.comanda.isOpen,
+            visible: currentComanda.isOpen,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                /*ReusableFAB(
-                    tag: 'remove pedido',
-                    text: 'Pedido',
-                    builder: (context) => PedidoRemover(comanda: comanda),
-                    iconData: Icons.remove),*/
                 Expanded(
                     flex: 1,
                     child: FloatingActionButton.extended(
@@ -82,7 +76,7 @@ class _ComandaDetalhesState extends State<ComandaDetalhes> {
                         final newComanda = await Navigator.of(context).push(
                           MaterialPageRoute(
                               builder: (context) =>
-                                  PedidoRemover(comanda: widget.comanda)),
+                                  PedidoRemover(comanda: currentComanda)),
                         );
                         setState(() {
                           comanda = newComanda;
@@ -97,14 +91,17 @@ class _ComandaDetalhesState extends State<ComandaDetalhes> {
                   flex: 1,
                   child: FloatingActionButton.extended(
                     heroTag: 'fechar comanda',
-                    onPressed: () {
+                    onPressed: () async {
                       HapticFeedback.heavyImpact();
-                      Navigator.push(
-                        context,
+
+                      final newComanda = await Navigator.of(context).push(
                         MaterialPageRoute(
                             builder: (context) =>
-                                ComandaFechar(comanda: widget.comanda)),
+                                ComandaFechar(comanda: currentComanda)),
                       );
+                      setState(() {
+                        comanda = newComanda;
+                      });
                     },
                     backgroundColor: Colors.green,
                     icon: const Icon(Icons.monetization_on),
@@ -112,12 +109,26 @@ class _ComandaDetalhesState extends State<ComandaDetalhes> {
                   ),
                 ),
                 const SizedBox(width: 5),
-                ReusableFAB(
-                    tag: 'add pedido',
-                    text: 'Pedido',
-                    builder: (context) =>
-                        PedidoInserir(comanda: widget.comanda),
-                    iconData: Icons.add),
+                Expanded(
+                  flex: 1,
+                  child: FloatingActionButton.extended(
+                    heroTag: 'add pedido',
+                    onPressed: () async {
+                      HapticFeedback.heavyImpact();
+                      final newComanda = await Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                PedidoInserir(comanda: currentComanda)),
+                      );
+                      setState(() {
+                        comanda = newComanda;
+                      });
+                    },
+                    backgroundColor: Colors.grey[800],
+                    icon: const Icon(Icons.add),
+                    label: const Text('Pedido'),
+                  ),
+                ),
               ],
             ),
           ),

@@ -1,19 +1,31 @@
 import 'package:arcade/pages/comandas/comanda_detalhes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 import '../entities/comanda.dart';
+import '../providers/provider.dart';
 
-class ComandaWidget extends StatelessWidget {
+class ComandaWidget extends StatefulWidget {
   final Comanda comanda;
 
   const ComandaWidget({super.key, required this.comanda});
 
   @override
+  State<ComandaWidget> createState() => _ComandaWidgetState();
+}
+
+class _ComandaWidgetState extends State<ComandaWidget> {
+
+  set comanda(comanda) {}
+
+  @override
   Widget build(BuildContext context) {
-    Color backgroundColor = comanda.isOpen ? Colors.transparent : Colors.green;
-    Color borderColor = comanda.isOpen ? Colors.white : Colors.black;
-    Color fontColor = comanda.isOpen ? Colors.white : Colors.black;
+    Color backgroundColor = widget.comanda.isOpen ? Colors.transparent : Colors.green;
+    Color borderColor = widget.comanda.isOpen ? Colors.white : Colors.black;
+    Color fontColor = widget.comanda.isOpen ? Colors.white : Colors.black;
+
+    final provider = Provider.of<AppProvider>(context, listen: false);
 
     return GestureDetector(
       child: Container(
@@ -28,20 +40,20 @@ class ComandaWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(comanda.name,
+            Text(widget.comanda.name,
                 style: TextStyle(
                     fontSize: MediaQuery.of(context).size.width * 0.06,
                     color: fontColor,
                     fontWeight: FontWeight.bold)),
-            Text("${comanda.externalId}",
+            Text("${widget.comanda.externalId}",
                 style: TextStyle(
                     fontSize: MediaQuery.of(context).size.width * 0.18,
                     color: fontColor,
                     fontWeight: FontWeight.bold)),
             Text(
-                comanda.isOpen
-                    ? "Total: ${comanda.totalFormatado}"
-                    : "Pago: ${comanda.totalFormatado}",
+                widget.comanda.isOpen
+                    ? "Total: ${widget.comanda.totalFormatado}"
+                    : "Pago: ${widget.comanda.totalFormatado}",
                 style: TextStyle(
                   fontSize: MediaQuery.of(context).size.width * 0.045,
                   color: fontColor,
@@ -49,14 +61,25 @@ class ComandaWidget extends StatelessWidget {
           ],
         ),
       ),
-      onTap: () {
+      onTap: () async {
         HapticFeedback.heavyImpact();
-        Navigator.pushReplacement(
+        provider.setCurrentComanda(widget.comanda);
+
+        final newComanda = await Navigator.of(context).push(
+          MaterialPageRoute(
+              builder: (context) =>
+                  ComandaDetalhes(comanda: provider.getCurrentComanda())),
+        );
+        setState(() {
+          comanda = newComanda;
+        });/*
+
+        Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ComandaDetalhes(comanda: comanda),
+            builder: (context) => ComandaDetalhes(comanda: widget.comanda),
           ),
-        );
+        );*/
       },
     );
   }

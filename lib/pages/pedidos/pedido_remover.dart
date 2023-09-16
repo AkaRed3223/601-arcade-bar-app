@@ -1,3 +1,4 @@
+import 'package:arcade/pages/comandas/comanda_detalhes.dart';
 import 'package:arcade/widgets/custom_app_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,8 +27,8 @@ class _PedidoRemoverState extends State<PedidoRemover> {
     });
 
     // const String baseUrl = 'http://localhost:8080';
-    // const String baseUrl = 'http://172.31.64.1:8080';
-    const String baseUrl = 'http://3.137.160.128:8080';
+    const String baseUrl = 'http://172.31.64.1:8080';
+    // const String baseUrl = 'http://3.137.160.128:8080';
 
     if (selectedProdutoId != null) {
       final url = Uri.parse('$baseUrl/tabs/${widget.comanda.id}/remove');
@@ -53,7 +54,10 @@ class _PedidoRemoverState extends State<PedidoRemover> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      appBar: const CustomAppBar(title: 'Excluir Pedido'),
+      appBar: CustomAppBar(
+        title: 'Excluir Pedido',
+        backDestination: ComandaDetalhes(comanda: widget.comanda),
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

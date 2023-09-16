@@ -1,6 +1,8 @@
+import 'package:arcade/pages/cardapio/cardapio.dart';
+import 'package:arcade/pages/comandas/comandas_home.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/home_page_main_buttons.dart';
+import '../widgets/reusable_main_buttons.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
@@ -20,11 +22,11 @@ class MyHomePage extends StatelessWidget {
         children: const <Widget>[
           Padding(
             padding: EdgeInsets.symmetric(vertical: 10),
-            child: HomeButton(title: 'Comandas'),
+            child: ReusableMainButtons(title: 'Comandas', destination: ComandasHome()),
           ),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 10),
-            child: HomeButton(title: 'Cardápio'),
+            child: ReusableMainButtons(title: 'Cardápio', destination: Cardapio()),
           ),
         ],
       ),

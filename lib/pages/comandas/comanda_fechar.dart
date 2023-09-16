@@ -1,3 +1,4 @@
+import 'package:arcade/pages/comandas/comanda_detalhes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -29,8 +30,8 @@ class _ComandaFecharState extends State<ComandaFechar> {
     });
 
     // const String baseUrl = 'http://localhost:8080';
-    // const String baseUrl = 'http://172.31.64.1:8080';
-    const String baseUrl = 'http://3.137.160.128:8080';
+    const String baseUrl = 'http://172.31.64.1:8080';
+    // const String baseUrl = 'http://3.137.160.128:8080';
 
     final url = Uri.parse('$baseUrl/tabs/$selectedComandaId/checkout');
     final headers = {'Content-Type': 'application/json'};
@@ -53,7 +54,10 @@ class _ComandaFecharState extends State<ComandaFechar> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      appBar: const CustomAppBar(title: 'Fechar Comanda'),
+      appBar: CustomAppBar(
+        title: 'Fechar Comanda',
+        backDestination: ComandaDetalhes(comanda: widget.comanda),
+      ),
       body: SingleChildScrollView(
         child: Center(
           child: Column(

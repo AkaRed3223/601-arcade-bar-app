@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:arcade/pages/comandas/comandas_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -31,8 +32,8 @@ class _ComandaAbrirState extends State<ComandaAbrir> {
     });
 
     // const String baseUrl = 'http://localhost:8080';
-    // const String baseUrl = 'http://172.31.64.1:8080';
-    const String baseUrl = 'http://3.137.160.128:8080';
+    const String baseUrl = 'http://172.31.64.1:8080';
+    // const String baseUrl = 'http://3.137.160.128:8080';
 
     final url = Uri.parse('$baseUrl/tabs');
     final headers = {'Content-Type': 'application/json'};
@@ -77,7 +78,10 @@ class _ComandaAbrirState extends State<ComandaAbrir> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      appBar: const CustomAppBar(title: 'Abrir Comanda'),
+      appBar: const CustomAppBar(
+        title: 'Abrir Comanda',
+        backDestination: ComandasHome(),
+      ),
       body: Center(
         child: GestureDetector(
           onTap: () {
@@ -89,8 +93,7 @@ class _ComandaAbrirState extends State<ComandaAbrir> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding:
-                      const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
                   child: Column(
                     children: [
                       TextField(
@@ -168,7 +171,6 @@ class _ComandaAbrirState extends State<ComandaAbrir> {
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           )),
-
                     ],
                   ),
                 if (showError)

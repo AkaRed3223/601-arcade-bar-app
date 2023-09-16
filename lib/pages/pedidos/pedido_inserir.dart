@@ -1,3 +1,4 @@
+import 'package:arcade/pages/comandas/comanda_detalhes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -35,8 +36,8 @@ class _PedidoInserirState extends State<PedidoInserir> {
     });
 
     // const String baseUrl = 'http://localhost:8080';
-    // const String baseUrl = 'http://172.31.64.1:8080';
-    const String baseUrl = 'http://3.137.160.128:8080';
+    const String baseUrl = 'http://172.31.64.1:8080';
+    // const String baseUrl = 'http://3.137.160.128:8080';
 
     final url = Uri.parse('$baseUrl/tabs/$comandaId/insert');
     final headers = {'Content-Type': 'application/json'};
@@ -65,7 +66,7 @@ class _PedidoInserirState extends State<PedidoInserir> {
 
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      appBar: const CustomAppBar(title: 'Novo Pedido'),
+      appBar: CustomAppBar(title: 'Novo Pedido', backDestination: ComandaDetalhes(comanda: widget.comanda),),
       body: SingleChildScrollView(
         controller: _scrollController,
         child: Column(

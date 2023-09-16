@@ -1,4 +1,5 @@
 import 'package:arcade/entities/comanda.dart';
+import 'package:arcade/pages/comandas/comandas_home.dart';
 import 'package:arcade/providers/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +25,10 @@ class _ComandasState extends State<Comandas> {
     _sortComandasByIsOpen(comandas);
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      appBar: const CustomAppBar(title: 'Todas as Comandas'),
+      appBar: const CustomAppBar(
+        title: 'Todas as Comandas',
+        backDestination: ComandasHome(),
+      ),
       body: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2, mainAxisSpacing: 16.0, crossAxisSpacing: 16.0),

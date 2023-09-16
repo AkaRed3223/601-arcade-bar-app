@@ -7,13 +7,20 @@ import 'package:flutter/services.dart';
 
 import '../../entities/comanda.dart';
 import '../../widgets/comanda_total_widget.dart';
-import '../../widgets/floating_action_button.dart';
+import '../../widgets/reusable_floating_action_buttons.dart';
 import 'comanda_todas.dart';
 
-class ComandaDetalhes extends StatelessWidget {
+class ComandaDetalhes extends StatefulWidget {
   final Comanda comanda;
 
   const ComandaDetalhes({super.key, required this.comanda});
+
+  @override
+  State<ComandaDetalhes> createState() => _ComandaDetalhesState();
+}
+
+class _ComandaDetalhesState extends State<ComandaDetalhes> {
+  set comanda(comanda) {}
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +48,9 @@ class ComandaDetalhes extends StatelessWidget {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: comanda.products.length,
+              itemCount: widget.comanda.products.length,
               itemBuilder: (context, index) {
-                return PedidoWidget(produto: comanda.products[index]);
+                return PedidoWidget(produto: widget.comanda.products[index]);
               },
             ),
           ),
@@ -52,20 +59,39 @@ class ComandaDetalhes extends StatelessWidget {
             child: Container(
               color: Colors.black,
               padding: const EdgeInsets.all(16),
-              child: TotalComandaWidget(comanda: comanda),
+              child: TotalComandaWidget(comanda: widget.comanda),
             ),
           ),
           const SizedBox(width: 5),
           Visibility(
-            visible: comanda.isOpen,
+            visible: widget.comanda.isOpen,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ReusableFAB(
+                /*ReusableFAB(
                     tag: 'remove pedido',
                     text: 'Pedido',
                     builder: (context) => PedidoRemover(comanda: comanda),
-                    iconData: Icons.remove),
+                    iconData: Icons.remove),*/
+                Expanded(
+                    flex: 1,
+                    child: FloatingActionButton.extended(
+                      heroTag: 'remove pedido',
+                      onPressed: () async {
+                        HapticFeedback.heavyImpact();
+                        final newComanda = await Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  PedidoRemover(comanda: widget.comanda)),
+                        );
+                        setState(() {
+                          comanda = newComanda;
+                        });
+                      },
+                      backgroundColor: Colors.grey[800],
+                      icon: const Icon(Icons.remove),
+                      label: const Text('Pedido'),
+                    )),
                 const SizedBox(width: 5),
                 Expanded(
                   flex: 1,
@@ -77,7 +103,7 @@ class ComandaDetalhes extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                ComandaFechar(comanda: comanda)),
+                                ComandaFechar(comanda: widget.comanda)),
                       );
                     },
                     backgroundColor: Colors.green,
@@ -89,7 +115,8 @@ class ComandaDetalhes extends StatelessWidget {
                 ReusableFAB(
                     tag: 'add pedido',
                     text: 'Pedido',
-                    builder: (context) => PedidoInserir(comanda: comanda),
+                    builder: (context) =>
+                        PedidoInserir(comanda: widget.comanda),
                     iconData: Icons.add),
               ],
             ),

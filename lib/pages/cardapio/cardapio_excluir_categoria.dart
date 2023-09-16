@@ -1,5 +1,6 @@
 import 'package:arcade/entities/produto.dart';
 import 'package:arcade/pages/cardapio/cardapio.dart';
+import 'package:arcade/widgets/custom_app_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -62,23 +63,9 @@ class _CardapioExcluirCategoriaState extends State<CardapioExcluirCategoria> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      appBar: AppBar(
-        title: const Text('Excluir Categoria'),
-        centerTitle: true,
-        backgroundColor: Colors.grey[800],
-        elevation: 2,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            HapticFeedback.mediumImpact();
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const Cardapio(),
-              ),
-            );
-          },
-        ),
+      appBar: const CustomAppBar(
+          title: 'Excluir Categoria',
+          backDestination: Cardapio(),
       ),
       body: SingleChildScrollView(
         child: Column(

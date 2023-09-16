@@ -1,12 +1,13 @@
 import 'package:arcade/pages/comandas/comanda_excluir.dart';
 import 'package:arcade/pages/comandas/comanda_todas.dart';
+import 'package:arcade/pages/home_page.dart';
 import 'package:arcade/providers/provider.dart';
 import 'package:arcade/widgets/custom_app_bar_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../../widgets/home_page_main_buttons.dart';
+import '../../widgets/reusable_main_buttons.dart';
+import 'comanda_abrir.dart';
 
 class ComandasHome extends StatefulWidget {
   const ComandasHome({super.key});
@@ -23,65 +24,27 @@ class _ComandasHomeState extends State<ComandasHome> {
 
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      appBar: const CustomAppBar(title: 'Menu Comandas'),
+      appBar: const CustomAppBar(
+        title: 'Menu Comandas',
+        backDestination: MyHomePage(),
+      ),
       body: ListView(
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            child: ElevatedButton(
-              onPressed: () {
-                HapticFeedback.heavyImpact();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Comandas()),
-                );
-              },
-              child: Container(
-                padding: const EdgeInsets.all(50.0),
-                color: Colors.grey,
-                child: Center(
-                  child: Text(
-                    'Ver Comandas',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.width * 0.08,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black87),
-                  ),
-                ),
-              ),
-            ),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 10),
+            child: ReusableMainButtons(
+                title: 'Ver Comandas', destination: Comandas()),
           ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 10),
-            child: HomeButton(title: 'Abrir Comanda'),
+            child: ReusableMainButtons(
+                title: 'Abrir Comanda', destination: ComandaAbrir()),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
-            child: ElevatedButton(
-              onPressed: () {
-                HapticFeedback.heavyImpact();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ComandaExcluir(comandas: comandas)),
-                );
-              },
-              child: Container(
-                padding: const EdgeInsets.all(50.0),
-                color: Colors.grey,
-                child: Center(
-                  child: Text(
-                    'Excluir Comanda',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.width * 0.08,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black87),
-                  ),
-                ),
-              ),
-            ),
+            child: ReusableMainButtons(
+                title: 'Excluir Comanda',
+                destination: ComandaExcluir(comandas: comandas)),
           ),
         ],
       ),

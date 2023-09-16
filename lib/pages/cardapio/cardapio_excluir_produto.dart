@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 import '../../providers/provider.dart';
+import '../../widgets/custom_app_bar_widget.dart';
 import 'cardapio.dart';
 
 class CardapioExcluirProduto extends StatefulWidget {
@@ -61,23 +62,9 @@ class _CardapioExcluirProdutoState extends State<CardapioExcluirProduto> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      appBar: AppBar(
-        title: const Text('Excluir Produto'),
-        centerTitle: true,
-        backgroundColor: Colors.grey[800],
-        elevation: 2,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            HapticFeedback.mediumImpact();
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const Cardapio(),
-              ),
-            );
-          },
-        ),
+      appBar: const CustomAppBar(
+        title: 'Excluir Produto',
+        backDestination: Cardapio(),
       ),
       body: SingleChildScrollView(
         child: Column(

@@ -1,3 +1,4 @@
+import 'package:arcade/pages/comandas/comanda_detalhes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -65,7 +66,7 @@ class _PedidoInserirState extends State<PedidoInserir> {
 
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      appBar: const CustomAppBar(title: 'Novo Pedido'),
+      appBar: CustomAppBar(title: 'Novo Pedido', backDestination: ComandaDetalhes(comanda: widget.comanda),),
       body: SingleChildScrollView(
         controller: _scrollController,
         child: Column(

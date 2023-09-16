@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class HomeButton extends StatelessWidget implements PreferredSizeWidget {
+class ReusableMainButtons extends StatelessWidget
+    implements PreferredSizeWidget {
   final String title;
+  final Widget destination;
 
-  const HomeButton({super.key, required this.title});
+  const ReusableMainButtons(
+      {super.key, required this.title, required this.destination});
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -17,7 +20,10 @@ class HomeButton extends StatelessWidget implements PreferredSizeWidget {
       ),
       onPressed: () {
         HapticFeedback.heavyImpact();
-        Navigator.pushNamed(context, _findRouteByTitle(title));
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => destination),
+        );
       },
       child: Container(
         padding: const EdgeInsets.all(50.0),
@@ -34,17 +40,5 @@ class HomeButton extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
     );
-  }
-
-  _findRouteByTitle(String title) {
-    Map<String, String> routeMap = {
-      'Comandas': 'menu_comandas',
-      'Ver Comandas': 'menu_comandas/comandas/ver',
-      'Abrir Comanda': 'menu_comandas/comandas/abrir',
-      'Fechar Comanda': 'menu_comandas/comandas/fechar',
-      'Excluir Comanda': 'menu_comandas/comandas/excluir',
-      'Cardápio': 'cardapio',
-    };
-    return routeMap[title] ?? '/';
   }
 }

@@ -1,3 +1,4 @@
+import 'package:arcade/pages/comandas/comandas_home.dart';
 import 'package:arcade/providers/provider.dart';
 import 'package:arcade/widgets/custom_app_bar_widget.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +72,10 @@ class _ComandaExcluirState extends State<ComandaExcluir> {
 
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      appBar: const CustomAppBar(title: 'Excluir Comanda'),
+      appBar: const CustomAppBar(
+        title: 'Excluir Comanda',
+        backDestination: ComandasHome(),
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

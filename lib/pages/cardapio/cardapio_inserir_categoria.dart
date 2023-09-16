@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:arcade/widgets/custom_app_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -13,7 +14,8 @@ class CardapioInserirCategoria extends StatefulWidget {
   const CardapioInserirCategoria({super.key});
 
   @override
-  State<CardapioInserirCategoria> createState() => _CardapioInserirCategoriaState();
+  State<CardapioInserirCategoria> createState() =>
+      _CardapioInserirCategoriaState();
 }
 
 class _CardapioInserirCategoriaState extends State<CardapioInserirCategoria> {
@@ -33,10 +35,11 @@ class _CardapioInserirCategoriaState extends State<CardapioInserirCategoria> {
     const String baseUrl = 'http://3.137.160.128:8080';
 
     final url = Uri.parse('$baseUrl/categories');
-    final headers = { 'Content-Type': 'application/json' };
+    final headers = {'Content-Type': 'application/json'};
     final body = {'name': nameController.text};
 
-    final response = await http.post(url, headers: headers, body: jsonEncode(body));
+    final response =
+        await http.post(url, headers: headers, body: jsonEncode(body));
 
     if (response.statusCode == 201) {
       setState(() {
@@ -58,7 +61,6 @@ class _CardapioInserirCategoriaState extends State<CardapioInserirCategoria> {
           builder: (context) => const Cardapio(),
         ),
       );*/
-
     } else {
       setState(() {
         showError = true;
@@ -70,23 +72,9 @@ class _CardapioInserirCategoriaState extends State<CardapioInserirCategoria> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      appBar: AppBar(
-        title: const Text('Inserir Categoria'),
-        centerTitle: true,
-        backgroundColor: Colors.grey[800],
-        elevation: 2,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            HapticFeedback.mediumImpact();
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const Cardapio(),
-              ),
-            );
-          },
-        ),
+      appBar: const CustomAppBar(
+        title: 'Inserir Categoria',
+        backDestination: Cardapio(),
       ),
       body: Center(
         child: GestureDetector(
@@ -99,7 +87,8 @@ class _CardapioInserirCategoriaState extends State<CardapioInserirCategoria> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 0),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 30, horizontal: 0),
                   child: Column(
                     children: [
                       TextField(
@@ -133,7 +122,8 @@ class _CardapioInserirCategoriaState extends State<CardapioInserirCategoria> {
                         },
                         child: const Text(
                           'Inserir Categoria',
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20),
                         ),
                       ),
                     ],
@@ -149,14 +139,12 @@ class _CardapioInserirCategoriaState extends State<CardapioInserirCategoria> {
                         color: Colors.green,
                       ),
                       SizedBox(height: 20),
-                      Text(
-                          'Categoria criada!',
+                      Text('Categoria criada!',
                           style: TextStyle(
-                              fontSize: 20,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
-                          )
-                      ),
+                          )),
                     ],
                   ),
                 if (showError)
@@ -169,14 +157,12 @@ class _CardapioInserirCategoriaState extends State<CardapioInserirCategoria> {
                         color: Colors.red,
                       ),
                       SizedBox(height: 20),
-                      Text(
-                          'Erro ao criar categoria!',
+                      Text('Erro ao criar categoria!',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
-                          )
-                      ),
+                          )),
                     ],
                   ),
               ],

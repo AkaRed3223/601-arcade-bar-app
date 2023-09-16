@@ -5,14 +5,21 @@ import 'package:provider/provider.dart';
 
 import '../../entities/produto.dart';
 import '../../providers/provider.dart';
-import '../../widgets/floating_action_button.dart';
 import 'cardapio_excluir_categoria.dart';
 import 'cardapio_excluir_produto.dart';
 import 'cardapio_inserir_categoria.dart';
 import 'cardapio_inserir_produto.dart';
 
-class Cardapio extends StatelessWidget {
+class Cardapio extends StatefulWidget {
   const Cardapio({super.key});
+
+  @override
+  State<Cardapio> createState() => _CardapioState();
+}
+
+class _CardapioState extends State<Cardapio> {
+  set categorias(categorias) {}
+  set produtos(produtos) {}
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +36,7 @@ class Cardapio extends StatelessWidget {
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
               HapticFeedback.mediumImpact();
-              //Navigator.of(context).pop();
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const MyHomePage(),
-                ),
-              );
+              Navigator.of(context).pop(const MyHomePage());
             },
           ),
           title: const Text('Cardápio'),
@@ -70,19 +71,43 @@ class Cardapio extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      ReusableFAB(
-                          tag: 'add categoria',
-                          text: 'Categoria',
-                          builder: (context) =>
-                              const CardapioInserirCategoria(),
-                          iconData: Icons.add),
+                      Expanded(
+                        flex: 1,
+                        child: FloatingActionButton.extended(
+                          heroTag: 'add categoria',
+                          onPressed: () async {
+                            HapticFeedback.heavyImpact();
+                            final newCategorias = await Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context) => const CardapioInserirCategoria()),
+                            );
+                            setState(() {
+                              this.categorias = newCategorias;
+                            });
+                          },
+                          backgroundColor: Colors.grey[800],
+                          icon: const Icon(Icons.add),
+                          label: const Text('Categoria'),
+                        )
+                      ),
                       const SizedBox(width: 5),
-                      ReusableFAB(
-                        tag: 'add produto',
-                        text: 'Produto',
-                        builder: (context) => CardapioInserirProduto(
-                            categorias: categorias, produtos: produtos),
-                        iconData: Icons.add,
+                      Expanded(
+                        flex: 1,
+                        child: FloatingActionButton.extended(
+                          heroTag: 'add produto',
+                          onPressed: () async {
+                            HapticFeedback.heavyImpact();
+                            final newProdutos = await Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context) => CardapioInserirProduto(
+                                  categorias: categorias, produtos: produtos)),
+                            );
+                            setState(() {
+                              this.produtos = newProdutos;
+                            });
+                          },
+                          backgroundColor: Colors.grey[800],
+                          icon: const Icon(Icons.add),
+                          label: const Text('Produto'),
+                        ),
                       ),
                     ],
                   ),
@@ -90,20 +115,43 @@ class Cardapio extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      ReusableFAB(
-                        tag: 'remove categoria',
-                        text: 'Categoria',
-                        builder: (context) => CardapioExcluirCategoria(
-                            categorias: categorias, produtos: produtos),
-                        iconData: Icons.remove,
+                      Expanded(
+                        flex: 1,
+                        child: FloatingActionButton.extended(
+                          heroTag: 'remove categoria',
+                          onPressed: () async {
+                            HapticFeedback.heavyImpact();
+                            final newCategorias = await Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context) => CardapioExcluirCategoria(
+                                  categorias: categorias, produtos: produtos)),
+                            );
+                            setState(() {
+                              this.categorias = newCategorias;
+                            });
+                          },
+                          backgroundColor: Colors.grey[800],
+                          icon: const Icon(Icons.remove),
+                          label: const Text('Categoria'),
+                        ),
                       ),
                       const SizedBox(width: 5),
-                      ReusableFAB(
-                        tag: 'remove produto',
-                        text: 'Produto',
-                        builder: (context) =>
-                            CardapioExcluirProduto(produtos: produtos),
-                        iconData: Icons.remove,
+                      Expanded(
+                        flex: 1,
+                        child: FloatingActionButton.extended(
+                          heroTag: 'remove produto',
+                          onPressed: () async {
+                            HapticFeedback.heavyImpact();
+                            final newProdutos = await Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context) => CardapioExcluirProduto(produtos: produtos)),
+                            );
+                            setState(() {
+                              this.produtos = newProdutos;
+                            });
+                          },
+                          backgroundColor: Colors.grey[800],
+                          icon: const Icon(Icons.remove),
+                          label: const Text('Produto'),
+                        ),
                       ),
                     ],
                   ),

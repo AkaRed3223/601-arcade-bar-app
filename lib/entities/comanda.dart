@@ -25,12 +25,12 @@ class Comanda {
 
   factory Comanda.fromJson(Map<String, dynamic> json) {
     return Comanda(
-      id: json['id'],
-      externalId: json['externalId'],
-      name: json['name'], 
-      products: Produto.listFromJson(json['products']), 
-      total: json['total'],
-      isOpen: json['isOpen']
+        id: json['id'],
+        externalId: json['externalId'],
+        name: json['name'],
+        products: Produto.listFromJson(json['products']),
+        total: json['total'],
+        isOpen: json['isOpen']
     );
   }
 
@@ -41,10 +41,9 @@ class Comanda {
 
 class ComandasService {
   Future<List<Comanda>> fetchComandas() async {
-
     // const String baseUrl = 'http://localhost:8080';
-    const String baseUrl = 'http://172.26.128.1:8080';
-    // const String baseUrl = 'http://3.137.160.128:8080';
+    // const String baseUrl = 'http://172.26.128.1:8080';
+    const String baseUrl = 'http://3.137.160.128:8080';
 
     final response = await http.get(
       Uri.parse('$baseUrl/tabs'),
@@ -56,7 +55,10 @@ class ComandasService {
       final jsonData = json.decode(responseBody);
       final List<Comanda> comandaList = Comanda.listFromJson(jsonData);
       return comandaList;
-    } else {
+    } else if (response.statusCode == 404) {
+      return [];
+    }
+    else {
       throw Exception('API call failed with status code: ${response.statusCode}');
     }
   }

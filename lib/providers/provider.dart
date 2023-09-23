@@ -3,17 +3,21 @@ import 'package:arcade/entities/produto.dart';
 import 'package:flutter/material.dart';
 
 import '../entities/comanda.dart';
+import '../entities/operation.dart';
 
 class AppProvider extends ChangeNotifier {
   List<Comanda> _comandas = [];
   List<Produto> _produtos = [];
   List<Categoria> _categorias = [];
+  List<Operation> _operations = [];
 
   List<Comanda> get comandas => _comandas;
   List<Produto> get produtos => _produtos;
   List<Categoria> get categorias => _categorias;
+  List<Operation> get operations => _operations;
 
   late Comanda currentComanda;
+  late Operation currentOperation;
 
   AppProvider() {
     _loadData();
@@ -23,6 +27,7 @@ class AppProvider extends ChangeNotifier {
     _comandas = await ComandasService().fetchComandas();
     _produtos = await ProdutosService().fetchProdutos();
     _categorias = await CategoriasService().fetchCategorias();
+    _operations = await OperationsService().fetchOperations();
 
     notifyListeners();
   }
@@ -39,6 +44,11 @@ class AppProvider extends ChangeNotifier {
 
   Future<void> loadComandas() async {
     _comandas = await ComandasService().fetchComandas();
+    notifyListeners();
+  }
+
+  Future<void> loadOperations() async {
+    _operations = await OperationsService().fetchOperations();
     notifyListeners();
   }
 
@@ -78,5 +88,9 @@ class AppProvider extends ChangeNotifier {
 
   Comanda getCurrentComanda() {
     return currentComanda;
+  }
+
+  Operation getCurrentOperation() {
+    return currentOperation;
   }
 }

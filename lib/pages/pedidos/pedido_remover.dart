@@ -30,8 +30,8 @@ class _PedidoRemoverState extends State<PedidoRemover> {
     });
 
     // const String baseUrl = 'http://localhost:8080';
-    // const String baseUrl = 'http://172.26.128.1:8080';
-    const String baseUrl = 'http://3.137.160.128:8080';
+    const String baseUrl = 'http://172.31.48.1:8080';
+    // const String baseUrl = 'http://3.137.160.128:8080';
 
     if (selectedProdutoId != null) {
       final url = Uri.parse('$baseUrl/tabs/${widget.comanda.id}/remove');

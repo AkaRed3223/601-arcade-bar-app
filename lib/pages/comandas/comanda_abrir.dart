@@ -20,6 +20,7 @@ class ComandaAbrir extends StatefulWidget {
 class _ComandaAbrirState extends State<ComandaAbrir> {
   final TextEditingController idController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
 
   bool showSuccess = false;
   bool showError = false;
@@ -32,12 +33,16 @@ class _ComandaAbrirState extends State<ComandaAbrir> {
     });
 
     // const String baseUrl = 'http://localhost:8080';
-    // const String baseUrl = 'http://172.26.128.1:8080';
-    const String baseUrl = 'http://3.137.160.128:8080';
+    const String baseUrl = 'http://172.31.48.1:8080';
+    // const String baseUrl = 'http://3.137.160.128:8080';
 
     final url = Uri.parse('$baseUrl/tabs');
     final headers = {'Content-Type': 'application/json'};
-    final body = {'externalId': idController.text, 'name': nameController.text};
+    final body = {
+      'externalId': idController.text,
+      'name': nameController.text,
+      'phone': phoneController.text
+    };
 
     final response =
         await http.post(url, headers: headers, body: jsonEncode(body));
@@ -57,16 +62,6 @@ class _ComandaAbrirState extends State<ComandaAbrir> {
       setState(() {
         currentComanda = newComanda;
       });
-
-      /*await Future.delayed(const Duration(seconds: 2));
-
-      // Navigate back to the Comandas screen
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const Comandas(),
-        ),
-      );*/
     } else {
       setState(() {
         showError = true;
@@ -120,7 +115,25 @@ class _ComandaAbrirState extends State<ComandaAbrir> {
                         ),
                         controller: nameController,
                         decoration: const InputDecoration(
-                          labelText: 'Nome do Cliente',
+                          labelText: 'Nome',
+                          labelStyle: TextStyle(
+                            color: Colors.white,
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                      TextField(
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                        controller: phoneController,
+                        decoration: const InputDecoration(
+                          labelText: 'Telefone',
                           labelStyle: TextStyle(
                             color: Colors.white,
                           ),
@@ -158,13 +171,12 @@ class _ComandaAbrirState extends State<ComandaAbrir> {
                 if (showSuccess)
                   const Column(
                     children: [
-                      //SizedBox(height: 20),
                       Icon(
                         Icons.check_circle_outline,
                         size: 100,
                         color: Colors.green,
                       ),
-                      //SizedBox(height: 20),
+                      SizedBox(height: 12),
                       Text('Comanda criada!',
                           style: TextStyle(
                             fontSize: 20,

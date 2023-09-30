@@ -5,11 +5,15 @@ class Categoria {
   final int id;
   final String name;
   final int position;
+  final String createdAt;
+  final String updatedAt;
 
   Categoria({
     required this.id,
     required this.name,
     required this.position,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   factory Categoria.fromJson(Map<String, dynamic> json) {
@@ -17,6 +21,8 @@ class Categoria {
       id: json['id'],
       name: json['name'],
       position: json['position'],
+      createdAt: json['createdAt'],
+      updatedAt: json['updatedAt'],
     );
   }
 
@@ -29,8 +35,8 @@ class CategoriasService {
   Future<List<Categoria>> fetchCategorias() async {
 
     // const String baseUrl = 'http://localhost:8080';
-    // const String baseUrl = 'http://172.26.128.1:8080';
-    const String baseUrl = 'http://3.137.160.128:8080';
+    const String baseUrl = 'http://172.31.48.1:8080';
+    //const String baseUrl = 'http://3.137.160.128:8080';
 
     final response = await http.get(
       Uri.parse('$baseUrl/categories'),

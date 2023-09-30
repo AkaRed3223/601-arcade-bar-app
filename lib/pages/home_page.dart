@@ -24,8 +24,8 @@ class _MyHomePageState extends State<MyHomePage> {
     });
 
     // const String baseUrl = 'http://localhost:8080';
-    // const String baseUrl = 'http://172.26.128.1:8080';
-    const String baseUrl = 'http://3.137.160.128:8080';
+    const String baseUrl = 'http://172.31.48.1:8080';
+    // const String baseUrl = 'http://3.137.160.128:8080';
 
     final response = await http.post(
       Uri.parse('$baseUrl/operations/initiate'),
@@ -50,8 +50,8 @@ class _MyHomePageState extends State<MyHomePage> {
     });
 
     // const String baseUrl = 'http://localhost:8080';
-    // const String baseUrl = 'http://172.26.128.1:8080';
-    const String baseUrl = 'http://3.137.160.128:8080';
+    const String baseUrl = 'http://172.31.48.1:8080';
+    // const String baseUrl = 'http://3.137.160.128:8080';
 
     final response = await http.post(
       Uri.parse('$baseUrl/operations/closeout'),

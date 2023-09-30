@@ -30,8 +30,8 @@ class _ComandaFecharState extends State<ComandaFechar> {
     });
 
     // const String baseUrl = 'http://localhost:8080';
-    // const String baseUrl = 'http://172.26.128.1:8080';
-    const String baseUrl = 'http://3.137.160.128:8080';
+    const String baseUrl = 'http://172.31.48.1:8080';
+    // const String baseUrl = 'http://3.137.160.128:8080';
 
     final url = Uri.parse('$baseUrl/tabs/$selectedComandaId/checkout');
     final headers = {'Content-Type': 'application/json'};
@@ -58,89 +58,96 @@ class _ComandaFecharState extends State<ComandaFechar> {
         title: 'Fechar Comanda',
         backDestination: ComandaDetalhes(comanda: widget.comanda),
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(20.0),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.grey,
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 0, 0, 60),
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(20.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.grey,
+                    ),
+                    borderRadius: BorderRadius.circular(25.0),
+                    color: Colors.transparent,
                   ),
-                  borderRadius: BorderRadius.circular(25.0),
-                  color: Colors.transparent,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(widget.comanda.name,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.width * 0.1,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold)),
+                  ),
                 ),
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Text(widget.comanda.name,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.width * 0.1,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold)),
-                ),
-              ),
-              const SizedBox(height: 10),
-              Text("${widget.comanda.externalId}",
-                  style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width * 0.24,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold)),
-              Text("Total: ${widget.comanda.totalFormatado}",
-                  style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width * 0.07,
-                      color: Colors.greenAccent,
-                      fontWeight: FontWeight.bold)),
-              const SizedBox(
-                height: 12,
-              ),
-              for (Produto produto in widget.comanda.products)
-                Text("${produto.name} - ${produto.precoFormatado}",
+                const SizedBox(height: 12),
+                Text("${widget.comanda.externalId}",
                     style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.width * 0.05,
-                        color: Colors.white)),
-              const SizedBox(
-                height: 70,
-              ),
-              if (showSuccess)
-                const Column(
-                  children: [
-                    SizedBox(height: 20),
-                    Icon(
-                      Icons.check_circle_outline,
-                      size: 100,
-                      color: Colors.green,
-                    ),
-                    SizedBox(height: 20),
-                    Text('Comanda encerrada!',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        )),
-                  ],
+                        fontSize: MediaQuery.of(context).size.width * 0.24,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold)),
+                Text("Total: ${widget.comanda.totalFormatado}",
+                    style: TextStyle(
+                        fontSize: MediaQuery.of(context).size.width * 0.07,
+                        color: Colors.greenAccent,
+                        fontWeight: FontWeight.bold)),
+                const SizedBox(
+                  height: 12,
                 ),
-              if (showError)
-                const Column(
-                  children: [
-                    SizedBox(height: 20),
-                    Icon(
-                      Icons.error_outline,
-                      size: 100,
-                      color: Colors.red,
+                for (Produto produto in widget.comanda.products)
+                  Text("${produto.name} - ${produto.precoFormatado}",
+                      style: TextStyle(
+                          fontSize: MediaQuery.of(context).size.width * 0.05,
+                          color: Colors.white)),
+                if (showSuccess)
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 30),
+                    child: Column(
+                      children: [
+                        SizedBox(height: 20),
+                        Icon(
+                          Icons.check_circle_outline,
+                          size: 100,
+                          color: Colors.green,
+                        ),
+                        SizedBox(height: 20),
+                        Text('Comanda encerrada!',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            )),
+                      ],
                     ),
-                    SizedBox(height: 20),
-                    Text('Erro ao encerrar comanda!',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        )),
-                  ],
-                ),
-            ],
+                  ),
+                const SizedBox(height: 12,),
+                if (showError)
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 30),
+                    child: Column(
+                      children: [
+                        SizedBox(height: 20),
+                        Icon(
+                          Icons.error_outline,
+                          size: 100,
+                          color: Colors.red,
+                        ),
+                        SizedBox(height: 20),
+                        Text('Erro ao encerrar comanda!',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            )),
+                      ],
+                    ),
+                  ),
+              ],
+            ),
           ),
         ),
       ),

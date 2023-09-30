@@ -24,14 +24,19 @@ class _ComandaDetalhesState extends State<ComandaDetalhes> {
 
   @override
   Widget build(BuildContext context) {
-
     final provider = Provider.of<AppProvider>(context, listen: false);
     final currentComanda = provider.getCurrentComanda();
 
     return Scaffold(
       backgroundColor: Colors.grey[900],
       appBar: AppBar(
-        title: const Text('Detalhes da Comanda'),
+        title: Text(
+          '${currentComanda.name} - ${currentComanda.phone}',
+          overflow: TextOverflow.fade,
+          style: TextStyle(
+            fontSize: MediaQuery.of(context).size.width * 0.04,
+          ),
+        ),
         centerTitle: true,
         backgroundColor: Colors.grey[800],
         elevation: 2,
@@ -63,7 +68,7 @@ class _ComandaDetalhesState extends State<ComandaDetalhes> {
           ),
           const SizedBox(width: 5),
           Visibility(
-            visible: currentComanda.isOpen,
+            visible: currentComanda.isOpen && !currentComanda.isDeleted,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

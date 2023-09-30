@@ -23,7 +23,7 @@ class _CardapioState extends State<Cardapio> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<AppProvider>(context, listen: false);
+    final provider = Provider.of<AppProvider>(context, listen: true);
     final categorias = provider.categorias;
     final produtos = provider.produtos;
 

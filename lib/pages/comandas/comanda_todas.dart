@@ -8,7 +8,6 @@ import '../../widgets/comanda_widget.dart';
 import '../../widgets/custom_app_bar_widget.dart';
 
 class Comandas extends StatefulWidget {
-
   const Comandas({super.key});
 
   @override
@@ -18,7 +17,6 @@ class Comandas extends StatefulWidget {
 class _ComandasState extends State<Comandas> {
   @override
   Widget build(BuildContext context) {
-
     final provider = Provider.of<AppProvider>(context, listen: false);
     final comandas = provider.comandas;
 
@@ -37,8 +35,7 @@ class _ComandasState extends State<Comandas> {
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisSpacing: 16.0,
-                crossAxisSpacing: 16.0
-            ),
+                crossAxisSpacing: 16.0),
             itemCount: comandas.length,
             itemBuilder: (BuildContext context, int index) {
               return ComandaWidget(comanda: comandas[index]);
@@ -62,7 +59,7 @@ class _ComandasState extends State<Comandas> {
   Future<void> _refreshComandasData() async {
     final provider = Provider.of<AppProvider>(context, listen: false);
     await provider.loadComandas();
-    await Future.delayed(const Duration(seconds: 1));
+    //await Future.delayed(const Duration(seconds: 1));
     setState(() {});
   }
 }

@@ -44,6 +44,9 @@ class AppProvider extends ChangeNotifier {
 
   Future<void> loadComandas() async {
     _comandas = await ComandasService().fetchComandas();
+    /*for (var comanda in _comandas) {
+      ProdutosService.sortProdutosByInsertedAt(comanda.products);
+    }*/
     notifyListeners();
   }
 

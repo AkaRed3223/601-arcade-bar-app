@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:arcade/widgets/text_input_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -91,50 +92,12 @@ class _CardapioInserirProdutoState extends State<CardapioInserirProduto> {
                   padding: const EdgeInsets.all(5),
                   child: Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextField(
-                          style: const TextStyle(
-                            color: Colors.white,
-                          ),
+                      TextInputWidget(
                           controller: nameController,
-                          decoration: const InputDecoration(
-                            labelText: 'Nome do Produto',
-                            labelStyle: TextStyle(
-                              color: Colors.white,
-                            ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextField(
-                          style: const TextStyle(
-                            color: Colors.white,
-                          ),
+                          label: 'Nome do Produto'),
+                      TextInputWidget(
                           controller: priceController,
-                          keyboardType: const TextInputType.numberWithOptions(
-                              decimal: true),
-                          decoration: const InputDecoration(
-                            labelText: 'Preço do Produto',
-                            labelStyle: TextStyle(
-                              color: Colors.white,
-                            ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ),
+                          label: 'Preço do Produto'),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: DropdownButtonFormField<int>(
@@ -171,7 +134,8 @@ class _CardapioInserirProdutoState extends State<CardapioInserirProduto> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 0),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 16, horizontal: 0),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.white70,

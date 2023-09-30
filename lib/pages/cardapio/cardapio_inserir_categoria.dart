@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:arcade/widgets/custom_app_bar_widget.dart';
+import 'package:arcade/widgets/text_input_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -91,24 +92,7 @@ class _CardapioInserirCategoriaState extends State<CardapioInserirCategoria> {
                       const EdgeInsets.symmetric(vertical: 30, horizontal: 0),
                   child: Column(
                     children: [
-                      TextField(
-                        style: const TextStyle(
-                          color: Colors.white,
-                        ),
-                        controller: nameController,
-                        decoration: const InputDecoration(
-                          labelText: 'Nome da Categoria',
-                          labelStyle: TextStyle(
-                            color: Colors.white,
-                          ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                          ),
-                        ),
-                      ),
+                      TextInputWidget(controller: nameController, label: 'Nome da Categoria'),
                       const SizedBox(height: 50),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(

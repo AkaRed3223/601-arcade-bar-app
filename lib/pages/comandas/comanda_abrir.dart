@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:arcade/pages/comandas/comandas_home.dart';
+import 'package:arcade/widgets/text_input_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -91,61 +92,18 @@ class _ComandaAbrirState extends State<ComandaAbrir> {
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
                   child: Column(
                     children: [
-                      TextField(
-                        style: const TextStyle(
-                          color: Colors.white,
-                        ),
-                        controller: idController,
-                        decoration: const InputDecoration(
-                          labelText: 'Número da Comanda',
-                          labelStyle: TextStyle(
-                            color: Colors.white,
-                          ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                          ),
-                        ),
+                      TextInputWidget(
+                          controller: idController,
+                          label: 'Número da Comanda'
                       ),
-                      TextField(
-                        style: const TextStyle(
-                          color: Colors.white,
-                        ),
-                        controller: nameController,
-                        decoration: const InputDecoration(
-                          labelText: 'Nome',
-                          labelStyle: TextStyle(
-                            color: Colors.white,
-                          ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                          ),
-                        ),
+                      TextInputWidget(
+                          controller: nameController,
+                          label: 'Nome'
                       ),
-                      TextField(
-                        style: const TextStyle(
-                          color: Colors.white,
-                        ),
-                        controller: phoneController,
-                        decoration: const InputDecoration(
-                          labelText: 'Telefone',
-                          labelStyle: TextStyle(
-                            color: Colors.white,
-                          ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                          ),
-                        ),
+                      TextInputWidget(
+                          controller: phoneController,
+                          label: 'Telefone'
                       ),
-                      //const SizedBox(height: 50),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
                         child: ElevatedButton(

@@ -75,30 +75,8 @@ class _PedidoInserirState extends State<PedidoInserir> {
 
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      appBar: /*CustomAppBar(
-        title: 'Novo Pedido',
-        backDestination: ComandaDetalhes(comanda: widget.comanda),
-      ),*/
-      /*AppBar(
+      appBar: AppBar(
         title: const Text('Inserir Pedido'),
-        centerTitle: true,
-        backgroundColor: Colors.grey[800],
-        elevation: 2,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            HapticFeedback.mediumImpact();
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ComandaDetalhes(comanda: provider.getCurrentComanda()),
-              ),
-            );
-          },
-        ),
-      ),*/
-      AppBar(
-        title: Text('Inserir Pedido'),
         centerTitle: true,
         backgroundColor: Colors.grey[800],
         elevation: 2,

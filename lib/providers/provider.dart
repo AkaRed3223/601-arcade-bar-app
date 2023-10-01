@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../entities/comanda.dart';
 import '../entities/operation.dart';
+import '../entities/payment.dart';
 
 class AppProvider extends ChangeNotifier {
   List<Comanda> _comandas = [];
@@ -28,7 +29,6 @@ class AppProvider extends ChangeNotifier {
     _produtos = await ProdutosService().fetchProdutos();
     _categorias = await CategoriasService().fetchCategorias();
     _operations = await OperationsService().fetchOperations();
-
     notifyListeners();
   }
 
@@ -44,9 +44,6 @@ class AppProvider extends ChangeNotifier {
 
   Future<void> loadComandas() async {
     _comandas = await ComandasService().fetchComandas();
-    /*for (var comanda in _comandas) {
-      ProdutosService.sortProdutosByInsertedAt(comanda.products);
-    }*/
     notifyListeners();
   }
 
@@ -82,6 +79,11 @@ class AppProvider extends ChangeNotifier {
 
   void removeProduto(int id) {
     _produtos.removeWhere((produto) => produto.id == id);
+    notifyListeners();
+  }
+
+  void addPaymentToComanda(Payment payment) {
+    currentComanda.payments.add(payment);
     notifyListeners();
   }
 

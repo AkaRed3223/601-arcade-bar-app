@@ -90,9 +90,9 @@ class _ComandaFecharState extends State<ComandaFechar> {
                         fontSize: MediaQuery.of(context).size.width * 0.24,
                         color: Colors.white,
                         fontWeight: FontWeight.bold)),
-                Text("Total: ${widget.comanda.totalFormatado}",
+                Text("Total devido: ${widget.comanda.totalFormatado}",
                     style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.width * 0.07,
+                        fontSize: MediaQuery.of(context).size.width * 0.06,
                         color: Colors.greenAccent,
                         fontWeight: FontWeight.bold)),
                 const SizedBox(

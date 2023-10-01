@@ -45,15 +45,15 @@ class _ComandaWidgetState extends State<ComandaWidget> {
                     fontSize: MediaQuery.of(context).size.width * 0.06,
                     color: fontColor,
                     fontWeight: FontWeight.bold)),
-            Text("${widget.comanda.externalId}",
+            Text(widget.comanda.externalId.toString(),
                 style: TextStyle(
                     fontSize: MediaQuery.of(context).size.width * 0.18,
                     color: fontColor,
                     fontWeight: FontWeight.bold)),
             Text(
                 widget.comanda.isOpen
-                    ? "Total: ${widget.comanda.totalFormatado}"
-                    : "Pago: ${widget.comanda.totalFormatado}",
+                    ? "Devido: ${widget.comanda.totalFormatado}"
+                    : "Pago: ${widget.comanda.paidFormatado}",
                 style: TextStyle(
                   fontSize: MediaQuery.of(context).size.width * 0.045,
                   color: fontColor,
@@ -68,7 +68,8 @@ class _ComandaWidgetState extends State<ComandaWidget> {
         final newComanda = await Navigator.of(context).push(
           MaterialPageRoute(
               builder: (context) =>
-                  ComandaDetalhes(comanda: provider.getCurrentComanda())),
+                  ComandaDetalhes(comanda: provider.getCurrentComanda())
+          ),
         );
         setState(() {
           comanda = newComanda;

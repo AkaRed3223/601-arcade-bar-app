@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:arcade/entities/payment.dart';
 import 'package:arcade/entities/produto.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
@@ -10,7 +11,9 @@ class Comanda {
   final String name;
   final String phone;
   late final List<Produto> products;
-  final double total;
+  late final List<Payment> payments;
+  final double totalDue;
+  final double totalPaid;
   final bool isOpen;
   final bool isDeleted;
   final String createdAt;
@@ -22,15 +25,17 @@ class Comanda {
     required this.name,
     required this.phone,
     required this.products,
-    required this.total,
+    required this.payments,
+    required this.totalDue,
+    required this.totalPaid,
     required this.isOpen,
     required this.isDeleted,
     required this.createdAt,
     required this.updatedAt,
   });
 
-  String get totalFormatado =>
-      NumberFormat.currency(locale: 'pt_BR', symbol: 'R\$').format(total);
+  String get totalFormatado => Comanda.formatCurrency(totalDue);
+  String get paidFormatado => Comanda.formatCurrency(totalPaid);
 
   factory Comanda.fromJson(Map<String, dynamic> json) {
     return Comanda(
@@ -39,12 +44,18 @@ class Comanda {
       name: json['name'],
       phone: Comanda.formatPhone(json['phone']),
       products: Produto.listFromJson(json['products']),
-      total: json['total'],
+      payments: Payment.listFromJson(json['payments']),
+      totalDue: json['totalDue'],
+      totalPaid: json['totalPaid'],
       isOpen: json['isOpen'],
       isDeleted: json['isDeleted'],
       createdAt: json['createdAt'],
       updatedAt: json['updatedAt'],
     );
+  }
+
+  static String formatCurrency(double value) {
+    return NumberFormat.currency(locale: 'pt_BR', symbol: 'R\$').format(value);
   }
 
   static List<Comanda> listFromJson(List<dynamic> jsonList) {

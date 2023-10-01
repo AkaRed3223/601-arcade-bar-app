@@ -29,13 +29,17 @@ class _ComandasState extends State<Comandas> {
         backDestination: ComandasHome(),
       ),
       body: RefreshIndicator(
-        //key: _refreshIndicatorKey,
-        onRefresh: _refreshComandasData,
+        onRefresh: () async {
+          final provider = Provider.of<AppProvider>(context, listen: false);
+          await provider.loadComandas();
+          setState(() {});
+        },
         child: GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                mainAxisSpacing: 16.0,
-                crossAxisSpacing: 16.0),
+                mainAxisSpacing: 12.0,
+                crossAxisSpacing: 12.0,
+            ),
             itemCount: comandas.length,
             itemBuilder: (BuildContext context, int index) {
               return ComandaWidget(comanda: comandas[index]);
@@ -54,12 +58,5 @@ class _ComandasState extends State<Comandas> {
         return a.externalId.compareTo(b.externalId);
       }
     });
-  }
-
-  Future<void> _refreshComandasData() async {
-    final provider = Provider.of<AppProvider>(context, listen: false);
-    await provider.loadComandas();
-    //await Future.delayed(const Duration(seconds: 1));
-    setState(() {});
   }
 }

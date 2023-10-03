@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../entities/comanda.dart';
+import '../../entities/payment.dart';
 import '../../entities/produto.dart';
 import '../../widgets/custom_app_bar_widget.dart';
 import 'package:http/http.dart' as http;
@@ -30,8 +31,8 @@ class _ComandaFecharState extends State<ComandaFechar> {
     });
 
     // const String baseUrl = 'http://localhost:8080';
-    const String baseUrl = 'http://172.31.48.1:8080';
-    // const String baseUrl = 'http://3.137.160.128:8080';
+    // const String baseUrl = 'http://172.31.48.1:8080';
+    const String baseUrl = 'http://3.137.160.128:8080';
 
     final url = Uri.parse('$baseUrl/tabs/$selectedComandaId/checkout');
     final headers = {'Content-Type': 'application/json'};
@@ -90,6 +91,27 @@ class _ComandaFecharState extends State<ComandaFechar> {
                         fontSize: MediaQuery.of(context).size.width * 0.24,
                         color: Colors.white,
                         fontWeight: FontWeight.bold)),
+                const Divider(
+                  color: Colors.green,
+                  thickness: 2,
+                ),
+                for (Payment payment in widget.comanda.payments)
+                  Container(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text('${payment.name} - ${Comanda.formatCurrency(payment.value)}',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: MediaQuery.of(context).size.width * 0.05,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                const Divider(
+                  color: Colors.green,
+                  thickness: 2,
+                ),
                 Text("Total devido: ${widget.comanda.totalFormatado}",
                     style: TextStyle(
                         fontSize: MediaQuery.of(context).size.width * 0.06,

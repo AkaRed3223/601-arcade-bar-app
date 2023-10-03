@@ -41,8 +41,8 @@ class _ComandaDetalhesState extends State<ComandaDetalhes> {
     });
 
     // const String baseUrl = 'http://localhost:8080';
-    const String baseUrl = 'http://172.31.48.1:8080';
-    // const String baseUrl = 'http://3.137.160.128:8080';
+    // const String baseUrl = 'http://172.31.48.1:8080';
+    const String baseUrl = 'http://3.137.160.128:8080';
 
     final url = Uri.parse('$baseUrl/tabs/$selectedComandaId/pay');
     final headers = {'Content-Type': 'application/json'};

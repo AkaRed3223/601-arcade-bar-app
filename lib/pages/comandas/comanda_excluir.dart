@@ -29,8 +29,8 @@ class _ComandaExcluirState extends State<ComandaExcluir> {
     });
 
     // const String baseUrl = 'http://localhost:8080';
-    const String baseUrl = 'http://172.31.48.1:8080';
-    // const String baseUrl = 'http://3.137.160.128:8080';
+    // const String baseUrl = 'http://172.31.48.1:8080';
+    const String baseUrl = 'http://3.137.160.128:8080';
 
     if (selectedComandaId != null) {
       final url = Uri.parse('$baseUrl/tabs/$selectedComandaId');
@@ -92,7 +92,8 @@ class _ComandaExcluirState extends State<ComandaExcluir> {
                       style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                          color: Colors.white
+                      ),
                       value: selectedComandaId,
                       onChanged: (value) {
                         setState(() {
@@ -101,13 +102,11 @@ class _ComandaExcluirState extends State<ComandaExcluir> {
                         });
                       },
                       items: comandas
-                          .where((comanda) =>
-                              comanda.products.isEmpty && comanda.isOpen)
+                          .where((comanda) => comanda.products.isEmpty && comanda.isOpen)
                           .map((comanda) {
                         return DropdownMenuItem<int>(
                           value: comanda.id,
-                          child:
-                              Text('${comanda.name} (${comanda.externalId})'),
+                          child: Text('${comanda.name} (${comanda.externalId})'),
                         );
                       }).toList(),
                       decoration: const InputDecoration(

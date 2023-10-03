@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 import '../../entities/comanda.dart';
+import '../../entities/produto.dart';
 import '../../providers/provider.dart';
 
 class PedidoRemover extends StatefulWidget {
@@ -30,8 +31,8 @@ class _PedidoRemoverState extends State<PedidoRemover> {
     });
 
     // const String baseUrl = 'http://localhost:8080';
-    const String baseUrl = 'http://172.31.48.1:8080';
-    // const String baseUrl = 'http://3.137.160.128:8080';
+    // const String baseUrl = 'http://172.31.48.1:8080';
+    const String baseUrl = 'http://3.137.160.128:8080';
 
     if (selectedProdutoId != null) {
       final url = Uri.parse('$baseUrl/tabs/${widget.comanda.id}/remove');
@@ -68,6 +69,16 @@ class _PedidoRemoverState extends State<PedidoRemover> {
     final provider = Provider.of<AppProvider>(context, listen: false);
     final currentComanda = provider.getCurrentComanda();
 
+    List<Produto> uniqueProducts = [];
+    Set<int> uniqueIds = <int>{};
+
+    for (final produto in currentComanda.products) {
+      if (!uniqueIds.contains(produto.id)) {
+        uniqueProducts.add(produto);
+        uniqueIds.add(produto.id);
+      }
+    }
+
     return Scaffold(
       backgroundColor: Colors.grey[900],
       appBar: AppBar(
@@ -99,7 +110,7 @@ class _PedidoRemoverState extends State<PedidoRemover> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     DropdownButtonFormField<int>(
-                      items: currentComanda.products.map((produto) {
+                      items: uniqueProducts.map((produto) {
                         return DropdownMenuItem<int>(
                           value: produto.id,
                           child: Text(

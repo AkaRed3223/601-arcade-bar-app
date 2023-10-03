@@ -36,8 +36,8 @@ class Operation {
 class OperationsService {
 
   // static const String baseUrl = 'http://localhost:8080';
-  static const String baseUrl = 'http://172.31.48.1:8080';
-  // static const String baseUrl = 'http://3.137.160.128:8080';
+  // static const String baseUrl = 'http://172.31.48.1:8080';
+  static const String baseUrl = 'http://3.137.160.128:8080';
 
   Future<List<Operation>> fetchOperations() async {
     final response = await http.get(

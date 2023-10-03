@@ -83,7 +83,7 @@ class AppProvider extends ChangeNotifier {
   }
 
   void addPaymentToComanda(Payment payment) {
-    currentComanda.payments.add(payment);
+    //currentComanda.payments.add(payment);
     notifyListeners();
   }
 

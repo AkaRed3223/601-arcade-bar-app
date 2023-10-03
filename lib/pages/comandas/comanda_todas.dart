@@ -17,7 +17,7 @@ class Comandas extends StatefulWidget {
 class _ComandasState extends State<Comandas> {
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<AppProvider>(context, listen: false);
+    final provider = Provider.of<AppProvider>(context, listen: true);
     final comandas = provider.comandas;
 
     _sortComandasByIsOpen(comandas);

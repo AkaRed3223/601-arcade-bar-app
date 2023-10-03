@@ -7,6 +7,7 @@ class Categoria {
   final int position;
   final String createdAt;
   final String updatedAt;
+  final bool isActive;
 
   Categoria({
     required this.id,
@@ -14,6 +15,7 @@ class Categoria {
     required this.position,
     required this.createdAt,
     required this.updatedAt,
+    required this.isActive,
   });
 
   factory Categoria.fromJson(Map<String, dynamic> json) {
@@ -23,6 +25,7 @@ class Categoria {
       position: json['position'],
       createdAt: json['createdAt'],
       updatedAt: json['updatedAt'],
+      isActive: json['isActive'],
     );
   }
 

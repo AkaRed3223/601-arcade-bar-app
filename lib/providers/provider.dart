@@ -25,30 +25,47 @@ class AppProvider extends ChangeNotifier {
   }
 
   Future<void> _loadData() async {
-    _comandas = await ComandasService().fetchComandas();
-    _produtos = await ProdutosService().fetchProdutos();
-    _categorias = await CategoriasService().fetchCategorias();
-    _operations = await OperationsService().fetchOperations();
+    await fetchCategorias();
+    await fetchProdutos();
+    await fetchComandas();
+    await fetchOperations();
     notifyListeners();
   }
 
-  Future<void> loadCategorias() async {
+  Future<void> fetchCategorias() async {
     _categorias = await CategoriasService().fetchCategorias();
+  }
+
+  Future<void> fetchProdutos() async {
+    _produtos = await ProdutosService().fetchProdutos();
+    _produtos.sort((a, b) => a.price.compareTo(b.price));
+  }
+
+  Future<void> fetchComandas() async {
+    _comandas = await ComandasService().fetchComandas();
+  }
+
+  Future<void> fetchOperations() async {
+    _operations = await OperationsService().fetchOperations();
+  }
+
+  Future<void> loadCategorias() async {
+    await fetchCategorias();
     notifyListeners();
   }
 
   Future<void> loadProdutos() async {
-    _produtos = await ProdutosService().fetchProdutos();
+    await fetchProdutos();
     notifyListeners();
   }
 
   Future<void> loadComandas() async {
-    _comandas = await ComandasService().fetchComandas();
+    await fetchComandas();
     notifyListeners();
   }
 
   Future<void> loadOperations() async {
-    _operations = await OperationsService().fetchOperations();
+    await fetchOperations();
     notifyListeners();
   }
 

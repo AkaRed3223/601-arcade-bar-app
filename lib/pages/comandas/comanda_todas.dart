@@ -32,6 +32,7 @@ class _ComandasState extends State<Comandas> {
         onRefresh: () async {
           final provider = Provider.of<AppProvider>(context, listen: false);
           await provider.loadComandas();
+          await provider.loadProdutos();
           setState(() {});
         },
         child: GridView.builder(

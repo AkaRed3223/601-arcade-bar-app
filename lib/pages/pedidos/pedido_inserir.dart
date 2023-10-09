@@ -24,6 +24,7 @@ class PedidoInserir extends StatefulWidget {
 }
 
 class _PedidoInserirState extends State<PedidoInserir> {
+  List<Item> _data = [];
   Produto? selectedProduct;
   bool showSuccess = false;
   bool showError = false;
@@ -68,10 +69,18 @@ class _PedidoInserirState extends State<PedidoInserir> {
 
   @override
   Widget build(BuildContext context) {
-
     final provider = Provider.of<AppProvider>(context, listen: false);
     final produtos = provider.produtos;
     final categorias = provider.categorias;
+
+    _data = categorias.map((categoria) {
+      return Item(
+        categoria: categoria,
+        produtos: produtos
+            .where((produto) => produto.category.id == categoria.id)
+            .toList(),
+      );
+    }).toList();
 
     return Scaffold(
       backgroundColor: Colors.grey[900],
@@ -92,7 +101,56 @@ class _PedidoInserirState extends State<PedidoInserir> {
         controller: _scrollController,
         child: Column(
           children: [
-            for (Categoria categoria in categorias)
+            ExpansionPanelList.radio(
+              dividerColor: Colors.green,
+              expandedHeaderPadding: const EdgeInsets.all(0),
+              expansionCallback: (int index, bool isExpanded) {
+                setState(() {
+                  _data[index].isExpanded = !isExpanded;
+                });
+              },
+              expandIconColor: Colors.white,
+              children: _data.map<ExpansionPanelRadio>((Item item) {
+                return ExpansionPanelRadio(
+                  value: item.categoria,
+                  backgroundColor: Colors.grey[900],
+                  canTapOnHeader: true,
+                  headerBuilder: (BuildContext context, bool isExpanded) {
+                    return ListTile(
+                      title: Text(
+                        item.categoria.name,
+                        style: const TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    );
+                  },
+                  body: Column(
+                    children: item.produtos.map((produto) => ListTile(
+                      title: Text(
+                        '${produto.name} - ${produto.precoFormatado}',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      onTap: () {
+                        HapticFeedback.heavyImpact();
+                        setState(() {
+                          selectedProduct = produto;
+                        });
+                      },
+                    )).toList(),
+                  ),
+                  //isExpanded: item.isExpanded,
+                );
+              }).toList(),
+            ),
+            /*for (Categoria categoria in categorias)
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -137,7 +195,7 @@ class _PedidoInserirState extends State<PedidoInserir> {
                   ),
                 ],
               ),
-            const SizedBox(height: 80),
+            const SizedBox(height: 80),*/
           ],
         ),
       ),
@@ -211,4 +269,16 @@ class _PedidoInserirState extends State<PedidoInserir> {
       ),
     );
   }
+}
+
+class Item {
+  Item({
+    required this.categoria,
+    required this.produtos,
+    this.isExpanded = false,
+  });
+
+  Categoria categoria;
+  List<Produto> produtos;
+  bool isExpanded;
 }

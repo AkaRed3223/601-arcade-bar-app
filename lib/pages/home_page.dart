@@ -2,6 +2,7 @@ import 'package:arcade/pages/cardapio/cardapio.dart';
 import 'package:arcade/pages/comandas/comandas_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 import '../widgets/reusable_main_buttons.dart';
@@ -23,12 +24,8 @@ class _MyHomePageState extends State<MyHomePage> {
       showError = false;
     });
 
-    // const String baseUrl = 'http://localhost:8080';
-    // const String baseUrl = 'http://172.31.48.1:8080';
-    const String baseUrl = 'http://3.137.160.128:8080';
-
     final response = await http.post(
-      Uri.parse('$baseUrl/operations/initiate'),
+      Uri.parse('${dotenv.get('BASE_URL')}/operations/initiate'),
       headers: {'Content-Type': 'application/json; charset=utf-8'},
     );
 
@@ -49,12 +46,8 @@ class _MyHomePageState extends State<MyHomePage> {
       showError = false;
     });
 
-    // const String baseUrl = 'http://localhost:8080';
-    // const String baseUrl = 'http://172.31.48.1:8080';
-    const String baseUrl = 'http://3.137.160.128:8080';
-
     final response = await http.post(
-      Uri.parse('$baseUrl/operations/closeout'),
+      Uri.parse('${dotenv.get('BASE_URL')}/operations/closeout'),
       headers: {'Content-Type': 'application/json; charset=utf-8'},
     );
 

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 import 'comanda.dart';
@@ -34,14 +35,9 @@ class Operation {
 }
 
 class OperationsService {
-
-  // static const String baseUrl = 'http://localhost:8080';
-  // static const String baseUrl = 'http://172.31.48.1:8080';
-  static const String baseUrl = 'http://3.137.160.128:8080';
-
   Future<List<Operation>> fetchOperations() async {
     final response = await http.get(
-      Uri.parse('$baseUrl/operations'),
+      Uri.parse('${dotenv.get('BASE_URL')}/operations'),
       headers: {'Content-Type': 'application/json; charset=utf-8'},
     );
 
@@ -57,7 +53,7 @@ class OperationsService {
 
   Future<Operation> fetchCurrentOperation() async {
     final response = await http.get(
-      Uri.parse('$baseUrl/operations/current'),
+      Uri.parse('${dotenv.get('BASE_URL')}/operations/current'),
       headers: {'Content-Type': 'application/json; charset=utf-8'},
     );
 
@@ -73,7 +69,7 @@ class OperationsService {
 
   Future<Operation> initiateOperation() async {
     final response = await http.get(
-      Uri.parse('$baseUrl/operations/initiate'),
+      Uri.parse('${dotenv.get('BASE_URL')}/operations/initiate'),
       headers: {'Content-Type': 'application/json; charset=utf-8'},
     );
 
@@ -89,7 +85,7 @@ class OperationsService {
 
   Future<Operation> closeoutOperation() async {
     final response = await http.get(
-      Uri.parse('$baseUrl/operations/closeout'),
+      Uri.parse('${dotenv.get('BASE_URL')}/operations/closeout'),
       headers: {'Content-Type': 'application/json; charset=utf-8'},
     );
 

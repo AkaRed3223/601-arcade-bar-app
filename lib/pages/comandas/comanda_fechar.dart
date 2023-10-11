@@ -1,6 +1,7 @@
 import 'package:arcade/pages/comandas/comanda_detalhes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import '../../entities/comanda.dart';
 import '../../entities/payment.dart';
@@ -30,11 +31,7 @@ class _ComandaFecharState extends State<ComandaFechar> {
       showError = false;
     });
 
-    // const String baseUrl = 'http://localhost:8080';
-    // const String baseUrl = 'http://172.31.48.1:8080';
-    const String baseUrl = 'http://3.137.160.128:8080';
-
-    final url = Uri.parse('$baseUrl/tabs/$selectedComandaId/checkout');
+    final url = Uri.parse('${dotenv.get('BASE_URL')}/tabs/$selectedComandaId/checkout');
     final headers = {'Content-Type': 'application/json'};
     //final body = {'externalId': idController.text, 'name': nameController.text};
 

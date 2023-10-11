@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class Categoria {
@@ -36,13 +37,8 @@ class Categoria {
 
 class CategoriasService {
   Future<List<Categoria>> fetchCategorias() async {
-
-    // const String baseUrl = 'http://localhost:8080';
-    // const String baseUrl = 'http://172.31.48.1:8080';
-    const String baseUrl = 'http://3.137.160.128:8080';
-
     final response = await http.get(
-      Uri.parse('$baseUrl/categories'),
+      Uri.parse('${dotenv.get('BASE_URL')}/categories'),
       headers: {'Content-Type': 'application/json; charset=utf-8'},
     );
 

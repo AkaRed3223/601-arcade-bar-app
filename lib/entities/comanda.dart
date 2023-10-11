@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:arcade/entities/payment.dart';
 import 'package:arcade/entities/produto.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
@@ -76,12 +77,8 @@ class Comanda {
 
 class ComandasService {
   Future<List<Comanda>> fetchComandas() async {
-    // const String baseUrl = 'http://localhost:8080';
-    // const String baseUrl = 'http://172.31.48.1:8080';
-    const String baseUrl = 'http://3.137.160.128:8080';
-
     final response = await http.get(
-      Uri.parse('$baseUrl/tabs'),
+      Uri.parse('${dotenv.get('BASE_URL')}/tabs'),
       headers: {'Content-Type': 'application/json; charset=utf-8'},
     );
 

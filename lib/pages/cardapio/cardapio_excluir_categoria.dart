@@ -3,6 +3,7 @@ import 'package:arcade/pages/cardapio/cardapio.dart';
 import 'package:arcade/widgets/custom_app_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
@@ -31,11 +32,8 @@ class _CardapioExcluirCategoriaState extends State<CardapioExcluirCategoria> {
     });
 
     if (selectedCategoriaId != null) {
-      // const String baseUrl = 'http://localhost:8080';
-      // const String baseUrl = 'http://172.31.48.1:8080';
-      const String baseUrl = 'http://3.137.160.128:8080';
 
-      final url = Uri.parse('$baseUrl/categories/$selectedCategoriaId');
+      final url = Uri.parse('${dotenv.get('BASE_URL')}/categories/$selectedCategoriaId');
 
       final response = await http.delete(url);
 

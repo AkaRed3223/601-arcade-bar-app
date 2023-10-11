@@ -4,6 +4,7 @@ import 'package:arcade/widgets/custom_app_bar_widget.dart';
 import 'package:arcade/widgets/text_input_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
@@ -31,11 +32,7 @@ class _CardapioInserirCategoriaState extends State<CardapioInserirCategoria> {
       showError = false;
     });
 
-    // const String baseUrl = 'http://localhost:8080';
-    // const String baseUrl = 'http://172.31.48.1:8080';
-    const String baseUrl = 'http://3.137.160.128:8080';
-
-    final url = Uri.parse('$baseUrl/categories');
+    final url = Uri.parse('${dotenv.get('BASE_URL')}/categories');
     final headers = {'Content-Type': 'application/json'};
     final body = {'name': nameController.text};
 

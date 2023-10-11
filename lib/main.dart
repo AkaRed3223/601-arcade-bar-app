@@ -4,9 +4,11 @@ import 'package:arcade/pages/comandas/comandas_home.dart';
 import 'package:arcade/pages/home_page.dart';
 import 'package:arcade/providers/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: ".env");
   runApp(
     ChangeNotifierProvider(
       create: (context) => AppProvider(),

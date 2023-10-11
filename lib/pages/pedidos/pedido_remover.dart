@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:arcade/pages/comandas/comanda_detalhes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
@@ -30,12 +31,8 @@ class _PedidoRemoverState extends State<PedidoRemover> {
       showError = false;
     });
 
-    // const String baseUrl = 'http://localhost:8080';
-    // const String baseUrl = 'http://172.31.48.1:8080';
-    const String baseUrl = 'http://3.137.160.128:8080';
-
     if (selectedProdutoId != null) {
-      final url = Uri.parse('$baseUrl/tabs/${widget.comanda.id}/remove');
+      final url = Uri.parse('${dotenv.get('BASE_URL')}/tabs/${widget.comanda.id}/remove');
       final headers = {'Content-Type': 'application/json'};
       final queryParams = {'productId': selectedProdutoId.toString()};
 

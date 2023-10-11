@@ -1,4 +1,5 @@
 import 'package:arcade/entities/categoria.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -45,18 +46,10 @@ class Produto {
 }
 
 class ProdutosService {
-  /*static void sortProdutosByInsertedAt(List<Produto> produtos) {
-    produtos.sort((a, b) => a.insertedAt.compareTo(b.insertedAt));
-  }*/
 
   Future<List<Produto>> fetchProdutos() async {
-
-    // const String baseUrl = 'http://localhost:8080';
-    // const String baseUrl = 'http://172.31.48.1:8080';
-    const String baseUrl = 'http://3.137.160.128:8080';
-
     final response = await http.get(
-      Uri.parse('$baseUrl/products'),
+      Uri.parse('${dotenv.get('BASE_URL')}/products'),
       headers: {'Content-Type': 'application/json; charset=utf-8' },
     );
 
